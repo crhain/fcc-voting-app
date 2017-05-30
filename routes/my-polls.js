@@ -1,18 +1,15 @@
 const express = require('express');
 const router = express.Router();
+const pollIdHandler = require('./polls-id.js');
 
 //handle base route to /polls
 router.get('/', (req, res, next) => {
     let user = global.debug ? 'default' : req.user;
-    res.render('mypolls', {user});
+    res.render('mypolls', {user, mypolls: global.mypolls});
 });
 
 //handle /polls/:id
-router.get('/:id', (req, res, next) => {
-    let user = global.debug ? 'default' : req.user;
-    let id = req.params.id;    
-    res.render('poll', {user, name: id});
-});
+router.get('/:id', pollIdHandler);
 
 
 module.exports = router;

@@ -13,6 +13,17 @@ const app = express();
 //get port
 const PORT = process.env.PORT || 3000;
 global.debug = true; //set a variable for debug mode
+//This is is just for testing before we get database in place
+global.polls = [
+    {_id: '1', name: 'presidents'}, 
+    {_id: '2', name: 'friends'},
+    {_id: '3', name: 'programming languages'},
+    {_id: '4', name: 'food'}
+];
+global.mypolls = [
+    {_id: '3', name: 'programming languages'},
+    {_id: '4', name: 'food'}
+];
 
 //set up view engine
 app.set('views', path.join(__dirname, 'views'));
