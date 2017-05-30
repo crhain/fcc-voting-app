@@ -9,14 +9,16 @@
     <div id="header">
         <h1>This is my header</h1>
         <ul>
-            <li id="nav-home" class="active nav-btn">Home</li>
-            <li id="nav-polls" class="nav-btn">Polls</li>
+            <li id="nav-home" class="active nav-btn"><a href="/">Home</a></li>
+            <li id="nav-polls" class="nav-btn"><a href="/polls">Polls</a></li>
             {{#if user}}
-            <li id="nav-mypolls" class="nav-btn">My Polls</li>            
-            <li id="nav-user" class="nav-btn">{{user}}</li>
+            <li id="nav-mypolls" class="nav-btn"><a href="/mypolls">My Polls</a></li>            
+            <li id="nav-user" class="nav-btn user-menu"><a href="">{{user}}</a></li>
+            {{else}}
+            <li id="nav-user" class="nav-btn"><a href="">Log In</a></li>
             {{/if}}
         </ul>
-    </div>
+    </div>    
 
     {{{body}}}
     <script type="text/javascript" src="/javascripts/nav.js"></script>
