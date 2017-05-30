@@ -28,7 +28,6 @@
     "body-parser": "^1.17.2",
     "cookie-parser": "^1.4.3",
     "express": "^4.15.3",
-    "express-handlebars": "^3.0.0",
     "express-session": "^1.15.3",
     "hbs": "^4.0.1",
     "mongodb": "^2.2.27",

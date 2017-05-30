@@ -12,6 +12,7 @@ const newPoll = require('./routes/new-poll.js');
 const app = express();
 //get port
 const PORT = process.env.PORT || 3000;
+global.debug = true; //set a variable for debug mode
 
 //set up view engine
 app.set('views', path.join(__dirname, 'views'));
@@ -24,6 +25,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //basic route
+//Note: can check if logged in using if(req.user){} because passport only passes user to req if logged in
+//If logged in pass context to handlebars {user: udefined/name}
 app.use('/', index);
 app.use('/polls', polls);
 app.use('/mypolls', myPolls);

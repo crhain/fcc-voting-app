@@ -3,7 +3,8 @@ const router = express.Router();
 
 
 router.get('/', (req, res, next) => {
-    res.render('home');
+    let user = global.debug ? 'default' : req.user;
+    res.render('home', {user});
 });
 
 module.exports = router;

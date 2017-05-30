@@ -3,7 +3,8 @@ const router = express.Router();
 
 //handle base route to /polls
 router.get('/', (req, res, next) => {
-    res.render('newpoll');
+    let user = global.debug ? 'default' : req.user;
+    res.render('newpoll', {user});
 });
 
 

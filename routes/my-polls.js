@@ -3,13 +3,15 @@ const router = express.Router();
 
 //handle base route to /polls
 router.get('/', (req, res, next) => {
-    res.render('mypolls');
+    let user = global.debug ? 'default' : req.user;
+    res.render('mypolls', {user});
 });
 
 //handle /polls/:id
 router.get('/:id', (req, res, next) => {
-    var id = req.params.id;    
-    res.render('poll', {name: id});
+    let user = global.debug ? 'default' : req.user;
+    let id = req.params.id;    
+    res.render('poll', {user, name: id});
 });
 
 

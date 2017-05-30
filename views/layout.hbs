@@ -6,8 +6,19 @@
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
 </head>
 <body>
- 
+    <div id="header">
+        <h1>This is my header</h1>
+        <ul>
+            <li id="nav-home" class="active nav-btn">Home</li>
+            <li id="nav-polls" class="nav-btn">Polls</li>
+            {{#if user}}
+            <li id="nav-mypolls" class="nav-btn">My Polls</li>            
+            <li id="nav-user" class="nav-btn">{{user}}</li>
+            {{/if}}
+        </ul>
+    </div>
+
     {{{body}}}
- 
+    <script type="text/javascript" src="/javascripts/nav.js"></script>
 </body>
 </html>
