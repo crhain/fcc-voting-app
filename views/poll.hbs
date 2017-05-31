@@ -1,19 +1,20 @@
-<h1>Poll: {{name}}</h1>
-<h2>By {{by}}</h2>
-<form id="poll-form" action="/" method="post">
-    <select id="poll-select" form="poll-form">
-        {{#each pollOptions}}
-        <option value={{this.option}}>{{this.option}}</option>        
-        {{/each}}
-    </select>
-    <button id="poll-submit" type='submit' form='poll-form'>Submit</button>
-</form>
-<div>
-    <h3>Results</h3>
-    <ul>
-        {{#each pollOptions}}
-        <li>{{this.option}} : {{this.count}}</li>
-        {{/each}}
-    </ul>
-</div>   
-
+<div id="poll" class="section">
+    <h1>Poll: {{name}}</h1>
+    <h2>By {{by}}</h2>
+    <form id="poll-form" action="/" method="post">
+        <select id="poll-select" form="poll-form">
+            {{#each pollOptions}}
+            <option value={{this.option}}>{{this.option}}</option>        
+            {{/each}}
+        </select>
+        <button id="poll-submit" type='submit' form='poll-form'>Submit</button>
+    </form>
+    <div>
+        <h3>Results</h3>
+        <ul>
+            {{#each pollOptions}}
+            <li>{{this.option}} : {{this.count}}</li>
+            {{/each}}
+        </ul>
+    </div>   
+</div>
