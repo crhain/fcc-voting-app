@@ -5,8 +5,11 @@ module.exports = function (req, res, next){
     var poll = global.polls.find((poll) => {
         return poll._id === id;
     });
-    res.render('poll', {user, _id: id, 
+    res.render('poll', {
+                        user, 
+                        _id: id, 
                         name: poll.name,
+                        by: poll.by,
                         pollOptions: poll.pollOptions
     });
 }
