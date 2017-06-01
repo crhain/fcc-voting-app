@@ -1,7 +1,7 @@
 <div id="my-polls" class="section">
     <h1>My Polls</h1>
-    <ul id="mypoll-list">
-        {{#each mypolls}}
+     <ul id="mypoll-list">
+        {{#each polls}}
         <li id={{this._id}}><a href='/polls/{{this._id}}'>{{this.name}}</a></li>
         {{/each}}
     </ul>

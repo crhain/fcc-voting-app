@@ -4,8 +4,8 @@ const db = require('../database.js');
 
 //handle base route to /polls
 router.get('/', (req, res, next) => {
-    let user = global.debug ? 'default' : req.user;
-    res.render('newpoll', {user});
+    let user = global.debug ? {name: "Carl"} : req.user;
+    res.render('newpoll', {user: user.name});
 });
 
 

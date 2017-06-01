@@ -17,7 +17,6 @@ database.connect = function(url, done) {
   });
 };
 
-
 database.get = function() {
   return state.db;
 }
