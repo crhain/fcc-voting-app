@@ -29,9 +29,14 @@ global.polls = [
         name: 'programming languages', 
         by: "Carl",
         pollOptions: [
-            {option: 'JavaScript', count: 0},
-            {option: 'C++', count: 0},
-            {option: 'PHP', count: 0}
+            {option: 'JavaScript', count: 5},
+            {option: 'C++', count: 2},
+            {option: 'PHP', count: 1},
+            {option: 'Java', count: 2},
+            {option: 'C#', count: 3},
+            {option: 'Ruby', count: 1},
+            {option: 'Python', count: 4}
+            
         ]
     },
     {
