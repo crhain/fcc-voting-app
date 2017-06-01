@@ -2,13 +2,16 @@
     <h1>Poll: {{name}}</h1>
     <h2>By {{by}}</h2>
     <form id="poll-form" action="/" method="post">
-        <select id="poll-select" form="poll-form">
-            {{#each pollOptions}}
-            <option value={{this.option}}>{{this.option}}</option>        
-            {{/each}}
-        </select>
-        <button id="poll-submit" type='submit' form='poll-form'>Submit</button>
+        {{#each pollOptions}}
+        <label>            
+            <input type="radio" name="option" value={{this.option}} form="poll-form">
+            {{this.option}}
+        </label>    
+        {{/each}}
+        <button id="poll-submit" type='submit' form='poll-form'>Vote</button>         
     </form>
+    <button id="new-option-btn">Add Option</button>
+    <button id="share-twitter-btn">Share on Twiter</button>    
     <div>
         <h3>Results</h3>
         <ul>
@@ -20,5 +23,13 @@
     <div id="chart-container">
         <canvas id="myChart" width="100" height="100"></canvas>
     </div>
+    <button id="delete-poll-btn">Delete This Poll</button>
     <script type="text/javascript" src="/javascripts/poll-chart.js"></script>     
 </div>
+
+
+<!-- <select id="poll-select" form="poll-form">
+            {{#each pollOptions}}
+            <option value={{this.option}}>{{this.option}}</option>        
+            {{/each}}
+        </select>  -->
