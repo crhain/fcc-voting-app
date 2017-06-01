@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const pollIdHandler = require('./polls-id.js');
+const db = require('../database.js');
 
 //handle base route to /polls
 router.get('/', (req, res, next) => {

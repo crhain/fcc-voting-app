@@ -3,6 +3,8 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+//load db handler
+const db = require('./database.js');
 //load route handlers
 const index = require('./routes/index.js');
 const polls = require('./routes/polls.js');
@@ -80,22 +82,24 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
 //basic route
-//Note: can check if logged in using if(req.user){} because passport only passes user to req if logged in
-//If logged in pass context to handlebars {user: udefined/name}
 app.use('/', index);
 app.use('/polls', polls);
 app.use('/mypolls', myPolls);
 app.use('/newpoll', newPoll);
 
-/*app.get('/polls/:id', (req, res, next)=>{
-    var id = req.params.id;    
-    res.render('poll', {name: id});
-});*/
+//establish connection to database
+db.connect(process.env.DATABASE, (err, db) =>{
+    if(err){
+        console.log('Database error: ' + err);
+    } else {
+        console.log('Succesfful database connection');
+        //setup passport strategy for authentification
+        
+        //start server
+        app.listen(PORT, ()=>{
+            console.log('listening on port: ' + PORT);
+        });     
 
-
-
-app.listen(PORT, ()=>{
-    console.log('listening on port: ' + PORT);
+    }
 });
