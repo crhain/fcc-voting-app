@@ -4,12 +4,8 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 //load db handler
-const db = require('./helpers/database.js');
-//load route handlers
+const db = require('./models/database.js');
 const index = require('./routes/index.js');
-const polls = require('./routes/polls.js');
-const myPolls = require('./routes/my-polls.js');
-const newPoll = require('./routes/new-poll.js');
 //create express app
 const app = express();
 //get port
@@ -84,9 +80,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 //basic route
 app.use('/', index);
-app.use('/polls', polls);
-app.use('/mypolls', myPolls);
-app.use('/newpoll', newPoll);
 
 //establish connection to database
 db.connect(process.env.DATABASE, (err, db) =>{
