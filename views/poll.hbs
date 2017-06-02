@@ -1,16 +1,19 @@
 <div id="poll" class="section">
     <h1>Poll: {{name}}</h1>
     <h2>By {{by}}</h2>
-    <form id="poll-form" action="/" method="post">
-        {{#each pollOptions}}
-        <label>            
-            <input type="radio" name="option" value={{this.option}} form="poll-form">
-            {{this.option}}
-        </label>    
-        {{/each}}
-        <button id="poll-submit" type='submit' form='poll-form'>Vote</button>         
+    <form id="poll-form">        
+        <select id="poll-options" name="poll-options">
+            {{#each pollOptions}}
+            <option value={{this.option}}>{{this.option}}</option> 
+            {{/each}}
+            <option value="new">Add new option</option>            
+        </select>
+        <button id="poll-submit-btn">Vote</button>         
     </form>
-    <button id="new-option-btn">Add Option</button>
+    <label for="new-option">
+        New Option:
+        <input id="new-option" type="text">
+    </label>    
     <button id="share-twitter-btn">Share on Twiter</button>    
     <div>
         <h3>Results</h3>
@@ -23,10 +26,10 @@
     <div id="chart-container">
         <canvas id="myChart" width="100" height="100"></canvas>
     </div>
-    <button id="delete-poll-btn">Delete This Poll</button>
-    <script type="text/javascript" src="/javascripts/poll-chart.js"></script>
-    <script type="text/javascript" src="/javascripts/poll-functions.js"></script>     
+    <button id="delete-poll-btn">Delete This Poll</button>   
 </div>
+ <script type="text/javascript" src="/javascripts/poll-chart.js"></script>
+ <script type="text/javascript" src="/javascripts/poll-ui.js"></script>     
 
 
 <!-- <select id="poll-select" form="poll-form">
