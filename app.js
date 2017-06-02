@@ -4,7 +4,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 //load db handler
-const db = require('./database.js');
+const db = require('./helpers/database.js');
 //load route handlers
 const index = require('./routes/index.js');
 const polls = require('./routes/polls.js');

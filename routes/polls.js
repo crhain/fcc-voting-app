@@ -1,5 +1,5 @@
 const express = require('express');
-const db = require('../database.js');
+const db = require('../helpers/database.js');
 const router = express.Router();
 const pollIdHandler = require('./polls-id.js');
 

@@ -1,4 +1,4 @@
-const db = require('../database.js');
+const db = require('../helpers/database.js');
 //handler to retrieve a poll by id
 module.exports = function (req, res, next){
     let user = global.debug ? {name: "Carl"} : req.user;
