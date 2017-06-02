@@ -78,8 +78,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-//basic route
-app.use('/', index);
+
+//app.use(require('./middlewares/users'));
+//app.use('/', index);
+//set up routes
+app.use(require('./routes/index.js'));
 
 //establish connection to database
 db.connect(process.env.DATABASE, (err, db) =>{
