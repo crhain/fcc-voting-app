@@ -1,14 +1,16 @@
 <div id="new-poll" class="section">
     <h1>Create A New Poll</h1>
-    <form id="new-poll-form" action="/newpoll" method="post">
+    <form id="new-poll-form">
         <label>
             Title:
-            <input form="new-poll-form" type="text">
+            <input id="new-poll-title" form="new-poll-form" type="text">
         </label>
         <label>
             Options (seperated by lines):
-            <textarea name="poll-options" id="new-poll-options" cols="30" rows="10"></textarea>
+            <textarea id="new-poll-options" name="new-poll-options" cols="30" rows="10"></textarea>
         </label>    
-        <button id="new-poll-submit" type='submit' form='new-poll-form'>Submit</button>
+        <button id="new-poll-submit-btn">Add Poll</button>
     </form>
 </div>
+
+<script type="text/javascript" src="/javascripts/new-poll-ui.js"></script> 
