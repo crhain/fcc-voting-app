@@ -4,7 +4,7 @@ const router = express.Router();
 const pollIdHandler = require('./polls-id.js');
 const pollsDb = require('../models/polls.js');
 
-//handle base route to /polls
+//handle base route to /polls : retrieves all polls
 router.get('/', (req, res, next) => {
     let user = global.debug ? {name: "Carl"} : req.user;
     pollsDb.getAll((err, polls)=>{
@@ -18,6 +18,5 @@ router.get('/', (req, res, next) => {
 
 //handle /polls/:id
 router.get('/:id', pollIdHandler);
-
 
 module.exports = router;

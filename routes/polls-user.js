@@ -18,7 +18,7 @@ router.get('/', (req, res, next) => {
 
 });
 
-//handle /polls/:id
+//handle /polls/user/:id
 router.get('/:id', pollIdHandler);
 
 
