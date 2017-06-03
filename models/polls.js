@@ -76,17 +76,39 @@ exports.updatePollOption = function(id, option, add, cb){
     let collection = db.get().collection('polls');
     let _id = ObjectID(id);
     if(add){
-        collection.update(
+        collection.findAndModify(
             {_id: _id},
-            {$addToSet: {pollOptions: {option: option, count: 1}}}
+            [],
+            {$addToSet: {pollOptions: {option: option, count: 1}}},
+            {new: true},
+            (err, poll) =>{
+                if(err){
+                    return cb(err);
+                } else {
+                    return cb(null, poll);
+                }
+            }
         );
     } else {
-        collection.update(
+        collection.findAndModify(
             {_id: _id, "pollOptions.option": option},
-            {$inc: { "pollOptions.$.count" : 1 } }            
+            [],
+            {$inc: { "pollOptions.$.count" : 1 } },
+            {new: true},
+            (err, poll) =>{
+                if(err){
+                    return cb(err);
+                } else {
+                    return cb(null, poll);
+                }
+            }
         );        
     }
 
-    //$inc: {count : 1 }
-    
+    /*collection.update(
+            {_id: _id},
+            {$addToSet: {pollOptions: {option: option, count: 1}}}*/
+
+    /*{_id: _id, "pollOptions.option": option},
+            {$inc: { "pollOptions.$.count" : 1 } } */           
 }

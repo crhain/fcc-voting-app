@@ -15,7 +15,6 @@
         var pollOptionsArray = Array.prototype.slice.call(pollOptions);
         var pollOptionsCount = pollOptionsArray.length;
         var voteOption = {id: selectedOptionId, option: selectedOption, new: false};
-        var poll = {name: '', by: '', pollOptions: []};
         var headers;
         var fetchInit;
         e.preventDefault();
@@ -35,11 +34,7 @@
                 voteOption.id = pollOptionsCount - 1;
                 voteOption.new = true;                 
             }
-        } else {
-
-            voteOption.option = document.getElementById('option_' + selectedOptionId).textContent;   
-        }
-        
+        } 
         //call vote api goes here
         headers = new Headers();
         headers.set("Content-Type", "application/json");           
@@ -49,7 +44,13 @@
                 credentials: 'include',
                 body: JSON.stringify(voteOption)            
             };
-        fetch('/polls/user/vote/' + currentId, fetchInit);        
+        fetch('/polls/user/vote/' + currentId, fetchInit)
+        .then((res)=>{
+            return res.json();
+        })
+        .then((json)=>{
+            updatePageWithNewData(json);
+        });        
         console.log('voting for ' + voteOption.option);        
     });
     
@@ -79,5 +80,29 @@
         //add call to /api/twitter/:url
         console.log('sharing on twitter...');        
     });
+
+    //Utility Functions
+    function updatePageWithNewData(poll){
+        console.log('I am updating the page with new data!');
+        //console.log(json);
+        var pollResultsList = document.getElementById('poll-results-list');
+        var pollResultsHTML = "";
+        var pollOptionsSelectHTML = "";
+                                
+        for(let i = 0; i < poll.pollOptions.length; i++){
+            //update  poll results list
+            pollResultsHTML += '<li class="option"><span class="option-name">';
+            pollResultsHTML += poll.pollOptions[i].option + '</span> : ';
+            pollResultsHTML += '<span class="option-count">' + poll.pollOptions[i].count + '</span></li>';
+            //update poll options select options
+            pollOptionsSelectHTML += '<option class="poll-option" value=' + i + '>';
+            pollOptionsSelectHTML += poll.pollOptions[i].option + '</option>'; 
+        }
+        pollOptionsSelectHTML += '<option value="-1">Add new option</option>';
+        
+        pollResultsList.innerHTML = pollResultsHTML;
+        pollOptionsSelect.innerHTML = pollOptionsSelectHTML;
+        
+    }
 
 })(typeof self !== 'undefined' ? self : this);

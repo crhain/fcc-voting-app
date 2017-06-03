@@ -15,9 +15,9 @@
         <input id="new-option" type="text">
     </label>    
     <button id="share-twitter-btn">Share on Twiter</button>    
-    <div>
+    <div id="poll-results">
         <h3>Results</h3>
-        <ul>
+        <ul id="poll-results-list">
             {{#each pollOptions}}
             <li class="option"><span class="option-name">{{this.option}}</span> : <span class="option-count">{{this.count}}</span></li>
             {{/each}}
