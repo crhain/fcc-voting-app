@@ -4,7 +4,7 @@ const router = express.Router();
 const polls = require('./polls.js');
 const pollsUser = require('./polls-user.js');
 const pollsNew = require('./polls-new.js');
-const pollsVote = require('./polls-vote.js');
+const pollsVote = require('./polls-user-vote.js');
 const pollsDelete = require('./polls-user-delete.js');
 
 //set up routes
@@ -19,8 +19,9 @@ const pollsDelete = require('./polls-user-delete.js');
 /polls/delete/:id (post)
 /polls/twitter/:id (post)
 */
-router.use('/polls/vote/', pollsVote);
-router.use('/polls/new', pollsNew);
+
+router.use('/polls/user/vote', pollsVote);
+router.use('/polls/user/new', pollsNew);
 router.use('/polls/user/delete', pollsDelete);
 router.use('/polls/user', pollsUser);
 router.use('/polls', polls);

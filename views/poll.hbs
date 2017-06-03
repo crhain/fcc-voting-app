@@ -8,7 +8,7 @@
             {{/each}}
             <option value="new">Add new option</option>            
         </select>
-        <button id="poll-submit-btn">Vote</button>         
+        <button id="poll-vote-btn">Vote</button>         
     </form>
     <label for="new-option">
         New Option:
@@ -28,6 +28,8 @@
     </div>
     <button id="delete-poll-btn">Delete This Poll</button>   
 </div>
+ <div id="poll-id">{{id}}</div>
+ 
  <script type="text/javascript" src="/javascripts/poll-chart.js"></script>
  <script type="text/javascript" src="/javascripts/poll-ui.js"></script>     
 

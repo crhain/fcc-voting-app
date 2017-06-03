@@ -7,9 +7,13 @@ const pollsDb = require('../models/polls.js');
 router.post('/:id', (req, res, next) => {
     let user = global.debug ? {name: "Carl"} : req.user;
     let id = req.params.id;
-    console.log('voted for ' + id);
-
-    
+    let option = req.body.option;
+    console.log('voted for poll id: ' + id);
+    console.log('with item: ' + option);
+    //need to check to see if vote item in current record
+    //if not we need to update the record
+    //send on succesful vote
+    res.sendStatus(200);    
 });
 
 module.exports = router;

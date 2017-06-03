@@ -11,6 +11,7 @@ router.get('/', (req, res, next) => {
         if(err){
             console.log(err);
         } else {
+            console.log(polls);
             res.render('polls', {user: user.name, polls: polls});
         }
     });    

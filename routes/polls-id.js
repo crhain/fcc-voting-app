@@ -6,11 +6,11 @@ module.exports = function (req, res, next){
     let id = req.params.id;
     pollsDb.getById(id, (err, poll) =>{
         if(err){
-            console.log(err);
+            console.log(err);            
         } else {
              res.render('poll', {
                                     user: user.name, 
-                                    _id: poll._id,
+                                    id: poll._id,
                                     name: poll.name,
                                     by: poll.by,
                                     pollOptions: poll.pollOptions 

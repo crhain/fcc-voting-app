@@ -1,15 +1,18 @@
 (function(self){
     //get page elements
-    var pollForm = document.getElementById('poll-form');
+    var pollVoteBtn = document.getElementById('poll-vote-btn');
     var newOptionBtn =  document.getElementById('new-option-btn');
     var deletePollBtn =  document.getElementById('delete-poll-btn');
-    var shareTwitterBtn =  document.getElementById('share-twitter-btn');
-    
+    var shareTwitterBtn =  document.getElementById('share-twitter-btn');    
+    var currentId = document.getElementById('poll-id').textContent;
     //#poll-form  -  on submit : for voteing
     //post to /poll/:id/vote
-    pollForm.addEventListener('submit', (e) =>{
+    pollVoteBtn.addEventListener('click', (e) =>{
         var selectedOption = document.getElementById('poll-options').value;
         var voteOption = selectedOption;
+        var headers;
+        var fetchInit;
+        var body = {option: null};
         e.preventDefault();
         if(selectedOption === 'new'){
             voteOption = document.getElementById('new-option').value;
@@ -18,10 +21,20 @@
                 console.log('please input a new option before voting!');
                 return;
             } else {
-                //logic to add new option goes here
+                //set body json object                 
             }
         }    
-        //call vote api goes here    
+        body.option = voteOption;
+        //call vote api goes here
+        headers = new Headers();
+        headers.set("Content-Type", "application/json");           
+        fetchInit = {
+                method: 'POST',
+                headers: headers,
+                credentials: 'include',
+                body: JSON.stringify(body)            
+            };
+        fetch('/polls/user/vote/' + currentId, fetchInit);        
         console.log('voting for ' + voteOption);        
     });
     
@@ -29,8 +42,16 @@
     //post to poll/delete/:id route
     deletePollBtn.addEventListener('click', (e)=>{
         e.preventDefault();
-        //add call to poll/:id/delete
-        console.log('deleting current poll...');        
+        //should call confirm pop up first and then the following code in that dialog            
+        var headers = new Headers();            ;
+        var fetchInit = {
+                method: 'DELETE',
+                headers: headers,
+                credentials: 'include',            
+            };                                                         
+            //add call to polls/user/new/
+            fetch('/polls/user/delete/' + currentId, fetchInit);
+            console.log('deleting current poll: ' + currentId);                                                           
     });
 
     //#share-twitter-btn - on click : for shareing url for poll on twitter

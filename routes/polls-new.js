@@ -11,7 +11,14 @@ router.get('/', (req, res, next) => {
 
 //handle /polls/new post event to create new poll
 router.post('/', (req, res, next) => {
-    console.log('creating a new poll...');
+    let user = global.debug ? {name: "Carl"} : req.user;
+    let title = req.body.title;
+    let options = req.body.options;
+    console.log('creating a new poll: ');
+    console.log(title);
+    //send on successful create
+    pollsDb.create(user, title, options);
+    res.sendStatus(200);    
 });
 
 
