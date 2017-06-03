@@ -13,7 +13,6 @@ exports.create = function(user, pollName, optionNames, cb){
     //need to iterate through pollOptions and unpack into object
     for(let i = 0; i < optionNames.length; i++){
         option = Object.create(null);
-        option.id = i;
         option.option = optionNames[i];
         option.count = 0;
         pollOptions.push(option); 
@@ -71,4 +70,23 @@ exports.getAllByUser = function(user, cb){
             return cb(null, myPolls);
         }        
     });
+}
+
+exports.updatePollOption = function(id, option, add, cb){
+    let collection = db.get().collection('polls');
+    let _id = ObjectID(id);
+    if(add){
+        collection.update(
+            {_id: _id},
+            {$addToSet: {pollOptions: {option: option, count: 1}}}
+        );
+    } else {
+        collection.update(
+            {_id: _id, "pollOptions.option": option},
+            {$inc: { "pollOptions.$.count" : 1 } }            
+        );        
+    }
+
+    //$inc: {count : 1 }
+    
 }

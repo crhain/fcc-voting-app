@@ -3,15 +3,19 @@
     var pollVoteBtn = document.getElementById('poll-vote-btn');
     var newOptionBtn =  document.getElementById('new-option-btn');
     var deletePollBtn =  document.getElementById('delete-poll-btn');
-    var shareTwitterBtn =  document.getElementById('share-twitter-btn');    
+    var shareTwitterBtn =  document.getElementById('share-twitter-btn');
+    var pollOptionsSelect = document.getElementById('poll-options');    
     var currentId = document.getElementById('poll-id').textContent;
     //#poll-form  -  on submit : for voteing
     //post to /poll/:id/vote
     pollVoteBtn.addEventListener('click', (e) =>{
-        var optionCount = Array.prototype.slice.call(document.getElementsByClassName('poll-option')).length;
-        var selectedOptionId = document.getElementById('poll-options').value;
-        var selectedOption; 
-        var voteOption = {id: selectedOptionId, option: selectedOption};
+        var selectedOptionId = pollOptionsSelect.value;
+        var pollOptions = pollOptionsSelect.options;        
+        var selectedOption = pollOptionsSelect.selectedOptions[0].textContent; 
+        var pollOptionsArray = Array.prototype.slice.call(pollOptions);
+        var pollOptionsCount = pollOptionsArray.length;
+        var voteOption = {id: selectedOptionId, option: selectedOption, new: false};
+        var poll = {name: '', by: '', pollOptions: []};
         var headers;
         var fetchInit;
         e.preventDefault();
@@ -22,11 +26,14 @@
                 //signal and error if new option not filled out
                 console.log('please input a new option before voting!');
                 return;
-            } else {
-                //set voteOption.id to the next number in options array.
-                //since the ids start at 0, we can just use the count.
+            //check to see if vote option same as in list    
+            } else if(pollOptionsArray.find( (el) => el.textContent === voteOption.option )){
+                console.log('Option already exists!');
+                return;
+            } else {                
                 //console.log('my next id is: ' + optionCount);
-                voteOption.id = optionCount;                 
+                voteOption.id = pollOptionsCount - 1;
+                voteOption.new = true;                 
             }
         } else {
 
