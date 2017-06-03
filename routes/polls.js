@@ -12,7 +12,7 @@ router.get('/', (req, res, next) => {
             console.log(err);
         } else {
             console.log(polls);
-            res.render('polls', {user: user.name, polls: polls});
+            res.render('polls', {user: user && user.name, polls: polls});
         }
     });    
 });

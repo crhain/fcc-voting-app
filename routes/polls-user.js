@@ -11,7 +11,7 @@ router.get('/', (req, res, next) => {
         if(err){
             console.log(err);
         } else {
-            res.render('mypolls', {user: user.name, myPolls});    
+            res.render('mypolls', {user: user && user.name, myPolls});    
         }
         
     });

@@ -9,7 +9,7 @@ module.exports = function (req, res, next){
             console.log(err);            
         } else {
              res.render('poll', {
-                                    user: user.name, 
+                                    user: user && user.name, 
                                     id: poll._id,
                                     name: poll.name,
                                     by: poll.by,
