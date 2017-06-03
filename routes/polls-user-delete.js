@@ -12,14 +12,10 @@ router.delete('/:id', (req, res, next) => {
             console.log(err);             
         } else {
             console.log('deleted doc id: ' + id);
-            //on succesfull delete
-            res.redirect('/polls/user'); 
-        }
-        
+            //on succesfull delete            
+        }        
     });
-
-    //redirect back to /polls/user
-            
+    //redirect handled by client in poll-ui.js            
 });
 
 module.exports = router;

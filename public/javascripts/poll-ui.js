@@ -51,7 +51,10 @@
             };                                                         
             //add call to polls/user/new/
             fetch('/polls/user/delete/' + currentId, fetchInit);
-            console.log('deleting current poll: ' + currentId);                                                           
+            console.log('deleting current poll: ' + currentId);
+            //redirect to new page in browser instead of from server
+            window.location.href = "/polls/user/";    
+
     });
 
     //#share-twitter-btn - on click : for shareing url for poll on twitter
