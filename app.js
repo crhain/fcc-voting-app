@@ -18,8 +18,8 @@ global.polls = [
         name: 'presidents', 
         by: 'Anne Nomous',
         pollOptions: [
-            {_id: 0, option: 'George Washington', count: 0},
-            {_id: 1, option: "Lincoln", count: 0}
+            {id: 0, option: 'George Washington', count: 0},
+            {id: 1, option: "Lincoln", count: 0}
         ]
     }, 
     {
@@ -27,13 +27,13 @@ global.polls = [
         name: 'programming languages', 
         by: "Carl",
         pollOptions: [
-            {_id: 0, option: 'JavaScript', count: 5},
-            {_id: 1, option: 'C++', count: 2},
-            {_id: 2, option: 'PHP', count: 1},
-            {_id: 3, option: 'Java', count: 2},
-            {_id: 4, option: 'C#', count: 3},
-            {_id: 5, option: 'Ruby', count: 1},
-            {_id: 6, option: 'Python', count: 4}
+            {id: 0, option: 'JavaScript', count: 5},
+            {id: 1, option: 'C++', count: 2},
+            {id: 2, option: 'PHP', count: 1},
+            {id: 3, option: 'Java', count: 2},
+            {id: 4, option: 'C#', count: 3},
+            {id: 5, option: 'Ruby', count: 1},
+            {id: 6, option: 'Python', count: 4}
             
         ]
     },
@@ -42,8 +42,8 @@ global.polls = [
         name: 'food', 
         by: "Carl",
         pollOptions:[
-            {_id: 0, option: 'Pasta', count: 0},
-            {_id: 1, option: 'Ceral', count: 0}
+            {id: 0, option: 'Pasta', count: 0},
+            {id: 1, option: 'Ceral', count: 0}
         ]
     }
 ];

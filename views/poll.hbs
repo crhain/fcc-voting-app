@@ -4,9 +4,9 @@
     <form id="poll-form">        
         <select id="poll-options" name="poll-options">
             {{#each pollOptions}}
-            <option value={{this.option}}>{{this.option}}</option> 
+            <option id="option_{{this.id}}" class="poll-option" value={{this.id}}>{{this.option}}</option> 
             {{/each}}
-            <option value="new">Add new option</option>            
+            <option value="-1">Add new option</option>            
         </select>
         <button id="poll-vote-btn">Vote</button>         
     </form>

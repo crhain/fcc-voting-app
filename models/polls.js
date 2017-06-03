@@ -13,7 +13,7 @@ exports.create = function(user, pollName, optionNames, cb){
     //need to iterate through pollOptions and unpack into object
     for(let i = 0; i < optionNames.length; i++){
         option = Object.create(null);
-        option._id = i;
+        option.id = i;
         option.option = optionNames[i];
         option.count = 0;
         pollOptions.push(option); 

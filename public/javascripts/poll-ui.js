@@ -8,23 +8,31 @@
     //#poll-form  -  on submit : for voteing
     //post to /poll/:id/vote
     pollVoteBtn.addEventListener('click', (e) =>{
-        var selectedOption = document.getElementById('poll-options').value;
-        var voteOption = selectedOption;
+        var optionCount = Array.prototype.slice.call(document.getElementsByClassName('poll-option')).length;
+        var selectedOptionId = document.getElementById('poll-options').value;
+        var selectedOption; 
+        var voteOption = {id: selectedOptionId, option: selectedOption};
         var headers;
         var fetchInit;
-        var body = {option: null};
         e.preventDefault();
-        if(selectedOption === 'new'){
-            voteOption = document.getElementById('new-option').value;
-            if(voteOption === ""){
+        //console.log('my selected id is: ' + selectedOptionId);
+        if(selectedOptionId === '-1'){
+            voteOption.option = document.getElementById('new-option').value;            
+            if(voteOption.option === ""){
                 //signal and error if new option not filled out
                 console.log('please input a new option before voting!');
                 return;
             } else {
-                //set body json object                 
+                //set voteOption.id to the next number in options array.
+                //since the ids start at 0, we can just use the count.
+                //console.log('my next id is: ' + optionCount);
+                voteOption.id = optionCount;                 
             }
-        }    
-        body.option = voteOption;
+        } else {
+
+            voteOption.option = document.getElementById('option_' + selectedOptionId).textContent;   
+        }
+        
         //call vote api goes here
         headers = new Headers();
         headers.set("Content-Type", "application/json");           
@@ -32,10 +40,10 @@
                 method: 'POST',
                 headers: headers,
                 credentials: 'include',
-                body: JSON.stringify(body)            
+                body: JSON.stringify(voteOption)            
             };
         fetch('/polls/user/vote/' + currentId, fetchInit);        
-        console.log('voting for ' + voteOption);        
+        console.log('voting for ' + voteOption.option);        
     });
     
     //#delete-poll-btn - on click : for deleting the current poll
