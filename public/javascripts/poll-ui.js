@@ -6,6 +6,9 @@
     var shareTwitterBtn =  document.getElementById('share-twitter-btn');
     var pollOptionsSelect = document.getElementById('poll-options');    
     var currentId = document.getElementById('poll-id').textContent;
+
+    //draw chart - requires poll-chart.js as module or loaded before this script in html file
+    var myChart = chartjs.draw();
     //#poll-form  -  on submit : for voteing
     //post to /poll/:id/vote
     pollVoteBtn.addEventListener('click', (e) =>{
@@ -102,7 +105,8 @@
         
         pollResultsList.innerHTML = pollResultsHTML;
         pollOptionsSelect.innerHTML = pollOptionsSelectHTML;
-        
+        //add call to new chart.js update method that I still haven't written
+        chartjs.update(myChart);
     }
 
 })(typeof self !== 'undefined' ? self : this);
