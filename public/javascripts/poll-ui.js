@@ -59,7 +59,8 @@
     
     //#delete-poll-btn - on click : for deleting the current poll
     //post to poll/delete/:id route
-    deletePollBtn.addEventListener('click', (e)=>{
+    
+    deletePollBtn && deletePollBtn.addEventListener('click', (e)=>{
         e.preventDefault();
         //should call confirm pop up first and then the following code in that dialog            
         var headers = new Headers();            ;
