@@ -29,7 +29,7 @@ router.use('/polls', polls);
 
 //define route for main page
 router.get('/', (req, res, next) => {
-    let user = global.debug ? {name: "Carl"} : req.user;
+    let user = global.debug ? global.user : req.user;
     res.render('home', {user: user && user.name});
 });
 

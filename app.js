@@ -10,6 +10,7 @@ const index = require('./routes/index.js');
 const app = express();
 //get port
 const PORT = process.env.PORT || 3000;
+global.user = {name: 'Bob'};
 global.debug = true; //set a variable for debug mode
 //This is is just for testing before we get database in place
 global.polls = [

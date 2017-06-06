@@ -5,7 +5,7 @@ const pollsDb = require('../models/polls.js');
 
 //handle /polls/vote/:id : votes for poll option
 router.post('/:id', (req, res, next) => {
-    let user = global.debug ? {name: "Carl"} : req.user;
+    let user = global.debug ? global.user : req.user;
     let _Id = req.params.id;
     //let pollOptions = req.body.pollOptions;
     let option = req.body.option;

@@ -6,7 +6,7 @@ const pollsDb = require('../models/polls.js');
 
 //handle base route to /polls
 router.get('/', (req, res, next) => {
-    let user = global.debug ? {name: "Carl"} : req.user;
+    let user = global.debug ? global.user : req.user;
     pollsDb.getAllByUser(user, (err, myPolls) =>{
         if(err){
             console.log(err);

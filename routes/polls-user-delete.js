@@ -5,7 +5,7 @@ const pollsDb = require('../models/polls.js');
 
 //handle base route to /polls/user/delete/:id : deletes poll id
 router.delete('/:id', (req, res, next) => {
-    let user = global.debug ? {name: "Carl"} : req.user;
+   let user = global.debug ? global.user : req.user;
     let id = req.params.id;
     pollsDb.delete(id, (err, deleteRes) =>{
         if(err){ 
