@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../models/database.js');
 const pollsDb = require('../models/polls.js');
+const votesDb = require('../models/votes.js');
 
 //handle base route to /polls/new to display new poll form
 router.get('/', (req, res, next) => {
@@ -17,8 +18,22 @@ router.post('/', (req, res, next) => {
     debug.log('creating a new poll: ');
     debug.log(title);
     //send on successful create
-    pollsDb.create(user, title, options);
-    res.sendStatus(200);    
+    pollsDb.create(user, title, options, (err, result)=>{
+        var pollId;
+        if(err){
+            console.log(err);
+        } else {
+            pollId = result.insertedId;
+            votesDb.create(pollId, (err, result)=>{
+                if(err){
+                    console.log(err);
+                } else {
+                    res.sendStatus(200);    
+                }
+            });
+        }
+    });
+    
 });
 
 

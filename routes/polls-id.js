@@ -4,6 +4,7 @@ const pollsDb = require('../models/polls.js');
 module.exports = function (req, res, next){
     let user = global.debug.on ? global.debug.getUser() : req.user;
     let id = req.params.id;
+    let voter = user ? user.name : req.ip;
     pollsDb.getById(id, (err, poll) =>{
         if(err){
             console.log(err);            
@@ -11,6 +12,7 @@ module.exports = function (req, res, next){
              res.render('poll', {
                                     user: user && user.name,
                                     owned: user && user.name === poll.by,
+                                    voter: voter,
                                     id: poll._id,
                                     name: poll.name,
                                     by: poll.by,

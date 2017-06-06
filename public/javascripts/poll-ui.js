@@ -16,10 +16,13 @@
         var pollOptions = pollOptionsSelect.options;        
         var selectedOption = pollOptionsSelect.selectedOptions[0].textContent; 
         var pollOptionsArray = Array.prototype.slice.call(pollOptions);
-        var pollOptionsCount = pollOptionsArray.length;
-        var voteOption = {id: selectedOptionId, option: selectedOption, new: false};
+        var pollOptionsCount = pollOptionsArray.length;        
         var headers;
         var fetchInit;
+        //for now, we get user name from menu, but in future we can use session cookie
+        var voter = document.getElementById('poll-current-voter').textContent;
+        //check to see if logged in.  If not, set to ip address that is stored on this page        
+        var voteOption = {voter: voter, id: selectedOptionId, option: selectedOption, new: false};
         e.preventDefault();
         //console.log('my selected id is: ' + selectedOptionId);
         if(selectedOptionId === '-1'){
@@ -52,7 +55,15 @@
             return res.json();
         })
         .then((json)=>{
-            updatePageWithNewData(json);
+            //check json it has {voted: true}
+            //if it does, inform user they have already voted
+            //else
+            if(json.voted){
+                console.log('you cannot vote more than once');
+            } else {
+                updatePageWithNewData(json);
+            }
+            
         });        
         console.log('voting for ' + voteOption.option);        
     });
@@ -92,7 +103,7 @@
         var pollResultsList = document.getElementById('poll-results-list');
         var pollResultsHTML = "";
         var pollOptionsSelectHTML = "";
-                                
+
         for(let i = 0; i < poll.pollOptions.length; i++){
             //update  poll results list
             pollResultsHTML += '<li class="option"><span class="option-name">';

@@ -19,8 +19,14 @@ exports.create = function(user, pollName, optionNames, cb){
     }
     poll.pollOptions = pollOptions;
     //call db method to create new record
-    collection.insert(poll);
-    
+    collection.insertOne(poll, (err, result)=>{
+        if(err){
+            return cb(err);
+        } else {
+            return cb(null, result);
+        }
+    });
+            
 };
 
 exports.delete = function(id, cb){
