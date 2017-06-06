@@ -6,12 +6,12 @@ const pollsDb = require('../models/polls.js');
 
 //handle base route to /polls : retrieves all polls
 router.get('/', (req, res, next) => {
-    let user = global.debug ? global.user : req.user;
+    let user = global.debug.on ? global.debug.getUser() : req.user;
     pollsDb.getAll((err, polls)=>{
         if(err){
             console.log(err);
         } else {
-            console.log(polls);
+            debug.log(polls);
             res.render('polls', {user: user && user.name, polls: polls});
         }
     });    

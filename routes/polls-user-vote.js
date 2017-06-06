@@ -5,14 +5,14 @@ const pollsDb = require('../models/polls.js');
 
 //handle /polls/vote/:id : votes for poll option
 router.post('/:id', (req, res, next) => {
-    let user = global.debug ? global.user : req.user;
+    let user = global.debug.on ? global.debug.getUser() : req.user;
     let _Id = req.params.id;
     //let pollOptions = req.body.pollOptions;
     let option = req.body.option;
     let add = req.body.new;
-    console.log('voted for poll id: ' + _Id);
-    console.log('with item: ' + option);
-    console.log(add ? "This is a new item" : "This is not a new item");
+    debug.log('voted for poll id: ' + _Id);
+    debug.log('with item: ' + option);
+    debug.log(add ? "This is a new item" : "This is not a new item");
     pollsDb.updatePollOption(_Id, option, add, (err, doc) =>{
         
         if(err){
@@ -21,8 +21,8 @@ router.post('/:id', (req, res, next) => {
         } else {
              let poll = doc.value;
              poll.add = add;             
-             console.log('poll updated with...'); 
-             console.log(poll);
+             debug.log('poll updated with...'); 
+             debug.log(poll);
              res.end(JSON.stringify(poll));            
         }
     });

@@ -10,45 +10,9 @@ const index = require('./routes/index.js');
 const app = express();
 //get port
 const PORT = process.env.PORT || 3000;
-global.user = {name: 'Bob'};
-global.debug = true; //set a variable for debug mode
-//This is is just for testing before we get database in place
-global.polls = [
-    {
-        _id: '1', 
-        name: 'presidents', 
-        by: 'Anne Nomous',
-        pollOptions: [
-            {id: 0, option: 'George Washington', count: 0},
-            {id: 1, option: "Lincoln", count: 0}
-        ]
-    }, 
-    {
-        _id: '3', 
-        name: 'programming languages', 
-        by: "Carl",
-        pollOptions: [
-            {id: 0, option: 'JavaScript', count: 5},
-            {id: 1, option: 'C++', count: 2},
-            {id: 2, option: 'PHP', count: 1},
-            {id: 3, option: 'Java', count: 2},
-            {id: 4, option: 'C#', count: 3},
-            {id: 5, option: 'Ruby', count: 1},
-            {id: 6, option: 'Python', count: 4}
-            
-        ]
-    },
-    {
-        _id: '4', 
-        name: 'food', 
-        by: "Carl",
-        pollOptions:[
-            {id: 0, option: 'Pasta', count: 0},
-            {id: 1, option: 'Ceral', count: 0}
-        ]
-    }
-];
-
+require('./helpers/debug.js');
+global.debug.on = true;
+global.debug.setUser({name: 'Carl'});
 
 //set up view engine
 app.set('views', path.join(__dirname, 'views'));
@@ -70,7 +34,7 @@ db.connect(process.env.DATABASE, (err, db) =>{
     if(err){
         console.log('Database error: ' + err);
     } else {
-        console.log('Succesfful database connection');
+        console.log('Successful database connection');
         //setup passport strategy for authentification
         
         //start server
