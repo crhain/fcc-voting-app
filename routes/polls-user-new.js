@@ -1,11 +1,12 @@
-const express       = require('express');
-const router        = express.Router();
-const db            = require('../models/database.js');
-const pollsDb       = require('../models/polls.js');
-const votesDb       = require('../models/votes.js');
+const express               = require('express');
+const router                = express.Router();
+const ensureAuthenticated   = require('../helpers/authenticate.js');
+const db                    = require('../models/database.js');
+const pollsDb               = require('../models/polls.js');
+const votesDb               = require('../models/votes.js');
 
 //handle base route to /polls/new to display new poll form
-router.get('/', (req, res, next) => {
+router.get('/', ensureAuthenticated, (req, res, next) => {
     let user = global.debug.getUser(); 
     if(user === undefined){
         user = req.user;
@@ -14,7 +15,7 @@ router.get('/', (req, res, next) => {
 });
 
 //handle /polls/new post event to create new poll
-router.post('/', (req, res, next) => {
+router.post('/', ensureAuthenticated, (req, res, next) => {
     let user = global.debug.getUser(); 
     if(user === undefined){
         user = req.user;

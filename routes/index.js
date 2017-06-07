@@ -3,7 +3,7 @@ const router            = express.Router();
 //load route handlers
 const polls             = require('./polls.js');
 const pollsUser         = require('./polls-user.js');
-const pollsNew          = require('./polls-new.js');
+const pollsNew          = require('./polls-user-new.js');
 const pollsVote         = require('./polls-user-vote.js');
 const pollsDelete       = require('./polls-user-delete.js');
 const login             = require('./login.js');
