@@ -9,6 +9,7 @@ const passport          = require('passport');
 const TwitterStrategy    = require('passport-twitter').Strategy;
 //load db handler
 const db                = require('./models/database.js');
+const usersDb           = require('./models/users.js');
 const index             = require('./routes/index.js');
 //create express app
 const app               = express();
@@ -69,27 +70,8 @@ db.connect(process.env.DATABASE, (err, db) =>{
           },
           function(token, tokenSecret, profile, cb) {
               debug.log(profile);
-              //Database logic here with callback containing our user object
-              db.collection('users').findAndModify( 
-                {id: profile.id},
-                {},
-                {$setOnInsert:{
-                    id: profile.id,
-                    name: profile.displayName || 'John Doe',
-                    photo: profile.photos ? profile.photos[0].value : '',
-                    email: profile.emails ? profile.emails[0].value : 'No public email',
-                    created_on: new Date(),
-                    provider: profile.provider || ''
-                },$set:{
-                    last_login: new Date()
-                },$inc:{
-                    login_count: 1
-                }},
-                {upsert:true, new: true},
-                (err, doc) => {
-                    return cb(null, doc.value);
-                }
-              );
+              //Database logic here with callback containing our user object              
+              usersDb.update(profile, cb);
           }
         ));
 
