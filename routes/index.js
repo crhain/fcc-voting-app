@@ -7,6 +7,7 @@ const pollsNew          = require('./polls-new.js');
 const pollsVote         = require('./polls-user-vote.js');
 const pollsDelete       = require('./polls-user-delete.js');
 const login             = require('./login.js');
+const logout            = require('./logout.js');
 const profile           = require('./profile.js');
 const auth              = require('./auth.js');
 
@@ -29,6 +30,7 @@ router.use('/polls/user/delete', pollsDelete);
 router.use('/polls/user', pollsUser);
 router.use('/polls', polls);
 router.use('/login', login);
+router.use('/logout', logout);
 router.use('/profile', profile);
 router.use('/auth/twitter/return', auth);
 
