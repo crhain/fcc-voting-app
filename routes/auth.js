@@ -1,7 +1,8 @@
-const express           = require('express');
-const db                = require('../models/database.js');
-const router            = express.Router();
-const usersDb           = require('../models/users.js');
+const express               = require('express');
+const db                    = require('../models/database.js');
+const router                = express.Router();
+const usersDb               = require('../models/users.js');
+const ensureAuthenticated   = require('../helpers/authenticate.js');
 
 //handle base route to /polls : retrieves all polls
 router.get('/', ensureAuthenticated, (req, res, next) => {
@@ -12,12 +13,7 @@ router.get('/', ensureAuthenticated, (req, res, next) => {
     res.render('profile', {user: user});    
 });
 
-function ensureAuthenticated(req, res, next) {
-          if (debug.autolog || req.isAuthenticated()) {
-              return next();
-          }
-          res.redirect('/');
-};
+
 
 
 module.exports = router;
