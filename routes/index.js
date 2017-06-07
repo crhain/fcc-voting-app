@@ -8,6 +8,7 @@ const pollsVote         = require('./polls-user-vote.js');
 const pollsDelete       = require('./polls-user-delete.js');
 const login             = require('./login.js');
 const profile           = require('./profile.js');
+const auth              = require('./auth.js');
 
 //set up routes
 /*/ (get)
@@ -29,6 +30,7 @@ router.use('/polls/user', pollsUser);
 router.use('/polls', polls);
 router.use('/login', login);
 router.use('/profile', profile);
+router.use('/auth/twitter/return', auth);
 
 
 //define route for main page
