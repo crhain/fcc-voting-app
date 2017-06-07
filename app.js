@@ -29,6 +29,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+        secret: process.env.SESSION_SECRET,
+        resave: true,
+        saveUninitialized: true,
+    }));
+app.use(passport.initialize());
+app.use(passport.session());    
 
 //app.use(require('./middlewares/users'));
 //app.use('/', index);
@@ -42,21 +49,6 @@ db.connect(process.env.DATABASE, (err, db) =>{
     } else {
         console.log('Successful database connection');
         //setup passport strategy for authentification
-        app.use(session({
-          secret: process.env.SESSION_SECRET,
-          resave: true,
-          saveUninitialized: true,
-        }));
-        app.use(passport.initialize());
-        app.use(passport.session());
-
-        function ensureAuthenticated(req, res, next) {
-          if (debug.autolog || req.isAuthenticated()) {
-              return next();
-          }
-          res.redirect('/');
-        };
-
         passport.serializeUser((user, done) => {
           done(null, user.id);
         });
@@ -108,3 +100,4 @@ db.connect(process.env.DATABASE, (err, db) =>{
 
     }
 });
+
