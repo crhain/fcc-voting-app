@@ -20,7 +20,12 @@ exports.update = function(profile, cb){
                 }},
                 {upsert:true, new: true},
                 (err, doc) => {
-                    return cb(null, doc.value);
+                    if(err){
+                        return cb(err);
+                    } else {
+                        return cb(null, doc.value);
+                    }
+                    
                 }
     );
 }
@@ -30,7 +35,12 @@ exports.getUser = function(id, done){
     collection.findOne(
                 {id: id},
                 (err, doc) => {
-                    done(null, doc);
+                    if(err){
+                        return done(err);
+                    } else {
+                        return done(null, doc);
+                    }
+                    
                 }
             );
 }            

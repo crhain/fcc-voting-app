@@ -35,7 +35,10 @@ router.use('/auth/twitter/return', auth);
 
 //define route for main page
 router.get('/', (req, res, next) => {
-    let user = global.debug.on ? global.debug.getUser() : req.user;
+    let user = global.debug.getUser(); 
+    if(user === undefined){
+        user = req.user;
+    }
     res.render('home', {user: user && user.name});
 });
 
