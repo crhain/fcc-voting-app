@@ -27,7 +27,7 @@ router.post('/:id', (req, res, next) => {
         } else {
             debug.log('Vote found: ');
             debug.log(vote);
-            if(vote && !debug.multivote){
+            if(vote && !debug.canMultivote()){
                 console.log('cannot vote');
                 res.end(JSON.stringify({voted: true}));
             } else {

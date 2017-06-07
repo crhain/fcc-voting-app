@@ -17,8 +17,8 @@ const app               = express();
 const PORT              = process.env.PORT || 3000;
 require('./helpers/debug.js');
 global.debug.on = false;
-debug.multivote = false;
-global.debug.autolog = true;
+debug.multivote(false);
+global.debug.autolog(false);
 //global.debug.setUser({name: 'Bob'});
 
 //set up view engine

@@ -1,11 +1,10 @@
 console.log('debugging module loaded');
-var user = {name: 'Default'};
+var user = {id: '1', name: 'Default', email: 'default@somewhere.com'};
+var autolog = false;
+var multivote = false;
 
 global.debug = {
-    on: false,
-    autolog: true,
-    multivote: true,
-    user: {id: '1', name: 'Default', email: 'default@somewhere.com'}
+    on: false,        
 };
 
 global.debug.log = function (...args) {
@@ -20,11 +19,35 @@ global.debug.setUser = function(newUser){
 }
 
 global.debug.getUser = function(){
-    if(this.on && this.autolog){        
+    if(this.on && autolog){        
         return user;
     } else {
         return undefined;
     }    
+}
+
+global.debug.autolog = function(status){
+    autolog = status;
+}
+
+global.debug.canAutolog = function(){
+    if(this.on){
+        return autolog;
+    } 
+
+    return false;
+}
+
+global.debug.multivote = function(status){
+    multivote = status;
+}
+
+global.debug.canMultivote = function(){
+    if(this.on){
+        return multivote;
+    }
+
+    return false;
 }
 
 //This is is just for testing before we get database in place

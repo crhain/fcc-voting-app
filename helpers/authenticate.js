@@ -1,5 +1,5 @@
 function ensureAuthenticated(req, res, next) {
-          if (debug.autolog || req.isAuthenticated()) {
+          if (debug.canAutolog() || req.isAuthenticated()) {
               debug.log('Authenticated');      
               return next();
           }
