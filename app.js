@@ -55,12 +55,7 @@ db.connect(process.env.DATABASE, (err, db) =>{
         });
 
         passport.deserializeUser((id, done) => {
-            db.collection('users').findOne(
-                {id: id},
-                (err, doc) => {
-                    done(null, doc);
-                }
-            );
+           usersDb.getUser(id, done);
         });
         
         passport.use(new TwitterStrategy({
