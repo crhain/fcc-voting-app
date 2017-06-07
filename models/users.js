@@ -3,7 +3,7 @@ const db = require('./database.js');
 //add hash, authenticate, and other user related functions and database calls
 exports.update = function(profile, cb){
     let collection = db.get().collection('users');
-    collection.findAndModify( 
+    /*collection.findAndModify( 
                 {id: profile.id},
                 {},
                 {$setOnInsert:{
@@ -22,5 +22,5 @@ exports.update = function(profile, cb){
                 (err, doc) => {
                     return cb(null, doc.value);
                 }
-    );
+    );*/
 }
