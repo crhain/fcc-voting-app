@@ -1,12 +1,15 @@
-const express = require('express');
-const db = require('../models/database.js');
-const router = express.Router();
-const pollsDb = require('../models/polls.js');
-const votesDb = require('../models/votes.js');
+const express       = require('express');
+const db            = require('../models/database.js');
+const router        = express.Router();
+const pollsDb       = require('../models/polls.js');
+const votesDb       = require('../models/votes.js');
 
 //handle base route to /polls/user/delete/:id : deletes poll id
 router.delete('/:id', (req, res, next) => {
-   let user = global.debug.on ? global.debug.getUser() : req.user;
+    let user = global.debug.getUser(); 
+    if(user === undefined){
+        user = req.user;
+    }
     let id = req.params.id;
     pollsDb.delete(id, (err, deleteRes) =>{
         if(err){ 

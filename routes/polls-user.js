@@ -1,12 +1,15 @@
-const express = require('express');
-const router = express.Router();
-const pollIdHandler = require('./polls-id.js');
-const db = require('../models/database.js');
-const pollsDb = require('../models/polls.js');
+const express           = require('express');
+const router            = express.Router();
+const pollIdHandler     = require('./polls-id.js');
+const db                = require('../models/database.js');
+const pollsDb           = require('../models/polls.js');
 
 //handle base route to /polls
 router.get('/', (req, res, next) => {
-    let user = global.debug.on ? global.debug.getUser() : req.user;
+    let user = global.debug.getUser(); 
+    if(user === undefined){
+        user = req.user;
+    }
     pollsDb.getAllByUser(user, (err, myPolls) =>{
         if(err){
             console.log(err);

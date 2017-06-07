@@ -5,7 +5,10 @@ const usersDb           = require('../models/users.js');
 
 //handle base route to /polls : retrieves all polls
 router.get('/', (req, res, next) => {
-    let user = global.debug.on ? global.debug.getUser() : req.user;
+    let user = global.debug.getUser(); 
+    if(user === undefined){
+        user = req.user;
+    }
     res.render('profile', {user: user});    
 });
 

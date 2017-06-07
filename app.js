@@ -17,8 +17,8 @@ const PORT              = process.env.PORT || 3000;
 require('./helpers/debug.js');
 global.debug.on = true;
 debug.multivote = false;
-//global.debug.autolog = false;
-global.debug.setUser({name: 'Bob'});
+global.debug.autolog = true;
+//global.debug.setUser({name: 'Bob'});
 
 //set up view engine
 app.set('views', path.join(__dirname, 'views'));
@@ -51,7 +51,7 @@ db.connect(process.env.DATABASE, (err, db) =>{
         app.use(passport.session());
 
         function ensureAuthenticated(req, res, next) {
-          if (req.isAuthenticated()) {
+          if (debug.autolog || req.isAuthenticated()) {
               return next();
           }
           res.redirect('/');

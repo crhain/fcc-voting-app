@@ -1,8 +1,11 @@
-const db = require('../models/database.js');
-const pollsDb = require('../models/polls.js');
+const db        = require('../models/database.js');
+const pollsDb   = require('../models/polls.js');
 //handler to retrieve a poll by id
 module.exports = function (req, res, next){
-    let user = global.debug.on ? global.debug.getUser() : req.user;
+    let user = global.debug.getUser(); 
+    if(user === undefined){
+        user = req.user;
+    }
     let id = req.params.id;
     let voter = user ? user.name : req.ip;
     pollsDb.getById(id, (err, poll) =>{

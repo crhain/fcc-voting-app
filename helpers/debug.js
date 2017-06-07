@@ -5,7 +5,7 @@ global.debug = {
     on: false,
     autolog: true,
     multivote: true,
-    user: {name: 'Default'}
+    user: {id: '1', name: 'Default', email: 'default@somewhere.com'}
 };
 
 global.debug.log = function (...args) {
