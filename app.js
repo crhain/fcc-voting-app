@@ -16,7 +16,7 @@ const app               = express();
 //get port
 const PORT              = process.env.PORT || 3000;
 require('./helpers/debug.js');
-global.debug.on = false;
+global.debug.on = true;
 debug.multivote(false);
 global.debug.autolog(false);
 //global.debug.setUser({name: 'Bob'});
@@ -38,10 +38,22 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());    
 
-//app.use(require('./middlewares/users'));
-//app.use('/', index);
+
 //set up routes
 app.use(require('./routes/index.js'));
+
+//default route if not found
+app.use((req, res)=>{
+    res.status(404);
+    if(req.accepts('html')){
+        res.end('404: Page Not Found');
+    }
+    if(req.accepts('json')){
+        res.end(JSON.stringify({error: 'not found'}));
+    }
+    // default to plain-text. send()
+    res.type('txt').send('Not found');
+});
 
 //establish connection to database
 db.connect(process.env.DATABASE, (err, db) =>{

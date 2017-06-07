@@ -44,5 +44,15 @@ router.get('/', (req, res, next) => {
     res.render('home', {user: user && user.name});
 });
 
+//handlers for unkown get and post routes
+/*router.get('*', (req, res, next) =>{
+    res.end('What?', 404);
+});
+
+router.post('*', (req, res, next) => {
+    res.end(JSON.stringify({status: '404'}));
+});*/
+ 
+
 module.exports = router;
 
