@@ -15,7 +15,7 @@ gulp.task('js', () => {
 
 gulp.task('css', () => {
     var plugins = [
-        autoprefixer({browsers: ['last 1 version']}),
+        autoprefixer({browsers: ['last 1 version'], cascade: false}),
         cssnano()
     ];
     return gulp.src('./public/src/stylesheets/*.css')
