@@ -48,7 +48,7 @@ exports.getById = function(id, cb){
     collection.findOne({_id: _id}, (err, poll)=>{
         if(err){
             return cb(err);
-        } else {
+        } else {            
             return cb(null, poll);
         }
     });

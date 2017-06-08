@@ -10,17 +10,22 @@ module.exports = function (req, res, next){
     let voter = user ? user.name : req.ip;
     pollsDb.getById(id, (err, poll) =>{
         if(err){
-            console.log(err);            
+            console.log(err);                        
         } else {
-             res.render('poll', {
-                                    user: user && user.name,
-                                    owned: user && user.name === poll.by,
-                                    voter: voter,
-                                    id: poll._id,
-                                    name: poll.name,
-                                    by: poll.by,
-                                    pollOptions: poll.pollOptions 
-            });
+             if(poll){
+                res.render('poll', {
+                    user: user && user.name,
+                    owned: user && user.name === poll.by,
+                    voter: voter,
+                    id: poll._id,
+                    name: poll.name,
+                    by: poll.by,
+                    pollOptions: poll.pollOptions 
+                });
+             } else {
+                 res.redirect('/');
+             }
+             
         }
     });             
 };
