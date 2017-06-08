@@ -33,5 +33,14 @@
     "mongodb": "^2.2.27",
     "passport": "^0.3.2",
     "passport-twitter": "^1.0.4"
+  },
+  "devDependencies": {
+    "autoprefixer": "^7.1.1",
+    "babel-preset-env": "^1.5.2",
+    "cssnano": "^3.10.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-minify": "^1.0.0",
+    "gulp-postcss": "^7.0.0"
   }
 }
