@@ -89,11 +89,14 @@
     });
 
     //#share-twitter-btn - on click : for shareing url for poll on twitter
-    //could impliment as an api call with url address to /api/twitter/:url route
-    shareTwitterBtn.addEventListener('click', (e)=>{
+    shareTwitterBtn && shareTwitterBtn.addEventListener('click', (e)=>{
         e.preventDefault();
         //add call to /api/twitter/:url
-        console.log('sharing on twitter...');        
+        console.log('sharing on twitter...');
+        var pollURL = window.location;
+        var tweet = "Check out my new poll at: " + pollURL;
+        var twitterURL = "https://twitter.com/intent/tweet" + "?text=" + encodeURIComponent(tweet) + "&hashtags=poll";
+        window.open(twitterURL, "Share");        
     });
 
     //Utility Functions
