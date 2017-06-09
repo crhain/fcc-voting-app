@@ -1,7 +1,7 @@
 (function(self){
     window.addEventListener('load', (e) => {
-        var currentPage = document.getElementsByClassName('section')[0].id;
-        //console.log('my page id is: ', currentPage);
+        //set active nav-menu item
+        var currentPage = document.getElementsByClassName('section')[0].id;        
         switch(currentPage){
             case 'home-page':
                 document.getElementById('nav-home').classList.add('pure-menu-selected');
