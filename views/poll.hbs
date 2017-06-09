@@ -18,21 +18,23 @@
         </div>    
     </form>
     
-    
-    <div id="poll-results">
-        <h3>Results</h3>
-        <ul id="poll-results-list">
-            {{#each pollOptions}}
-            <li class="option"><span class="option-name">{{this.option}}</span> : <span class="option-count">{{this.count}}</span></li>
-            {{/each}}
-        </ul>
-    </div>
-    <div id="chart-container">
-        <canvas id="myChart" width="100" height="100"></canvas>
-    </div>
-    {{#if owned }}
-    <button id="delete-poll-btn" class="pure-button">Delete This Poll</button>
-    {{/if}}   
+    <div class="pure-g">
+        <div id="poll-results" class="poll-result pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+            <h3>Results</h3>
+            <ul id="poll-results-list">
+                {{#each pollOptions}}
+                <li class="option"><span class="option-name">{{this.option}}</span> : <span class="option-count">{{this.count}}</span></li>
+                {{/each}}
+            </ul>
+        </div>
+        <div id="chart-container" class="poll-result pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+            <canvas id="myChart" width="300" height="300"></canvas>
+            {{#if owned }}
+                <button id="delete-poll-btn" class="pure-button">Delete This Poll</button>
+            {{/if}}
+            
+        </div>        
+    </div>   
 </div>
  <div id="poll-info-container" class="hidden">
     <div id="poll-id">{{id}}</div>

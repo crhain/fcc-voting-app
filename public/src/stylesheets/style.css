@@ -1,5 +1,14 @@
+*{
+    position: relative; 
+}
 h1{
     color: red;
+}
+
+#header{
+    width: 80%;
+    margin: 0px auto;
+    font-size: 20px;
 }
 
 #chart-container{
@@ -14,4 +23,20 @@ h1{
 
 #poll-info-container.hidden{
     display: none;
+}
+
+.section{
+    width: 80%;
+    margin: 0px auto;
+    /*border: 1px solid red;*/
+}
+
+.poll-result{
+    /*border: 1px solid red;*/
+}
+
+#delete-poll-btn{
+   position: absolute;    
+   left: 25%;
+   margin-top: 20px;
 }
