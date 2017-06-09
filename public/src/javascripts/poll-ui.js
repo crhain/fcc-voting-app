@@ -4,7 +4,8 @@
     //var newOptionBtn =  document.getElementById('new-option-btn');    
     var deletePollBtn =  document.getElementById('delete-poll-btn');
     var shareTwitterBtn =  document.getElementById('share-twitter-btn');
-    var pollOptionsSelect = document.getElementById('poll-options');    
+    var pollOptionsSelect = document.getElementById('poll-options');
+    var newOptionContainer = document.getElementById('new-option-container');    
     var currentId = document.getElementById('poll-id').textContent;
 
     //draw chart - requires poll-chart.js as module or loaded before this script in html file
@@ -16,7 +17,7 @@
         var pollOptions = pollOptionsSelect.options;        
         var selectedOption = pollOptionsSelect.selectedOptions[0].textContent; 
         var pollOptionsArray = Array.prototype.slice.call(pollOptions);
-        var pollOptionsCount = pollOptionsArray.length;        
+        var pollOptionsCount = pollOptionsArray.length;                 
         var headers;
         var fetchInit;
         //for now, we get user name from menu, but in future we can use session cookie
@@ -26,7 +27,7 @@
         e.preventDefault();
         //console.log('my selected id is: ' + selectedOptionId);
         if(selectedOptionId === '-1'){
-            voteOption.option = document.getElementById('new-option').value;            
+            voteOption.option = document.getElementById('new-option').value;           
             if(voteOption.option === ""){
                 //signal and error if new option not filled out
                 console.log('please input a new option before voting!');
@@ -38,7 +39,11 @@
             } else {                
                 //console.log('my next id is: ' + optionCount);
                 voteOption.id = pollOptionsCount - 1;
-                voteOption.new = true;                 
+                voteOption.new = true;
+                //hack to trigger change event on pollOptionsSelect so that it
+                //is hidden again after voteting
+                pollOptionsSelect.value = '0'; //first option
+                pollOptionsSelect.dispatchEvent(new Event('change'));                                                 
             }
         } 
         //call vote api goes here
@@ -69,13 +74,12 @@
     });
     
     pollOptionsSelect.addEventListener('change', (e)=>{
-        var newOptionContainer = document.getElementById('new-option-container');
-        if(pollOptionsSelect.value === '-1'){
+        var newOptionInput = document.getElementById('new-option');        
+        if(pollOptionsSelect.value === '-1'){            
+            newOptionInput.value = "";
             newOptionContainer.classList.remove('hidden');
-        } else {
-            if(!newOptionContainer.classList.contains('hidden')){
-                newOptionContainer.classList.add('hidden');
-            }
+        } else {        
+            newOptionContainer.classList.add('hidden');            
         }
     });
 
