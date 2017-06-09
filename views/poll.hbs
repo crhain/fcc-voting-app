@@ -1,24 +1,24 @@
-<div id="poll" class="section">
+<div id="poll-page" class="section">
     <h1>Poll: {{name}}</h1>
     <h2>By {{by}}</h2>
-    <form id="poll-form">        
+    <form id="poll-form" class="pure-form">        
         <select id="poll-options" name="poll-options">
             {{#each pollOptions}}
             <option id="option_{{this.id}}" class="poll-option" value={{this.id}}>{{this.option}}</option> 
             {{/each}}
             <option value="-1">Add new option</option>            
         </select>
-        <button id="poll-vote-btn">Vote</button>         
+        <button id="poll-vote-btn" class="pure-button pure-button-primary">Vote</button>
+        {{#if owned }}
+        <button id="share-twitter-btn" class="pure-button">Share on Twiter</button>    
+        {{/if}}         
+        <div id="new-option-container" class="hidden">
+            <label for="new-option" style="display: none">New Option:</label>
+            <input id="new-option" type="text" placeholder="New Option">
+        </div>    
     </form>
-    <div id="new-option-container" class="hidden">
-        <label for="new-option">
-            New Option:
-            <input id="new-option" type="text">
-        </label>
-    </div>    
-    {{#if owned }}
-    <button id="share-twitter-btn">Share on Twiter</button>    
-    {{/if}}
+    
+    
     <div id="poll-results">
         <h3>Results</h3>
         <ul id="poll-results-list">
@@ -31,7 +31,7 @@
         <canvas id="myChart" width="100" height="100"></canvas>
     </div>
     {{#if owned }}
-    <button id="delete-poll-btn">Delete This Poll</button>
+    <button id="delete-poll-btn" class="pure-button">Delete This Poll</button>
     {{/if}}   
 </div>
  <div id="poll-info-container" class="hidden">
