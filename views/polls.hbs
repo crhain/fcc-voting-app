@@ -1,8 +1,8 @@
 <div id="polls-page" class="section">
     <h1> Listing of Polls </h1>
-    <ul id="poll-list">
+    <ul class="poll-list pure-menu-list">
         {{#each polls}}
-        <li id={{this._id}}><a href='/polls/{{this._id}}'>{{this.name}}</a></li>
+        <li id={{this._id}} class="poll-list-item pure-menu-item"><a href='/polls/{{this._id}}' class="pure-menu-link">{{this.name}}</a></li>
         {{/each}}
     </ul>
 </div>
