@@ -1,7 +1,7 @@
 (function(self){
     //get page elements
     var pollVoteBtn = document.getElementById('poll-vote-btn');
-    var newOptionBtn =  document.getElementById('new-option-btn');
+    //var newOptionBtn =  document.getElementById('new-option-btn');    
     var deletePollBtn =  document.getElementById('delete-poll-btn');
     var shareTwitterBtn =  document.getElementById('share-twitter-btn');
     var pollOptionsSelect = document.getElementById('poll-options');    
@@ -68,6 +68,17 @@
         console.log('voting for ' + voteOption.option);        
     });
     
+    pollOptionsSelect.addEventListener('change', (e)=>{
+        var newOptionContainer = document.getElementById('new-option-container');
+        if(pollOptionsSelect.value === '-1'){
+            newOptionContainer.classList.remove('hidden');
+        } else {
+            if(!newOptionContainer.classList.contains('hidden')){
+                newOptionContainer.classList.add('hidden');
+            }
+        }
+    });
+
     //#delete-poll-btn - on click : for deleting the current poll
     //post to poll/delete/:id route
     

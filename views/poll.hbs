@@ -10,10 +10,12 @@
         </select>
         <button id="poll-vote-btn">Vote</button>         
     </form>
-    <label for="new-option">
-        New Option:
-        <input id="new-option" type="text">
-    </label>    
+    <div id="new-option-container" class="hidden">
+        <label for="new-option">
+            New Option:
+            <input id="new-option" type="text">
+        </label>
+    </div>    
     {{#if owned }}
     <button id="share-twitter-btn">Share on Twiter</button>    
     {{/if}}
@@ -32,11 +34,13 @@
     <button id="delete-poll-btn">Delete This Poll</button>
     {{/if}}   
 </div>
- <div id="poll-id">{{id}}</div>
- <div id="poll-current-voter">{{voter}}</div>
+ <div id="poll-info-container" class="hidden">
+    <div id="poll-id">{{id}}</div>
+    <div id="poll-current-voter">{{voter}}</div>
+ </div>   
  
- <script type="text/javascript" src="/dist/javascripts/poll-chart-min.js"></script>
- <script type="text/javascript" src="/dist/javascripts/poll-ui-min.js"></script>     
+ <script type="text/javascript" src="/src/javascripts/poll-chart.js"></script>
+ <script type="text/javascript" src="/src/javascripts/poll-ui.js"></script>     
 
 
 <!-- <select id="poll-select" form="poll-form">

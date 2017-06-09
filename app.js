@@ -85,8 +85,11 @@ db.connect(process.env.DATABASE, (err, db) =>{
         //start server
         app.listen(PORT, ()=>{
             console.log('listening on port: ' + PORT);
-        });     
+        }); 
+            
 
     }
 });
+
+
 
