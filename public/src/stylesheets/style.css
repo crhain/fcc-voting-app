@@ -5,10 +5,22 @@ h1{
     color: red;
 }
 
+textarea{
+    resize: none;
+}
+
 .section{
-    width: 80%;
+    width: 50%;
+    min-height: 500px;
     margin: 0px auto;
-    /*border: 1px solid red;*/
+    border: 2px solid grey;
+    padding: 15px;
+    box-shadow: 2px 2px 10px 2px black;
+
+}
+
+.center{
+    
 }
 
 #header{
@@ -19,6 +31,10 @@ h1{
 
 
 /* Poll Page */
+#poll-options{
+    width: 300px;
+}
+
 #chart-container{
     position: relative;
     width: 300px;

@@ -1,5 +1,4 @@
 <div id="my-polls-page" class="section">
-    <h1>My Polls</h1>
      <ul class="poll-list pure-menu-list">
         {{#each myPolls}}
         <li id={{this._id}} class="poll-list-item"><a href='/polls/user/{{this._id}}' class="pure-menu-link">{{this.name}}</a></li>

@@ -1,6 +1,6 @@
 <div id="poll-page" class="section">
-    <h1>Poll: {{name}}</h1>
-    <h2>By {{by}}</h2>
+    <h1>{{name}}</h1>
+    <h2>Poll by {{by}}</h2>    
     <form id="poll-form" class="pure-form">        
         <select id="poll-options" name="poll-options">
             {{#each pollOptions}}
@@ -26,14 +26,14 @@
                 <li class="option"><span class="option-name">{{this.option}}</span> : <span class="option-count">{{this.count}}</span></li>
                 {{/each}}
             </ul>
+            {{#if owned }}
+                <button id="delete-poll-btn" class="pure-button">Delete This Poll</button>
+            {{/if}}
         </div>
         <div class="poll-result pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
             <div id="chart-container" >
                 <canvas id="myChart" width="300" height="300"></canvas>                
-            </div>
-            {{#if owned }}
-                <button id="delete-poll-btn" class="pure-button">Delete This Poll</button>
-            {{/if}}
+            </div>            
         </div>                        
     </div>   
 </div>
