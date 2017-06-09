@@ -2,6 +2,8 @@ console.log('debugging module loaded');
 var user = {id: '1', name: 'Default', email: 'default@somewhere.com'};
 var autolog = false;
 var multivote = false;
+var localDb = false;
+var db = 'mongodb://localhost:27017/voteing-app';
 
 global.debug = {
     on: false,        
@@ -48,6 +50,18 @@ global.debug.canMultivote = function(){
     }
 
     return false;
+}
+
+global.debug.localDb = function(status){
+    localDb = status;
+}
+
+global.debug.getDbPath = function(){
+    if(this.on && localDb){
+        return db;
+    } 
+
+    return undefined;
 }
 
 //This is is just for testing before we get database in place

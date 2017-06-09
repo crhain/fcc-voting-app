@@ -16,9 +16,10 @@ const app               = express();
 //get port
 const PORT              = process.env.PORT || 3000;
 require('./helpers/debug.js');
-global.debug.on = true;
+debug.on = true;
 debug.multivote(true);
-global.debug.autolog(true);
+debug.autolog(true);
+//debug.localDb(true);
 //global.debug.setUser({name: 'Bob'});
 
 //set up view engine
@@ -56,7 +57,7 @@ app.use((req, res)=>{
 });
 
 //establish connection to database
-db.connect(process.env.DATABASE, (err, db) =>{
+db.connect( process.env.DATABASE, (err, db) =>{
     if(err){
         console.log('Database error: ' + err);
     } else {

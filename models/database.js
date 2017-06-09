@@ -10,7 +10,7 @@ var database = {};
 database.connect = function(url, done) {
   if (state.db) return done();
 
-  mongo.connect(url, function(err, db) {
+  mongo.connect(debug.getDbPath() || url, function(err, db) {
     if (err) return done(err);
     state.db = db;
     done();
