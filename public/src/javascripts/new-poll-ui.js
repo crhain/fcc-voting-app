@@ -38,7 +38,10 @@
                 body: JSON.stringify({title: newPollTitle, options: newPollOptions})            
             };              
             //add call to polls/user/new/
-            fetch('/polls/user/new', fetchInit);
+            fetch('/polls/user/new', fetchInit)
+                .then(()=>{
+                    window.location.href = "/polls/user/";  
+                });
             console.log('adding poll: ' + newPollTitle);            
         }                               
     });    

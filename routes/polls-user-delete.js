@@ -14,11 +14,14 @@ router.delete('/:id', ensureAuthenticated, (req, res, next) => {
     let id = req.params.id;
     pollsDb.delete(id, (err, deleteRes) =>{
         if(err){ 
-            console.log(err);             
+            console.log(err);
+            //res.end(JSON.stringify({status: 'error', pollId: null}));             
         } else {
             debug.log('deleted doc id: ' + id);
             //on succesfull delete
-            votesDb.delete(id);            
+            votesDb.delete(id);
+            //res.end(JSON.stringify({status: 'ok', pollId: id}));
+            res.sendStatus(200);            
         }        
     });
     //redirect handled by client in poll-ui.js            
