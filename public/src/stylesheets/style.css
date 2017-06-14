@@ -1,5 +1,5 @@
 *{
-    position: relative; 
+    position: relative;     
 }
 
 textarea{
@@ -22,6 +22,7 @@ textarea{
     width: 80%;
     margin: 0px auto;
     font-size: 20px;
+    overflow: visible;
 }
 
 
@@ -60,4 +61,8 @@ textarea{
     /*text-decoration: none;
     color: black;*/
     font-size: 20px;
+}
+
+.nav-dropdown{
+    background-color: #DDE0E7;    
 }

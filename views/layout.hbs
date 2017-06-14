@@ -2,15 +2,17 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Polls Unlimited</title>        
+    <title>Polls Unlimited</title>   
+    <script src="https://use.fontawesome.com/115e8e6547.js"></script>     
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" 
-        integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous" >
+        integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous" >        
     <!--[if lte IE 8]>
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-old-ie-min.css">
     <![endif]-->
     <!--[if gt IE 8]><!-->
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css">
     <!--<![endif]-->
+
     <link rel="stylesheet" type="text/css" href="/src/stylesheets/style.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
     <script type="text/javascript" src="/src/javascripts/fetch.js"></script>
@@ -24,9 +26,21 @@
             {{#if user}}
             <li id="nav-mypolls" class="nav-btn pure-menu-item"><a href="/polls/user" class="pure-menu-link">My Polls</a></li>
             <li id="nav-newpoll" class="nav-btn pure-menu-item"><a href="/polls/user/new" class="pure-menu-link">New Poll</a></li>            
-            <li id="nav-user" class="nav-btn pure-menu-item"><a href="/logout" class="pure-menu-link">Log Out: {{user}}</a></li>
+            <li id="nav-user" class="nav-btn pure-menu-item pure-menu-has-children">
+                <a href="#" class="pure-menu-link">{{user}}</a>
+                <ul class="nav-dropdown pure-menu-children">
+                    <li class="pure-menu-item"><a href="#" class="pure-menu-link">Profile</a></li>
+                    <li class="pure-menu-item"><a href="/logout" class="pure-menu-link">Logout</a></li>
+                </ul>
+            </li>
             {{else}}
-            <li id="nav-user" class="nav-btn pure-menu-item"><a href="/login/twitter" class="pure-menu-link">Log In With Twitter</a></li>
+            <li id="nav-user" class="nav-btn pure-menu-item pure-menu-has-children">
+                <a href="#" class="pure-menu-link">Login</a>
+                <ul class="nav-dropdown pure-menu-children">                    
+                    <li class="pure-menu-item"><a href="/login/twitter" class="pure-menu-link">Twitter</a></li>
+                    <li class="pure-menu-item"><a href="#" class="pure-menu-link">Logout</a></li>                    
+                </ul>
+            </li>                                
             {{/if}}
         </ul>
     </div>    

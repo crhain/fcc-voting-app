@@ -10,7 +10,7 @@ router.get('/', ensureAuthenticated, (req, res, next) => {
     if(user === undefined){
         user = req.user;
     }
-    res.render('profile', {user: user});    
+    res.render('profile', {user: user && user.name, user });   
 });
 
 module.exports = router;

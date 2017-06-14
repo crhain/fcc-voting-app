@@ -1,5 +1,5 @@
 console.log('debugging module loaded');
-var user = {id: '1', name: 'Default', email: 'default@somewhere.com'};
+var user = {id: '1', name: 'Default', emails: [{value: 'default@somewhere.com'}]};
 var autolog = false;
 var multivote = false;
 var localDb = false;
