@@ -7,7 +7,7 @@
     var pollOptionsSelect = document.getElementById('poll-options');
     var newOptionContainer = document.getElementById('new-option-container');    
     var currentId = document.getElementById('poll-id').textContent;
-
+    
     //draw chart - requires poll-chart.js as module or loaded before this script in html file
     var myChart = chartjs.draw();
     //#poll-form  -  on submit : for voteing
@@ -30,11 +30,13 @@
             voteOption.option = document.getElementById('new-option').value;           
             if(voteOption.option === ""){
                 //signal and error if new option not filled out
-                console.log('please input a new option before voting!');
+                //console.log('please input a new option before voting!');
+                showAlert('Please input a new option before voting!');
                 return;
             //check to see if vote option same as in list    
             } else if(pollOptionsArray.find( (el) => el.textContent === voteOption.option )){
-                console.log('Option already exists!');
+                //console.log('Option already exists!');
+                showAlert('Option already exists!');
                 return;
             } else {                
                 //console.log('my next id is: ' + optionCount);
@@ -64,6 +66,7 @@
             //if it does, inform user they have already voted
             //else
             if(json.voted){
+                showAlert("You cannot vote more than once!");
                 console.log('you cannot vote more than once');
             } else {
                 updatePageWithNewData(json);
@@ -114,7 +117,16 @@
         window.open(twitterURL, "Share");        
     });
 
+
     //Utility Functions
+
+    function showAlert(message){
+        var modalWindow = document.getElementById('modal-window');
+        var modalMessage = document.getElementById('modal-message');
+        modalMessage.textContent = message;
+        modalWindow.classList.remove('closed');
+    }
+
     function updatePageWithNewData(poll){
         console.log('I am updating the page with new data!');
         //console.log(json);

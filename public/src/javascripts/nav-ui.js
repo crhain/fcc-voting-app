@@ -19,6 +19,16 @@
             default:
                 break;        
         }
+
+        //Event handler for modal-window close button
+        var modalWindowCloseBtn = document.getElementById('modal-close-btn');
+        modalWindowCloseBtn.addEventListener('click', (e) =>{
+            var modalWindow = document.getElementById('modal-window');
+            modalWindow.classList.add('closed');
+            e.preventDefault();
+        });
+
+
         ////////////////////////////////////////////////////////////////////////////////////
         //                       set up purecss dropdown menus                                              
         ////////////////////////////////////////////////////////////////////////////////////
