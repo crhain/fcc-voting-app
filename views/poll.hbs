@@ -1,6 +1,6 @@
 <div id="poll-page" class="section pure-g">
     <div class="card pure-u-1 pure-u-xl-1-2">
-        <h1>{{name}}, by {{by}}</h1>            
+        <h1 class="section-title">{{name}}, by {{by}}</h1>            
         <form id="poll-form" class="pure-form">        
             <select id="poll-options" name="poll-options">
                 {{#each pollOptions}}
@@ -10,7 +10,7 @@
             </select>
             <button id="poll-vote-btn" class="pure-button pure-button-primary">Vote</button>
             {{#if owned }}
-            <button id="share-twitter-btn" class="pure-button">Share on Twiter</button>    
+            <button id="share-twitter-btn" class="pure-button twitter-button">Share on Twitter</button>    
             {{/if}}         
             <div id="new-option-container" class="hidden">
                 <label for="new-option" style="display: none">New Option:</label>
@@ -27,7 +27,7 @@
                     {{/each}}
                 </ul>
                 {{#if owned }}
-                    <button id="delete-poll-btn" class="pure-button">Delete This Poll</button>
+                    <button id="delete-poll-btn" class="pure-button danger-button">Delete This Poll</button>
                 {{/if}}
             </div>
             <div class="poll-result pure-u-1 pure-u-md-1-2 pure-u-lg-1-2">
