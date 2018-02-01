@@ -1,6 +1,23 @@
 fcc-voting-app
 ===================================================================================
 
+## DEVELOPMENT ##
+
+* Place a .env file in the root of the project directory.  (See the example .env for format)
+* type `npm run start` to start the development server
+* view the app at localhost:8080
+
+### .env Example ###
+
+DATABASE=mongodb://[user]:[password]@[address of database]
+SESSION_SECRET=[place value here]
+TWITTER_CLIENT_ID=[place value here]
+TWITTER_CLIENT_SECRET=[place value here]
+
+
+## REQUIREMENTS ##
+
+
 A voting app for free code camp back end certificate
 
 Objective: Build a full stack JavaScript app that is functionally similar to this: https://fcc-voting-arthow4n.herokuapp.com/ and deploy it to Heroku.

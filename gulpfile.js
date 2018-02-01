@@ -1,6 +1,7 @@
 const gulp = require('gulp');
 const babel = require('gulp-babel');
 const minify = require('gulp-minify');
+const sass = require('gulp-sass');
 const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
@@ -15,10 +16,11 @@ gulp.task('js', () => {
 
 gulp.task('css', () => {
     var plugins = [
-        autoprefixer({browsers: ['last 1 version'], cascade: false}),
+        autoprefixer({browsers: ['last 10 versions'], cascade: false}),
         cssnano()
     ];
-    return gulp.src('./public/src/stylesheets/*.css')
+    return gulp.src('./public/src/stylesheets/sass/main.scss')
+        .pipe(sass().on('error', sass.logError))
         .pipe(postcss(plugins))
         .pipe(gulp.dest('./public/dist/stylesheets'));
 });

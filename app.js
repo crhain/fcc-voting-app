@@ -14,12 +14,18 @@ const index             = require('./routes/index.js');
 //create express app
 const app               = express();
 //get port
-const PORT              = process.env.PORT || 3000;
+const PORT              = process.env.PORT || 8080;
+const IP                = process.env.IP;
+const ARGUMENTS         = process.argv.slice(2);
 require('./helpers/debug.js');
-debug.on = true;
-debug.multivote(false);
-debug.autolog(false);
-debug.localDb(false);
+console.log(ARGUMENTS);
+if(ARGUMENTS[0] === "debug"){
+    debug.on = true;
+    debug.multivote(true);
+    debug.autolog(true);
+    debug.localDb(false);
+}
+
 //global.debug.setUser({name: 'Bob'});
 
 //set up view engine
@@ -85,8 +91,8 @@ db.connect( process.env.DATABASE, (err, db) =>{
 
         //start server
         app.listen(PORT, ()=>{
-            console.log('listening on port: ' + PORT);
-        }); 
+            console.log("Server running on: " + IP + ":" + PORT);
+        });
             
 
     }

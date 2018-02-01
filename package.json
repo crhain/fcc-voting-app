@@ -10,8 +10,10 @@
     "node": "8.1.4"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "watch:sass": "node-sass public/src/stylesheets/sass/main.scss public/dist/stylesheets/style.css -w",
+    "heroku": "heroku local",
+    "devserver": "nodemon -r dotenv/config app.js debug",
+    "start": "npm-run-all --parallel devserver watch:sass"
   },
   "repository": {
     "type": "git",
@@ -38,9 +40,14 @@
     "autoprefixer": "^7.1.1",
     "babel-preset-env": "^1.5.2",
     "cssnano": "^3.10.0",
+    "dotenv": "^5.0.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-minify": "^1.0.0",
-    "gulp-postcss": "^7.0.0"
+    "gulp-postcss": "^7.0.0",
+    "gulp-sass": "^3.1.0",
+    "node-sass": "^4.7.2",
+    "nodemon": "^1.14.11",
+    "npm-run-all": "^4.1.2"
   }
 }
