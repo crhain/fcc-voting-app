@@ -10,7 +10,7 @@ router.get('/', (req, res, next) => {
     if(user === undefined){
         user = req.user;
     }        
-    res.render('login', {user: user && user.name});    
+    res.render('user/login', {user: user && user.name});    
 });
 
 router.get('/twitter', passport.authenticate('twitter'));

@@ -13,7 +13,7 @@ module.exports = function (req, res, next){
             console.log(err);                        
         } else {
              if(poll){
-                res.render('poll', {
+                res.render('poll/poll', {
                     user: user && user.name,
                     owned: user && user.name === poll.by,
                     voter: voter,

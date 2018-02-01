@@ -1,0 +1,60 @@
+<% include ../partials/header %> 
+
+<div id="poll-page" class="section pure-g">
+    <div class="card pure-u-1 pure-u-xl-1-2">
+        <h1 class="section-title"><%= name %>, by <%= by %></h1>            
+        <form id="poll-form" class="pure-form">        
+            <select id="poll-options" name="poll-options">                
+                <% pollOptions.forEach(function(option){ %>                
+                    <option id="option_<%= option.id %>" class="poll-option" value="<%= option.id %>"><%= option.option %></option> 
+                <% }); %>
+                <option value="-1">Add new option</option>            
+            </select>
+            <button id="poll-vote-btn" class="pure-button pure-button-primary">Vote</button>
+            <% if(owned){ %>
+                <button id="share-twitter-btn" class="pure-button twitter-button">Share on Twitter</button>    
+            <% } %>                        
+            <div id="new-option-container" class="hidden">
+                <label for="new-option" style="display: none">New Option:</label>
+                <input id="new-option" type="text" placeholder="New Option">
+            </div>    
+        </form>
+        
+        <div class="pure-g">
+            <div id="poll-results" class="poll-result pure-u-1 pure-u-md-1-2 pure-u-lg-1-2">
+                <h3>Results</h3>
+                <ul id="poll-results-list">
+                    <% pollOptions.forEach(function(option){ %>
+                        <li class="option">
+                            <span class="option-name"><%= option.option %></span> : <span class="option-count"><%= option.count %></span>
+                        </li>
+                    <% }); %>
+                    
+                </ul>
+                <% if(owned){ %>
+                    <button id="delete-poll-btn" class="pure-button danger-button">Delete This Poll</button>
+                <% } %>                    
+            </div>
+            <div class="poll-result pure-u-1 pure-u-md-1-2 pure-u-lg-1-2">
+                <div id="chart-container" >
+                    <canvas id="myChart" width="300" height="300"></canvas>                
+                </div>            
+            </div>                        
+        </div>
+    </div>       
+</div>
+ <div id="poll-info-container" class="hidden">
+    <div id="poll-id"><%= id %></div>
+    <div id="poll-current-voter"><%= voter %></div>
+ </div>   
+ 
+ <script type="text/javascript" src="/src/javascripts/poll-chart.js"></script>
+ <script type="text/javascript" src="/src/javascripts/poll-ui.js"></script>     
+
+
+<!-- <select id="poll-select" form="poll-form">
+            {{#each pollOptions}}
+            <option value={{this.option}}>{{this.option}}</option>        
+            {{/each}}
+        </select>  -->
+<% include ../partials/footer %>

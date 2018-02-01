@@ -11,9 +11,9 @@
   },
   "scripts": {
     "watch:sass": "node-sass public/src/stylesheets/sass/main.scss public/dist/stylesheets/style.css -w",
-    "heroku": "heroku local",
     "devserver": "nodemon -r dotenv/config app.js debug",
-    "start": "npm-run-all --parallel devserver watch:sass"
+    "start:dev": "npm-run-all --parallel devserver watch:sass",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",

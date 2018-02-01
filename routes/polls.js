@@ -15,7 +15,7 @@ router.get('/', (req, res, next) => {
             console.log(err);
         } else {
             debug.log(polls);
-            res.render('polls', {user: user && user.name, polls: polls});
+            res.render('poll/polls', {user: user && user.name, polls: polls});
         }
     });    
 });

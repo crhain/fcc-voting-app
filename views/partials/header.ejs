@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Polls Unlimited</title>   
+    <script src="https://use.fontawesome.com/115e8e6547.js"></script>     
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Rubik" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" 
+        integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous" >        
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css">
+    <!--<![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="/src/stylesheets/style.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+    <script type="text/javascript" src="/src/javascripts/fetch.js"></script>
+    <script type="text/javascript" src="/src/javascripts/nav-ui.js"></script>    
+</head>
+<body>
+    <div id="header" class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+        <ul class="pure-menu-list">
+            <li id="nav-home" class="nav-btn pure-menu-item"><a href="/" class="pure-menu-link">Home</a></li>
+            <li id="nav-polls" class="nav-btn pure-menu-item"><a href="/polls" class="pure-menu-link">Polls</a></li>
+            <% if(user) {  %>
+                <li id="nav-mypolls" class="nav-btn pure-menu-item"><a href="/polls/user" class="pure-menu-link">My Polls</a></li>
+                <li id="nav-newpoll" class="nav-btn pure-menu-item"><a href="/polls/user/new" class="pure-menu-link">New Poll</a></li>            
+                <li id="nav-user" class="nav-btn pure-menu-item pure-menu-has-children">
+                    <a href="#" class="pure-menu-link"><%=user%></a>
+                    <ul class="nav-dropdown pure-menu-children">
+                        <li class="pure-menu-item"><a href="#" class="pure-menu-link">Profile</a></li>
+                        <li class="pure-menu-item"><a href="/logout" class="pure-menu-link">Logout</a></li>
+                    </ul>
+                </li>
+            <% } else { %>
+                <li id="nav-mypolls" class="nav-btn pure-menu-item pure-menu-disabled">My Polls</li>
+                <li id="nav-newpoll" class="nav-btn pure-menu-item pure-menu-disabled">New Poll</li>            
+                <li id="nav-user" class="nav-btn pure-menu-item pure-menu-has-children">
+                    <a href="#" class="pure-menu-link">Login</a>
+                    <ul class="nav-dropdown pure-menu-children">                    
+                        <li class="pure-menu-item"><a href="/login/twitter" class="pure-menu-link">Twitter</a></li>
+                        <li class="pure-menu-item"><a href="#" class="pure-menu-link">Logout</a></li>                    
+                    </ul>
+                </li>                                
+            <% } %>
+        </ul>
+    </div> 
+
+    <div id="modal-window" class="closed"> <!-- closed -->
+        <div id="modal-message-window">
+            <div id="modal-close-btn">X</div>
+            <h1 id="modal-message">You Have Already Voted!</h1>                        
+        </div>
+    </div>   

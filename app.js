@@ -27,10 +27,12 @@ if(ARGUMENTS[0] === "debug"){
 }
 
 //global.debug.setUser({name: 'Bob'});
-
+//set public directory
+app.use(express.static(__dirname + "/public"));
 //set up view engine
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
+// app.set('view engine', 'hbs');
+app.set("view engine", "ejs");
 
 //set up app to use middleware
 app.use(bodyParser.json());

@@ -17,7 +17,7 @@ router.get('/', ensureAuthenticated, (req, res, next) => {
             if(err){
                 console.log(err);
             } else {
-                res.render('mypolls', {user: user && user.name, myPolls});    
+                res.render('poll/mypolls', {user: user && user.name, myPolls});    
             }
             
         });

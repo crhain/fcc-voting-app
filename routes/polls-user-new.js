@@ -11,7 +11,7 @@ router.get('/', ensureAuthenticated, (req, res, next) => {
     if(user === undefined){
         user = req.user;
     }
-    res.render('newpoll', {user: user && user.name});
+    res.render('poll/newpoll', {user: user && user.name});
 });
 
 //handle /polls/new post event to create new poll
