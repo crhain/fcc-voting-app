@@ -42,9 +42,10 @@ router.post("/", isLoggedIn, function(req, res){
     debug.log("Creating new poll:");
     debug.log(req.body.poll);
     let poll = req.body.poll;
-    // poll.author = {};
-    // poll.author.id = req.user._id;
-    // poll.author.name = req.user.name;
+    let debugUser = debug.getUser();
+    poll.author = {};
+    poll.author.id = debugUser ? debug.getUser()._id : undefined || req.user._id;
+    poll.author.name = debugUser ? debug.getUser().username : undefined || req.user.username;
     //get poll.optionsRaw and reformat is as [{option: option}]    
     poll.pollOptions = poll.optionsRaw.split("|").slice(1).map((option) =>{
         return {option, voters:[]};
@@ -80,43 +81,39 @@ router.get("/:id", function(req, res){
 });
 
 //UDPATE POLL ROUTE - VOTE
-// router.put("/:id", function(req, res){
-//     // var option = req.body.option;    
-//     // debug.log("voted for option id: ");
-//     // debug.log(option);
-//     debug.log("recieved post request");
-//     res.send("voted!");
-
-//     // res.send("Voted!");
-//     //find and update the correct poll with new count
-//     // Poll.findByIdAndUpdate(req.params.id, poll, function(err, poll){
-//     //    if(err){
-//     //        debug.log(err);
-//     //        res.redirect("/polls");
-//     //    } else {
-//     //         //redirect somehwere (show page)
-//     //         res.redirect("/polls/" + req.params.id);
-//     //    }
-//     // });
-// });
-
-router.put("/:id/vote", function (req, res){    
+router.put("/:id/vote", isLoggedIn, function (req, res){    
     var optionId = req.body.option;
     debug.log(optionId);
-    // findByIdAndUpdate
-    Poll.findOneAndUpdate(
-        {_id: req.params.id, "pollOptions._id": optionId},
-        {$inc: { "pollOptions.$.count" : 1 } },
-        {new: true},
-        function(err, poll){
-            if(err){
-                debug.log(err);  
-                res.redirect("/polls");
-            } else {
-                //redirect somehwere (show page)
-                res.redirect("back");
-            }
-    });
+    if(optionId === "new"){
+        Poll.findOneAndUpdate(
+            {_id: req.params.id},
+            {$addToSet: {pollOptions: {option: req.body.newOption, count: 1, votes:[]}}},
+            {new: true},
+            function(err, poll){
+                if(err){
+                    debug.log(err);  
+                    res.redirect("/polls");
+                } else {
+                    //redirect somehwere (show page)
+                    res.redirect("back");
+                }
+        });
+    } else {
+        Poll.findOneAndUpdate(
+            {_id: req.params.id, "pollOptions._id": optionId},
+            {$inc: { "pollOptions.$.count" : 1 } },
+            {new: true},
+            function(err, poll){
+                if(err){
+                    debug.log(err);  
+                    res.redirect("/polls");
+                } else {
+                    //redirect somehwere (show page)
+                    res.redirect("back");
+                }
+        });
+    }
+    
 });
 
 

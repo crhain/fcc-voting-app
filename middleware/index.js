@@ -5,7 +5,7 @@ var middlewareObj = {};
 
 //middleware to authenticate user
 middlewareObj.isLoggedIn = function(req, res, next){
-    if(debug.autolog || req.isAuthenticated()){
+    if(debug.canAutolog || req.isAuthenticated()){
         return next();
     }
     //flash message if authentication fails and then redirect to /login
@@ -15,7 +15,7 @@ middlewareObj.isLoggedIn = function(req, res, next){
 
 //middleware that checks to see if user logged in and own the campground
 middlewareObj.checkPollOwnership = function(req, res, next){
-    if(debug.autolog || req.isAuthenticated()){
+    if(debug.canAutolog || req.isAuthenticated()){
         //  Campground.findById(req.params.id, function(err, campground){
         //     if(err || !campground){
         //         req.flash("error", "Campgrounds not found!");

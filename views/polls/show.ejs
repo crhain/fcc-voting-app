@@ -9,28 +9,33 @@
 
 <div class="row-g">
     <div class="col-1-of-2">
-        
-                
-
         <div class="poll">
             <form class="delete-form" action="/polls/<%=poll._id%>/vote/?_method=PUT" method="POST">
                 <ul>
-                        <% poll.pollOptions.forEach(function(option){ %> 
+                        <% poll.pollOptions.forEach(function(option, index){ %> 
                             <li class="poll__option">
-                                <input class="poll__option-checkbox"type="radio" id="pollr-<%=option._id%>" name="option" value="<%=option._id%>" style="display: none">
-                                <label for="pollr-<%=option._id%>">
+                                <% if(index === 0){ %>
+                                    <input class="poll__option-checkbox"type="radio" id="pollr-<%= index %>" name="option" value="<%=option._id%>" style="display: none" checked>
+                                <% } else { %>
+                                    <input class="poll__option-checkbox"type="radio" id="pollr-<%= index %>" name="option" value="<%=option._id%>" style="display: none">
+                                <% } %>    
+                                <label for="pollr-<%= index %>">
                                     <span class="poll__option-name"><%=option.option%></span>
                                     <span class="poll__option-count"><%=option.count%></span>
                                 </label>
                             </li>
-                        <% }); %>               
-                </ul>                            
+                        <% }); %>
+                            <li class="poll__option">
+                                <input class="poll__option-checkbox"type="radio" id="pollr-new" name="option" value="new" style="display: none">
+                                <label for="pollr-new">
+                                    <span class="poll__option-new">New</span>                                    
+                                </label>
+                            </li>                                           
+                </ul>
+                <input type="text" class="poll__input-new" name="newOption">
                 <button class="btn btn-danger">Vote!</button>            
             </form>
-        </div>
-        
-
-
+        </div>        
         <!-- this button will open a delete modal confirmation and the modal confirm button will actually fire the delete -->
         <form class="delete-form" action="/polls/<%=poll._id%>/?_method=DELETE" method="POST">            
             <button class="btn btn-danger">Delete This Poll!</button>            

@@ -33,7 +33,8 @@
             display: none;
         }
 
-        &-name {
+        &-name,
+        &-new {
             position: absolute; 
             display: inline-block;            
             width: 90%;           
@@ -57,7 +58,7 @@
             text-align: center;
             transform: translateY(-50%);
             // border: 1px solid red;            
-        }
+        }        
     }
 
     &__option-checkbox:checked + label span {

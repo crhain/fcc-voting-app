@@ -120,7 +120,7 @@ h1, h2, h3 {
     border: 2px solid red; }
   .poll__option-id {
     display: none; }
-  .poll__option-name {
+  .poll__option-name, .poll__option-new {
     position: absolute;
     display: inline-block;
     width: 90%;

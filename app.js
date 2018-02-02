@@ -25,13 +25,14 @@ const pollRoutes        = require("./routes/polls");
 const indexRoutes       = require("./routes/index");
 
 require('./helpers/debug.js');
-console.log(ARGUMENTS);
 if(ARGUMENTS[0] === "debug"){
-    debug.on = true;
+    debug.on(true);
     debug.multivote(true);
     debug.autolog(true);
     debug.localDb(false);
 }
+
+console.log("user is called " + debug.getUser().username);
 
 //connect to database
 const databaseURL = process.env.DATABASE;
@@ -67,7 +68,11 @@ app.use(passport.session());
 
 //add currentUser local to all routes
 app.use(function(req, res, next){
-    res.locals.currentUser = req.user;
+    if(debug.canAutolog()){
+        res.locals.currentUser = req.user || debug.getUser();
+    } else {
+        res.locals.currentUser = req.user;
+    }    
     // res.locals.error = req.flash("error");
     // res.locals.success = req.flash("success");
     next();
