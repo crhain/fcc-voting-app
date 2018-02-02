@@ -27,7 +27,7 @@ const indexRoutes       = require("./routes/index");
 require('./helpers/debug.js');
 if(ARGUMENTS[0] === "debug"){
     debug.on(true);
-    debug.multivote(true);
+    debug.multivote(false);
     debug.autolog(true);
     debug.localDb(false);
 }

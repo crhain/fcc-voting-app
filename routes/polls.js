@@ -87,7 +87,7 @@ router.put("/:id/vote", isLoggedIn, function (req, res){
     if(optionId === "new"){
         Poll.findOneAndUpdate(
             {_id: req.params.id},
-            {$addToSet: {pollOptions: {option: req.body.newOption, count: 1, votes:[]}}},
+            {$addToSet: {pollOptions: {option: req.body.newOption, count: 1, votes:["Carl"]}}},
             {new: true},
             function(err, poll){
                 if(err){
@@ -99,19 +99,43 @@ router.put("/:id/vote", isLoggedIn, function (req, res){
                 }
         });
     } else {
+        //enable or disable multivote for debug
+        var query = {_id: req.params.id, "pollOptions._id": optionId, "pollOptions.voters": {$not: {$all: ["Carl"]}}}; 
+        if(debug.canMultivote()){
+            query = {_id: req.params.id, "pollOptions._id": optionId};
+        }
+        //record already exists, so update it with new vote and voter
         Poll.findOneAndUpdate(
-            {_id: req.params.id, "pollOptions._id": optionId},
-            {$inc: { "pollOptions.$.count" : 1 } },
+            query,
+            {$addToSet: {"pollOptions.$.voters" : "Carl"}, $inc: { "pollOptions.$.count" : 1 }},
             {new: true},
             function(err, poll){
                 if(err){
                     debug.log(err);  
                     res.redirect("/polls");
                 } else {
-                    //redirect somehwere (show page)
-                    res.redirect("back");
+                    if(poll){
+                        //redirect somehwere (show page)
+                        res.redirect("back");
+                    } else {
+                        res.send("You cannot vote more than once!");
+                    }
+                    
                 }
         });
+        // Poll.findOneAndUpdate(
+        //     {_id: req.params.id, "pollOptions._id": optionId},
+        //     {$inc: { "pollOptions.$.count" : 1 } },
+        //     {new: true},
+        //     function(err, poll){
+        //         if(err){
+        //             debug.log(err);  
+        //             res.redirect("/polls");
+        //         } else {
+        //             //redirect somehwere (show page)
+        //             res.redirect("back");
+        //         }
+        // });
     }
     
 });
