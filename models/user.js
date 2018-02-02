@@ -1,6 +1,7 @@
-var mongoose = require("mongoose");
+var mongoose                       = require("mongoose");
+var passportLocalMongoose          = require("passport-local-mongoose");
 
-var userSchema = new mongoose.Schema({
+var UserSchema = new mongoose.Schema({
     username: String,    
     created: {type: Date, default: Date.now },
     logged: {type: Date, default: Date.now },
@@ -9,5 +10,8 @@ var userSchema = new mongoose.Schema({
    
 });
 
+//plugin passport into mongoose UserSchema.
+UserSchema.plugin(passportLocalMongoose);
+
 //initialize user model
-module.exports = mongoose.model("User", pollSchema);
+module.exports = mongoose.model("User", UserSchema);

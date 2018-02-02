@@ -12,13 +12,11 @@ function seedDB(){
         } else {
             console.log("removed polls!");            
             var user = debug.getUser();
-            var username = user.username;
-            var userid = user._id;
-            console.log("Can I autolog?:" + debug.canAutolog());
-            console.log("Is debug on? " + debug.on());
-            console.log("This is the global user object:");
-            console.log(user);
-
+            var username, userid;
+            if(user){
+                username = user.username;
+                userid = user._id;
+            }                        
             var polls = [
                 {
                     name: "Mountains",

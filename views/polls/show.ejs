@@ -37,10 +37,11 @@
             </form>
         </div>        
         <!-- this button will open a delete modal confirmation and the modal confirm button will actually fire the delete -->
+        <% if(currentUser){ %>
         <form class="delete-form" action="/polls/<%=poll._id%>/?_method=DELETE" method="POST">            
             <button class="btn btn-danger">Delete This Poll!</button>            
         </form>
-        
+        <% } %>
 
         <!-- <p>My current user is <%= currentUser %></p> -->
 

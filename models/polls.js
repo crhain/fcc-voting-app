@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 
-var pollSchema = new mongoose.Schema({
+var PollSchema = new mongoose.Schema({
     name: String,
     question: String,
     date: {type: Date, default: Date.now },
@@ -22,4 +22,4 @@ var pollSchema = new mongoose.Schema({
 });
 
 //initialize Campground model
-module.exports = mongoose.model("Polls", pollSchema);
+module.exports = mongoose.model("Polls", PollSchema);

@@ -81,13 +81,14 @@ router.get("/:id", function(req, res){
 });
 
 //UDPATE POLL ROUTE - VOTE
+// --- note: instead of storing user name in voters we should use the userId/also update models/polls to require this as well
 router.put("/:id/vote", isLoggedIn, function (req, res){    
     var optionId = req.body.option;
     debug.log(optionId);
     if(optionId === "new"){
         Poll.findOneAndUpdate(
             {_id: req.params.id},
-            {$addToSet: {pollOptions: {option: req.body.newOption, count: 1, votes:["Carl"]}}},
+            {$addToSet: {pollOptions: {option: req.body.newOption, count: 1, voters:["Carl"]}}},
             {new: true},
             function(err, poll){
                 if(err){
@@ -143,7 +144,7 @@ router.put("/:id/vote", isLoggedIn, function (req, res){
 
 //DESTROY POLL ROUTE
 // note: add in middleware to check if user is logged in and has voted already
-router.delete("/:id", function (req, res){
+router.delete("/:id", checkPollOwnership, function (req, res){
     //find and update the correct campground
     Poll.findByIdAndRemove(req.params.id, function(err){
       if(err){
