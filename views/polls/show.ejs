@@ -8,48 +8,34 @@
 </div>
 
 <div class="row-g">
-        <form id="poll-form" class="pure-form">        
-            <select id="poll-options" name="poll-options">                
-                <% poll.pollOptions.forEach(function(option){ %>                
-                    <option id="option_<%= option.id %>" class="poll-option" value="<%= option._id %>"><%= option.option %></option> 
-                <% }); %>
-                <option value="-1">Add new option</option>            
-            </select>
-            <button id="poll-vote-btn" class="pure-button pure-button-primary">Vote</button>
-            <% if(true){ %>
-                <button id="share-twitter-btn" class="pure-button twitter-button">Share on Twitter</button>    
-            <% } %>                        
-            <div id="new-option-container" class="hidden">
-                <label for="new-option" style="display: none">New Option:</label>
-                <input id="new-option" type="text" placeholder="New Option">
-            </div>    
-        </form>
-</div>
-
-<div class="row-g">
     <div class="col-1-of-2">
+        
+                
+
         <div class="poll">
-            <ul>
-                <% poll.pollOptions.forEach(function(option){ %>                    
-                    <li class="poll__option" id="poll_option-<%= option._id %>">                    
-                        <span class="poll__option-id"><%= option._id %></span>
-                        <span class="poll__option-name"><%= option.option %></span> 
-                        <span class="poll__option-count"><%= option.count %></span>                        
-                    </li>                                        
-                <% }); %>    
-                <li class="poll__option">
-                    <span class="poll__option-name">New</span> 
-                </li>        
-            </ul>            
-            
-        </div>
-        <button id="poll-vote" class="btn btn-primary">VOTE!</button>
-        <!-- this button will open a delete modal confirmation and the modal confirm button will actually fire the delete -->
-        <% if(currentUser) {%>
-            <form class="delete-form" action="/polls/<%=poll._id%>/?_method=DELETE" method="POST">            
-                <button class="btn btn-danger">Delete This Poll!</button>            
+            <form class="delete-form" action="/polls/<%=poll._id%>/vote/?_method=PUT" method="POST">
+                <ul>
+                        <% poll.pollOptions.forEach(function(option){ %> 
+                            <li class="poll__option">
+                                <input class="poll__option-checkbox"type="radio" id="pollr-<%=option._id%>" name="option" value="<%=option._id%>" style="display: none">
+                                <label for="pollr-<%=option._id%>">
+                                    <span class="poll__option-name"><%=option.option%></span>
+                                    <span class="poll__option-count"><%=option.count%></span>
+                                </label>
+                            </li>
+                        <% }); %>               
+                </ul>                            
+                <button class="btn btn-danger">Vote!</button>            
             </form>
-        <% } %>
+        </div>
+        
+
+
+        <!-- this button will open a delete modal confirmation and the modal confirm button will actually fire the delete -->
+        <form class="delete-form" action="/polls/<%=poll._id%>/?_method=DELETE" method="POST">            
+            <button class="btn btn-danger">Delete This Poll!</button>            
+        </form>
+        
 
         <!-- <p>My current user is <%= currentUser %></p> -->
 
@@ -64,25 +50,13 @@
     </div>
 </div>
 
- <div id="poll-info-container" class="hidden">
+ <!-- <div id="poll-info-container" class="hidden">
     <div id="poll-id"><%= poll._id %></div>
     <div id="poll-current-voter"><%= currentUser %></div>
- </div>   
+ </div>    -->
  
  <script type="text/javascript" src="/src/javascripts/poll-chart.js"></script>
  <!-- <script type="text/javascript" src="/src/javascripts/poll-ui.js"></script>      -->
-<script>
-    var voteBtn = document.getElementById("poll-vote");
-    var voteOptions = document.getElementsByClassName();
-
-</script>
-
-<!-- <select id="poll-select" form="poll-form">
-            {{#each pollOptions}}
-            <option value={{this.option}}>{{this.option}}</option>        
-            {{/each}}
-        </select>  -->
-
 
         
 <% include ../partials/footer %>

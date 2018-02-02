@@ -140,3 +140,6 @@ h1, h2, h3 {
     padding: 1rem;
     text-align: center;
     transform: translateY(-50%); }
+
+.poll__option-checkbox:checked + label span {
+  color: red; }

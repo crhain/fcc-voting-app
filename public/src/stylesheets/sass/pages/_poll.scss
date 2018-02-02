@@ -60,5 +60,8 @@
         }
     }
 
+    &__option-checkbox:checked + label span {
+        color: red;
+    }
     
 }

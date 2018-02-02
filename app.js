@@ -77,21 +77,23 @@ app.use(function(req, res, next){
 //SETUP ROUTES                                              //
 //////////////////////////////////////////////////////////////
 // app.use(require('./routes/index.js'));
+
 app.use("/", indexRoutes);
 app.use("/polls", pollRoutes);
 
+
 //default route if not found
-app.use((req, res)=>{
-    res.status(404);
-    if(req.accepts('html')){
-        res.end('404: Page Not Found');
-    }
-    if(req.accepts('json')){
-        res.end(JSON.stringify({error: 'not found'}));
-    }
-    // default to plain-text. send()
-    res.type('txt').send('Not found');
-});
+// app.use((req, res)=>{
+//     res.status(404);
+//     if(req.accepts('html')){
+//         res.end('404: Page Not Found');
+//     }
+//     if(req.accepts('json')){
+//         res.end(JSON.stringify({error: 'not found'}));
+//     }
+//     // default to plain-text. send()
+//     res.type('txt').send('Not found');
+// });
 
 //start server
 app.listen(PORT, ()=>{

@@ -18,6 +18,7 @@ router.get("/", function(req, res){
     });    
 });
 
+
 //INDEX ROUTE 2 - shows listing of user polls
 router.get("/user", isLoggedIn, function(req, res){
     //for now, it does the same thing as first index route
@@ -65,6 +66,7 @@ router.post("/", isLoggedIn, function(req, res){
     });    
 });
 
+
 //SHOW ROUTE - shows more info about poll
 router.get("/:id", function(req, res){
     Poll.findById(req.params.id, function(err, poll){
@@ -77,22 +79,46 @@ router.get("/:id", function(req, res){
     });
 });
 
-
 //UDPATE POLL ROUTE - VOTE
-router.put("/:id/vote", isLoggedIn, (req, res) =>{
-    var poll = req.body.poll;    
-    res.send("Voted!");
-    //find and update the correct poll with new count
-    // Poll.findByIdAndUpdate(req.params.id, poll, function(err, poll){
-    //    if(err){
-    //        debug.log(err);
-    //        res.redirect("/polls");
-    //    } else {
-    //         //redirect somehwere (show page)
-    //         res.redirect("/polls/" + req.params.id);
-    //    }
-    // });
+// router.put("/:id", function(req, res){
+//     // var option = req.body.option;    
+//     // debug.log("voted for option id: ");
+//     // debug.log(option);
+//     debug.log("recieved post request");
+//     res.send("voted!");
+
+//     // res.send("Voted!");
+//     //find and update the correct poll with new count
+//     // Poll.findByIdAndUpdate(req.params.id, poll, function(err, poll){
+//     //    if(err){
+//     //        debug.log(err);
+//     //        res.redirect("/polls");
+//     //    } else {
+//     //         //redirect somehwere (show page)
+//     //         res.redirect("/polls/" + req.params.id);
+//     //    }
+//     // });
+// });
+
+router.put("/:id/vote", function (req, res){    
+    var optionId = req.body.option;
+    debug.log(optionId);
+    // findByIdAndUpdate
+    Poll.findOneAndUpdate(
+        {_id: req.params.id, "pollOptions._id": optionId},
+        {$inc: { "pollOptions.$.count" : 1 } },
+        {new: true},
+        function(err, poll){
+            if(err){
+                debug.log(err);  
+                res.redirect("/polls");
+            } else {
+                //redirect somehwere (show page)
+                res.redirect("back");
+            }
+    });
 });
+
 
 //DESTROY POLL ROUTE
 // note: add in middleware to check if user is logged in and has voted already
