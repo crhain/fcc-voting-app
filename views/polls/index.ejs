@@ -1,0 +1,16 @@
+<% include ../partials/header %> 
+
+<div id="polls-page" class="">
+    <div class="">
+        <h1 class="">Polls</h1>        
+        <ul class="">            
+            <% polls.forEach(function(poll){ %>            
+                <li id="<%= poll._id %>" class=""> 
+                    <a href="/polls/<%= poll._id %>" class=""><%= poll.name %></a>
+                </li>
+            <% }); %>
+        </ul>
+    </div>
+</div>
+
+<% include ../partials/footer %> 

@@ -15,19 +15,21 @@
     //post to poll/delete/:id route
     newPollSubmitBtn.addEventListener('click', (e)=>{
         e.preventDefault();
-        var newPollTitleBox = document.getElementById('new-poll-title');
-        var newPollTitle = newPollTitleBox.value;
+        var newPollTitleBox = document.getElementById('new-poll-name');
+        var name = newPollTitleBox.value;
+        var newPollQuestionBox = document.getElementById('new-poll-question');
+        var question = newPollQuestionBox.value;
         var newPollOptionsBox = document.getElementById('new-poll-options'); 
         var newPollOptionsString =  newPollOptionsBox.value;
-        var newPollOptions = newPollOptionsString.split('\n').filter((option)=>{
+        var options = newPollOptionsString.split('\n').filter((option)=>{
                 return !!option;
-            }); 
-        var headers;
+            });         
         var fetchInit;
+        console.log("Is this working yet?");
         //check to see if fields filled in.  If they are not, throw an error
-        if(!newPollTitle || !newPollOptionsString){
+        if(!name || !newPollOptionsString){
             console.log("Fill out form data!");
-            if(!newPollTitle){
+            if(!name){
                 newPollTitleBox.classList.add('error');                                
             } else {
                 newPollTitleBox.classList.remove('error');
@@ -44,23 +46,24 @@
             newPollTitleBox.classList.remove('error');
             newPollOptionsBox.classList.remove('error');
 
-            //filter out blank enteries               
-            headers = new Headers();
+            // filter out blank enteries               
+            var headers = new Headers();
             headers.set("Content-Type", "application/json");
-            //NOTE: remove < and > tags to prevent xss attacks
+            // NOTE: remove < and > tags to prevent xss attacks
             fetchInit = {
                 method: 'POST',
-                headers: headers,
+                header: headers,
                 credentials: 'include',
                 cache: 'default',
-                body: JSON.stringify({title: newPollTitle, options: newPollOptions})            
-            };              
+                body: JSON.stringify({name: "hi", question: "sup", options: ["option 1", "option 2"]})            
+            };
+                                      
             //add call to polls/user/new/
-            fetch('/polls/user/new', fetchInit)
+            fetch('/polls', fetchInit)
                 .then(()=>{
-                    window.location.href = "/polls/user/";  
-                });
-            console.log('adding poll: ' + newPollTitle);            
+                    console.log('data sent just fine');
+                    window.location.href = "/polls/";  
+                });                   
         }                               
     });    
 

@@ -1,0 +1,34 @@
+<% include ../partials/header %> 
+
+<div id="new-poll-page" class="section pure-g">
+    <div class="">
+        <h1 class="">Create A New Poll!</h1>
+        <form id="new-poll-form" class="" action="/polls" method="POST">
+            <label for="new-poll-name">Title: </label>
+            <input id="new-poll-name" class="" form="new-poll-form" type="text" name="poll[name]" placeholder="Requires a name" >
+            <label for=""></label>
+            <input id="new-poll-question" class="" form="new-poll-form" type="text" name="poll[question]" placeholder="Requires a name" >
+            
+            <label for="new-poll-options-v">Options (seperated by lines): </label>            
+            <input id="new-poll-options-h" type="text" name="poll[optionsRaw]" style="display: none"> 
+            <!-- <textarea id="new-poll-options" form="new-poll-form" class="" cols="30" rows="10" name="poll[optionsRaw]" placeholder="Requires At Least One Item"></textarea> -->            
+            <button id="new-poll-submit-btn" class="btn btn-primary">Add Poll</button>
+        </form>
+        <input id="new-poll-options-v" type="text">
+        <a href="#" class="btn" id="new-opt-btn">Add Option</a>
+    </div>    
+</div>
+
+<!-- <script type="text/javascript" src="/src/javascripts/new-poll-ui.js"></script>  -->
+<script>
+    var option = document.getElementById('new-poll-options-v');
+    var newOptions = document.getElementById('new-poll-options-h');
+    var optBtn = document.getElementById('new-opt-btn');
+    optBtn.addEventListener('click', function(e){
+        e.preventDefault();
+        newOptions.value += "|" + option.value;
+        option.value = "";        
+    });
+</script>
+
+<% include ../partials/footer %> 

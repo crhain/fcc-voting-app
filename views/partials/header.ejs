@@ -27,37 +27,18 @@
     <script type="text/javascript" src="/src/javascripts/fetch.js"></script>
     <script type="text/javascript" src="/src/javascripts/nav-ui.js"></script>    
 </head>
-<body>
-    <!-- <div id="header" class="pure-menu pure-menu-horizontal pure-menu-scrollable">
-        <ul class="pure-menu-list">
-            <li id="nav-home" class="nav-btn pure-menu-item"><a href="/" class="pure-menu-link">Home</a></li>
-            <li id="nav-polls" class="nav-btn pure-menu-item"><a href="/polls" class="pure-menu-link">Polls</a></li>
-            <% if(user) {  %>
-                <li id="nav-mypolls" class="nav-btn pure-menu-item"><a href="/polls/user" class="pure-menu-link">My Polls</a></li>
-                <li id="nav-newpoll" class="nav-btn pure-menu-item"><a href="/polls/user/new" class="pure-menu-link">New Poll</a></li>            
-                <li id="nav-user" class="nav-btn pure-menu-item pure-menu-has-children">
-                    <a href="#" class="pure-menu-link"><%=user%></a>
-                    <ul class="nav-dropdown pure-menu-children">
-                        <li class="pure-menu-item"><a href="#" class="pure-menu-link">Profile</a></li>
-                        <li class="pure-menu-item"><a href="/logout" class="pure-menu-link">Logout</a></li>
-                    </ul>
-                </li>
-            <% } else { %>
-                <li id="nav-mypolls" class="nav-btn pure-menu-item pure-menu-disabled">My Polls</li>
-                <li id="nav-newpoll" class="nav-btn pure-menu-item pure-menu-disabled">New Poll</li>            
-                <li id="nav-user" class="nav-btn pure-menu-item pure-menu-has-children">
-                    <a href="#" class="pure-menu-link">Login</a>
-                    <ul class="nav-dropdown pure-menu-children">                    
-                        <li class="pure-menu-item"><a href="/login/twitter" class="pure-menu-link">Twitter</a></li>
-                        <li class="pure-menu-item"><a href="#" class="pure-menu-link">Logout</a></li>                    
-                    </ul>
-                </li>                                
-            <% } %>
-        </ul>
-    </div>  -->
+<body>   
 <div class="container-fluid">    
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">  
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button 
+            class="navbar-toggler" 
+            type="button" 
+            data-toggle="collapse" 
+            data-target="#navbarSupportedContent" 
+            aria-controls="navbarSupportedContent" 
+            aria-expanded="false" 
+            aria-label="Toggle navigation"
+        >
             <span class="navbar-toggler-icon"></span>
         </button>      
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -66,24 +47,33 @@
                     <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>                
                 <li class="nav-item dropdown active">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a 
+                        class="nav-link dropdown-toggle" 
+                        href="#" 
+                        id="navbarDropdown" 
+                        role="button" 
+                        data-toggle="dropdown" 
+                        aria-haspopup="true" 
+                        aria-expanded="false"
+                    >
                         Polls
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/polls">View All Polls</a>
-                        <% if(user) { %>
+                        <% if(currentUser) { %>
                             <a class="dropdown-item" href="/polls/user">View My Polls</a>
-                            <a class="dropdown-item" href="/polls/user/new">Add a New Poll</a>                    
+                            <a class="dropdown-item" href="/polls/new">Add a New Poll</a>                    
                         <% } else { %>
                             <a class="dropdown-item disabled" href="#">View My Polls</a>      
-                            <a class="dropdown-item disabled" href="#">Add a New Poll</a>              
+                            <!-- this is just temporary for now - set href back to # -->
+                            <a class="dropdown-item" href="/polls/new">Add a New Poll</a>              
                         <% } %>
                         
                 </li>                            
-                <% if (user){ %>
+                <% if (currentUser){ %>
                     <li class="nav-item dropdown active"> 
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <%= user %>
+                            <%= currentUser.name %>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">Profile</a>                            
@@ -96,10 +86,10 @@
                             Login
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/login/twitter">Twitter</a>
+                            <a class="dropdown-item" href="/login">Twitter</a>
                             
                         <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Sign up</a>
+                            <a class="dropdown-item" href="/register">Sign up</a>
                         </div>
                     </li>     
                 <% } %>

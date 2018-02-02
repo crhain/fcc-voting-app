@@ -1,26 +1,112 @@
-const express           = require('express');
-const db                = require('../models/database.js');
-const router            = express.Router();
-const pollIdHandler     = require('./polls-id.js');
-const pollsDb           = require('../models/polls.js');
-
-//handle base route to /polls : retrieves all polls
-router.get('/', (req, res, next) => {
-    let user = global.debug.getUser(); 
-    if(user === undefined){
-        user = req.user;
-    }
-    pollsDb.getAll((err, polls)=>{
+const express = require("express");
+const router = express.Router();
+const Poll = require("../models/polls");
+const middleWare = require("../middleware");
+const isLoggedIn = middleWare.isLoggedIn;
+const checkPollOwnership = middleWare.checkPollOwnership;
+require("../helpers/debug");
+//INDEX ROUTE - shows listing of all polls
+router.get("/", function(req, res){
+    // res.send("showing polls");
+    Poll.find({}, function(err, polls){
         if(err){
-            console.log(err);
+            console.log("ERROR");
+            res.send(err);
         } else {
-            debug.log(polls);
-            res.render('poll/polls', {user: user && user.name, polls: polls});
+            res.render("polls/index", {polls})
         }
     });    
 });
 
-//handle /polls/:id
-router.get('/:id', pollIdHandler);
+//INDEX ROUTE 2 - shows listing of user polls
+router.get("/user", isLoggedIn, function(req, res){
+    //for now, it does the same thing as first index route
+    Poll.find({}, function(err, polls){
+        if(err){
+            debug.log("ERROR");
+            res.send(err);
+        } else {
+            res.render("polls/index", {polls})
+        }
+    });    
+});
+
+//NEW ROUTE
+router.get("/new", isLoggedIn, function(req, res){
+    res.render("polls/new");
+});
+
+//CREATE ROUTE
+router.post("/", isLoggedIn, function(req, res){
+    debug.log("Creating new poll:");
+    debug.log(req.body.poll);
+    let poll = req.body.poll;
+    // poll.author = {};
+    // poll.author.id = req.user._id;
+    // poll.author.name = req.user.name;
+    //get poll.optionsRaw and reformat is as [{option: option}]    
+    poll.pollOptions = poll.optionsRaw.split("|").slice(1).map((option) =>{
+        return {option, voters:[]};
+    });
+    poll.optionsRaw = "";
+    debug.log("My poll: ");
+    debug.log(poll);
+    // res.send("created poll!");
+    Poll.create(poll, function(err, poll){
+        if(err){
+            debug.log("Could not create!");
+            debug.log(err);
+            res.send(err); //add proper error handling
+        } else {
+
+            res.redirect("/polls");
+            // res.sendStatus(200); 
+        }
+    });    
+});
+
+//SHOW ROUTE - shows more info about poll
+router.get("/:id", function(req, res){
+    Poll.findById(req.params.id, function(err, poll){
+        if(err || !poll){
+            debug.log(err);
+            return res.redirect("/polls");
+        } else {
+            res.render("polls/show", {poll});
+        }
+    });
+});
+
+
+//UDPATE POLL ROUTE - VOTE
+router.put("/:id/vote", isLoggedIn, (req, res) =>{
+    var poll = req.body.poll;    
+    res.send("Voted!");
+    //find and update the correct poll with new count
+    // Poll.findByIdAndUpdate(req.params.id, poll, function(err, poll){
+    //    if(err){
+    //        debug.log(err);
+    //        res.redirect("/polls");
+    //    } else {
+    //         //redirect somehwere (show page)
+    //         res.redirect("/polls/" + req.params.id);
+    //    }
+    // });
+});
+
+//DESTROY POLL ROUTE
+// note: add in middleware to check if user is logged in and has voted already
+router.delete("/:id", function (req, res){
+    //find and update the correct campground
+    Poll.findByIdAndRemove(req.params.id, function(err){
+      if(err){
+        debug.log(err);  
+        res.redirect("/polls");
+      } else {
+        //redirect somehwere (show page)
+        res.redirect("/polls");
+      }
+    });
+});
 
 module.exports = router;
