@@ -16,8 +16,12 @@ var chartjs = (function(self){
     }    
 
     function draw(){
-        var options = document.getElementsByClassName('option-name');
-        var counts = document.getElementsByClassName('option-count');
+        // var options = document.getElementsByClassName('option-name');
+        // var counts = document.getElementsByClassName('option-count');
+        // console.log("my options are: "); 
+        // console.log(options); 
+        // console.log("my counts are: ");
+        // console.log(counts);
         var dataSet = getDataSetFromDOM(6);
 
         var myChart = new Chart(ctx, {
@@ -55,8 +59,12 @@ var chartjs = (function(self){
     } //end draw
 
     function getDataSetFromDOM(numberOfLabelsInChart){        
-        var labelsCollection = document.getElementsByClassName('option-name');
-        var dataCollection = document.getElementsByClassName('option-count');
+        var labelsCollection = document.getElementsByClassName('poll__option-name');
+        var dataCollection = document.getElementsByClassName('poll__option-count');
+        // console.log("my options are: "); 
+        // console.log(labelsCollection); 
+        // console.log("my counts are: ");
+        // console.log(dataCollection);        
         var dataSet = rollUpChartData( compileAndSortChartData(labelsCollection, dataCollection) , numberOfLabelsInChart);
         
         return dataSet;
@@ -65,6 +73,10 @@ var chartjs = (function(self){
     function compileAndSortChartData(labelsCollection, dataCollection) {
         var labelsArray = Array.prototype.map.call(labelsCollection, (e) => e.textContent);
         var dataArray = Array.prototype.map.call(dataCollection, (e) => +e.textContent);
+        // console.log("my labels array is: "); 
+        // console.log(labelsArray); 
+        // console.log("my data array is: ");
+        // console.log(dataArray);
         var dataSetArray = [];
         var aggregate = 0;
         

@@ -1,6 +1,63 @@
 <% include ../partials/header %> 
 
-<div id="poll-page" class="section pure-g">
+<div class="heading-secondary">
+    <h2><%= name %></h2>
+</div>
+<div class="heading-tertiary">
+    <h3>by <%= by %></h3>
+</div>
+
+<div class="row-g">
+        <form id="poll-form" class="pure-form">        
+            <select id="poll-options" name="poll-options">                
+                <% pollOptions.forEach(function(option){ %>                
+                    <option id="option_<%= option.id %>" class="poll-option" value="<%= option.id %>"><%= option.option %></option> 
+                <% }); %>
+                <option value="-1">Add new option</option>            
+            </select>
+            <button id="poll-vote-btn" class="pure-button pure-button-primary">Vote</button>
+            <% if(owned){ %>
+                <button id="share-twitter-btn" class="pure-button twitter-button">Share on Twitter</button>    
+            <% } %>                        
+            <div id="new-option-container" class="hidden">
+                <label for="new-option" style="display: none">New Option:</label>
+                <input id="new-option" type="text" placeholder="New Option">
+            </div>    
+        </form>
+</div>
+
+<div class="row-g">
+    <div class="col-1-of-2">
+        <div class="poll">
+            <ul>
+                <% pollOptions.forEach(function(option){ %>                    
+                    <li class="poll__option" id="poll_option-<%= option.id %>">                    
+                        <span class="poll__option-id"><%= option.id %></span>
+                        <span class="poll__option-name"><%= option.option %></span> 
+                        <span class="poll__option-count"><%= option.count %></span>                        
+                    </li>                                        
+                <% }); %>    
+                <li class="poll__option">
+                    <span class="poll__option-name">New</span> 
+                </li>        
+            </ul>            
+            
+        </div>
+
+
+
+    </div>
+    <div class="col-1-of-2">        
+        <div class="chart">
+            <div class="chart__container" >
+                <canvas id="myChart" width="300" height="300"></canvas>                
+            </div>
+        </div>
+                        
+    </div>
+</div>
+
+<!-- <div id="poll-page" class="section pure-g">
     <div class="card pure-u-1 pure-u-xl-1-2">
         <h1 class="section-title"><%= name %>, by <%= by %></h1>            
         <form id="poll-form" class="pure-form">        
@@ -36,13 +93,13 @@
                 <% } %>                    
             </div>
             <div class="poll-result pure-u-1 pure-u-md-1-2 pure-u-lg-1-2">
-                <div id="chart-container" >
+                <div class="chart" >
                     <canvas id="myChart" width="300" height="300"></canvas>                
                 </div>            
             </div>                        
         </div>
     </div>       
-</div>
+</div> -->
  <div id="poll-info-container" class="hidden">
     <div id="poll-id"><%= id %></div>
     <div id="poll-current-voter"><%= voter %></div>

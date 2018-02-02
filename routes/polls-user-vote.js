@@ -14,7 +14,7 @@ router.post('/:id', (req, res, next) => {
     //let pollOptions = req.body.pollOptions;
     let option = req.body.option;
     let add = req.body.new;
-    let voter = req.body.voter;
+    let voter = user;//req.body.voter;
     debug.log('voter: ' + voter);
     debug.log('voted for poll id: ' + _Id);
     debug.log('with item: ' + option);
@@ -24,17 +24,19 @@ router.post('/:id', (req, res, next) => {
     votesDb.findVoter(_Id, voter, (err, vote) => {
         if(err){
             console.log(err);
+            res.send(err);
         } else {
             debug.log('Vote found: ');
             debug.log(vote);
             if(vote && !debug.canMultivote()){
-                console.log('cannot vote');
+                console.log('cannot vote');                
                 res.end(JSON.stringify({voted: true}));
             } else {
                 pollsDb.updatePollOption(_Id, option, add, (err, doc) =>{ 
                     if(err){
                         console.log(err);
                         res.end(JSON.stringify({error: err}));
+                        // res.send(err);
                     } else {
                         let poll = doc.value;
                         poll.add = add;             
@@ -43,12 +45,16 @@ router.post('/:id', (req, res, next) => {
                         //update votes database
                         votesDb.addVote(_Id, voter);
                         //return json string with updated poll info
-                        res.end(JSON.stringify(poll));            
+                        res.end(JSON.stringify(poll));
+                        // res.redirect("/polls/" + _Id);            
+                        
                     }
                 });
             }
             
         }
+
+        
     });
 
     

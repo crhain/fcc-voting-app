@@ -10,13 +10,16 @@
 @import "base/utilities";
 
 // COMPONENTS
-// @import "components/???";
+@import "components/modal";
+@import "components/poll-item";
+@import "components/chart";
 
 //LAYOUT
 @import "layout/grid";
 
 //PAGES
 @import "pages/home";
+@import "pages/poll";
 
 
 

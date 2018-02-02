@@ -7,10 +7,25 @@
     var pollOptionsSelect = document.getElementById('poll-options');
     var newOptionContainer = document.getElementById('new-option-container');    
     var currentId = document.getElementById('poll-id').textContent;
+    var pollOptionSelected;
     
     //draw chart - requires poll-chart.js as module or loaded before this script in html file
     var myChart = chartjs.draw();
     //#poll-form  -  on submit : for voteing
+
+    //SELECT poll__option
+    var pollOptions = document.getElementsByClassName("poll__option");
+    for(let i = 0; i < pollOptions.length; i++){
+        pollOptions[i].addEventListener('click', function(e){
+            for(let i = 0; i < pollOptions.length; i++){
+                pollOptions[i].classList.remove('poll__option--selected');
+            }
+            this.classList.toggle('poll__option--selected');
+            pollOptionSelected = this;
+        });
+    }
+    
+
     //post to /poll/:id/vote
     pollVoteBtn.addEventListener('click', (e) =>{
         var selectedOptionId = pollOptionsSelect.value;
@@ -130,7 +145,7 @@
     function updatePageWithNewData(poll){
         console.log('I am updating the page with new data!');
         //console.log(json);
-        var pollResultsList = document.getElementById('poll-results-list');
+        // var pollResultsList = document.getElementById('poll-results-list');
         var pollResultsHTML = "";
         var pollOptionsSelectHTML = "";
 
@@ -145,10 +160,11 @@
         }
         pollOptionsSelectHTML += '<option value="-1">Add new option</option>';
         
-        pollResultsList.innerHTML = pollResultsHTML;
+        // pollResultsList.innerHTML = pollResultsHTML;
         pollOptionsSelect.innerHTML = pollOptionsSelectHTML;
+        var pollOptionCount = document.getElementById("poll__option-" + currentId)
         //add call to new chart.js update method that I still haven't written
-        chartjs.update(myChart);
+        // chartjs.update(myChart);
     }
 
 })(typeof self !== 'undefined' ? self : this);

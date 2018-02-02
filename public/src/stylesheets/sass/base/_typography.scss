@@ -1,7 +1,38 @@
+
+//BOOTSTRAP OVERIDES
 body{
     // font-family: "Lato", sans-serif;
     // font-weight: 400;
     // /* font-size: 16px; */
     // line-height: 1.7;
-    // color: $color-grey-dark; 
+    font-family: 'Montserrat', sans-serif;    
+    font-size: 1.5rem;
+    color: $text-dark;    
+}
+
+.navbar {
+    // font-size: 2rem;
+}
+
+.dropdown-item {
+    color: $text-dark;    
+    font-size: 1.5rem;
+}
+
+h1, h2, h3{
+    font-family: 'Rubik', sans-serif;    
+}
+
+//NEW CLASSES
+
+.heading-main {
+
+}
+
+.heading-secondary {
+
+}
+
+.text-label-lg {
+    font-size: 2rem;
 }

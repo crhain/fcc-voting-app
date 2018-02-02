@@ -17,7 +17,7 @@
         rel="stylesheet" 
         href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">    
-    <link rel="stylesheet" type="text/css" href="/src/stylesheets/style.css">
+    <link rel="stylesheet" type="text/css" href="/dist/stylesheets/style.css">
     <script 
         src="https://code.jquery.com/jquery-3.2.1.slim.min.js" 
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" 
@@ -28,7 +28,7 @@
     <script type="text/javascript" src="/src/javascripts/nav-ui.js"></script>    
 </head>
 <body>
-    <div id="header" class="pure-menu pure-menu-horizontal pure-menu-scrollable">
+    <!-- <div id="header" class="pure-menu pure-menu-horizontal pure-menu-scrollable">
         <ul class="pure-menu-list">
             <li id="nav-home" class="nav-btn pure-menu-item"><a href="/" class="pure-menu-link">Home</a></li>
             <li id="nav-polls" class="nav-btn pure-menu-item"><a href="/polls" class="pure-menu-link">Polls</a></li>
@@ -54,8 +54,59 @@
                 </li>                                
             <% } %>
         </ul>
-    </div> 
-
+    </div>  -->
+<div class="container-fluid">    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">  
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>                
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Polls
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/polls">View All Polls</a>
+                        <% if(user) { %>
+                            <a class="dropdown-item" href="/polls/user">View My Polls</a>
+                            <a class="dropdown-item" href="/polls/user/new">Add a New Poll</a>                    
+                        <% } else { %>
+                            <a class="dropdown-item disabled" href="#">View My Polls</a>      
+                            <a class="dropdown-item disabled" href="#">Add a New Poll</a>              
+                        <% } %>
+                        
+                </li>                            
+                <% if (user){ %>
+                    <li class="nav-item dropdown active"> 
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <%= user %>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Profile</a>                            
+                            <a class="dropdown-item" href="/logout">Logout</a>
+                        </div>
+                    </li>                
+                <% } else { %>
+                    <li class="nav-item dropdown active float-right">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Login
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/login/twitter">Twitter</a>
+                            
+                        <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Sign up</a>
+                        </div>
+                    </li>     
+                <% } %>
+                           
+            </ul>            
+        </div>
+    </nav>
     <div id="modal-window" class="closed"> <!-- closed -->
         <div id="modal-message-window">
             <div id="modal-close-btn">X</div>
