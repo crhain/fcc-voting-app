@@ -96,11 +96,11 @@ router.put("/:id/vote", isLoggedIn, function (req, res){
         query = {_id: req.params.id};
     } else {
         query = {_id: req.params.id, voters: {$not: {$all: [user._id]}}}; 
-    }    
+    }        
     if(optionId === "new"){
         Poll.findOneAndUpdate(
-            {_id: req.params.id, voters: {$not: {$all: [user._id]}}},
-            {$addToSet: {pollOptions: {option: req.body.newOption, count: 1}}, $addToSet:{voters: user._id}},
+            query,
+            {$addToSet: {pollOptions: {option: req.body.newOption, count: 1}}},
             {new: true},
             function(err, poll){
                 if(err){
@@ -108,9 +108,27 @@ router.put("/:id/vote", isLoggedIn, function (req, res){
                     req.flash("error", Message.Error); 
                     res.redirect("/polls");
                 } else {
-                    //redirect somehwere (show page)
-                    req.flash("success", Message.VoteSuccess);
-                    res.redirect("back");
+                    Poll.findOneAndUpdate(
+                        {_id: req.params.id},
+                        {$addToSet:{voters: user._id}},
+                        {new: true},
+                        function(err, secondPoll){
+                            if(err){
+                                debug.log(err); 
+                                req.flash("error", Message.Error); 
+                                res.redirect("/polls");
+                            } else {
+                                if(poll){
+                                    //redirect somehwere (show page)
+                                    req.flash("success", Message.VoteSuccess);
+                                    res.redirect("back");
+                                } else {
+                                    req.flash("error", Message.VoteOnlyOnce);
+                                    res.redirect("back");     
+                                }                                
+                            }
+                        }
+                    );                    
                 }
         });
     } else {        
