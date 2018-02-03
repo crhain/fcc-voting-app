@@ -8,8 +8,7 @@ var PollSchema = new mongoose.Schema({
         {
             _id: {type: mongoose.Schema.Types.ObjectId, default: mongoose.Types.ObjectId},
             option: String,
-            count: {type: Number, default: 0},
-            voters: [{type: mongoose.Schema.Types.ObjectId}]            
+            count: {type: Number, default: 0},            
         }
     ],    
     author: {
@@ -18,7 +17,8 @@ var PollSchema = new mongoose.Schema({
             ref: "User"
         },
         name: String
-    }
+    },
+    voters: [{type: mongoose.Schema.Types.ObjectId}]
 });
 
 //initialize Campground model

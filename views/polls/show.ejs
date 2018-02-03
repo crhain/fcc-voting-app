@@ -26,14 +26,14 @@
                             </li>
                         <% }); %>
                             <li class="poll__option">
-                                <input class="poll__option-checkbox"type="radio" id="pollr-new" name="option" value="new" style="display: none">
+                                <input class="poll__option-checkbox" type="radio" id="pollr-new" name="option" value="new" style="display: none">
                                 <label for="pollr-new">
                                     <span class="poll__option-new">New</span>                                    
                                 </label>
                             </li>                                           
                 </ul>
-                <input type="text" class="poll__input-new" name="newOption">
-                <button class="btn btn-danger">Vote!</button>            
+                <input type="text" id="poll-input-new" class="poll__input-new" name="newOption">
+                <button id="poll-vote-btn" class="btn btn-danger">Vote!</button>            
             </form>
         </div>        
         <!-- this button will open a delete modal confirmation and the modal confirm button will actually fire the delete -->
@@ -63,7 +63,19 @@
  </div>    -->
  
  <script type="text/javascript" src="/src/javascripts/poll-chart.js"></script>
- <script>var myChart = chartjs.draw();</script>
+ <script>
+    var myChart = chartjs.draw();
+    var voteBtn = document.getElementById("poll-vote-btn");
+    voteBtn.addEventListener('click', function(e){
+        var pollNewRadio = document.getElementById("pollr-new");
+        var pollNewInput = document.getElementById("poll-input-new");
+        
+        if(pollNewRadio.checked && !pollNewInput.value){
+            e.preventDefault();
+        }
+        
+    });
+ </script>
  <!-- <script type="text/javascript" src="/src/javascripts/poll-ui.js"></script>      -->
 
         

@@ -90,11 +90,17 @@ router.get("/:id", function(req, res){
 router.put("/:id/vote", isLoggedIn, function (req, res){    
     var optionId = req.body.option;
     var user = req.user;
-    debug.log(optionId);
+    //enable or disable multivote for debug
+    var query;
+    if(debug.canMultivote()){
+        query = {_id: req.params.id};
+    } else {
+        query = {_id: req.params.id, voters: {$not: {$all: [user._id]}}}; 
+    }    
     if(optionId === "new"){
         Poll.findOneAndUpdate(
-            {_id: req.params.id},
-            {$addToSet: {pollOptions: {option: req.body.newOption, count: 1, voters:[user._id]}}},
+            {_id: req.params.id, voters: {$not: {$all: [user._id]}}},
+            {$addToSet: {pollOptions: {option: req.body.newOption, count: 1}}, $addToSet:{voters: user._id}},
             {new: true},
             function(err, poll){
                 if(err){
@@ -107,16 +113,17 @@ router.put("/:id/vote", isLoggedIn, function (req, res){
                     res.redirect("back");
                 }
         });
-    } else {
-        //enable or disable multivote for debug
-        var query = {_id: req.params.id, "pollOptions._id": optionId, "pollOptions.voters": {$not: {$all: [user._id]}}}; 
+    } else {        
+        //enable or disable multivote for debug   
         if(debug.canMultivote()){
             query = {_id: req.params.id, "pollOptions._id": optionId};
-        }
+        } else {
+            query = {_id: req.params.id, "pollOptions._id": optionId, voters: {$not: {$all: [user._id]}}}; 
+        }    
         //record already exists, so update it with new vote and voter
         Poll.findOneAndUpdate(
             query,
-            {$addToSet: {"pollOptions.$.voters" : user._id}, $inc: { "pollOptions.$.count" : 1 }},
+            {$inc: { "pollOptions.$.count" : 1 }, $addToSet:{voters: user._id}},
             {new: true},
             function(err, poll){
                 if(err){

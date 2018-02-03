@@ -30,7 +30,8 @@ function seedDB(){
                     author: {
                         id: user ? userid : mongoose.Types.ObjectId(),
                         name: user ? username : "Mary"
-                    }
+                    },
+                    voters: []            
                 },
                 {
                     name: "Programming Language",
@@ -44,7 +45,8 @@ function seedDB(){
                     author: {
                         id: mongoose.Types.ObjectId(),
                         name: "Carl"
-                    }
+                    },
+                    voters: []
                 }    
             ];            
             //add a few polls
