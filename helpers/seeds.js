@@ -46,9 +46,7 @@ function seedDB(){
                         name: "Carl"
                     }
                 }    
-            ];
-
-            console.log(polls);
+            ];            
             //add a few polls
             polls.forEach((seed) =>{
                 Poll.create(seed, (err, poll) =>{

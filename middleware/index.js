@@ -15,7 +15,7 @@ middlewareObj.isLoggedIn = function(req, res, next){
     res.redirect("/login");    
 };
 
-//middleware that checks to see if user logged in and own the campground
+//middleware that checks to see if user logged in and own the poll
 middlewareObj.checkPollOwnership = function(req, res, next){
     if(debug.canAutolog() || req.isAuthenticated()){
          Poll.findById(req.params.id, function(err, poll){
@@ -24,7 +24,7 @@ middlewareObj.checkPollOwnership = function(req, res, next){
                 // res.redirect("back");
                 console.log(err);
             } else if(poll.author.id.equals(req.user._id) || req.user.isAdmin) {
-                req.poll = poll;
+                // req.poll = poll;
                 next();                
             } else {
                 // req.flash("error", "You don't have permission to do that!");

@@ -5,6 +5,7 @@ const path              = require('path');
 const bodyParser        = require('body-parser');
 const cookieParser      = require('cookie-parser');
 const methodOverride    = require('method-override');
+const flash             = require('connect-flash');
 //load authentication modules
 const session           = require('express-session');
 const passport          = require('passport');
@@ -49,6 +50,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/public')));
 app.use(methodOverride("_method"));
+app.use(flash());
 
 seedDB();
 
@@ -73,8 +75,8 @@ app.use(function(req, res, next){
     } else {
         res.locals.currentUser = req.user;
     }    
-    // res.locals.error = req.flash("error");
-    // res.locals.success = req.flash("success");
+    res.locals.error = req.flash("error");
+    res.locals.success = req.flash("success");
     next();
 });
 
@@ -88,17 +90,19 @@ app.use("/polls", pollRoutes);
 
 
 //default route if not found
-// app.use((req, res)=>{
-//     res.status(404);
-//     if(req.accepts('html')){
-//         res.end('404: Page Not Found');
-//     }
-//     if(req.accepts('json')){
-//         res.end(JSON.stringify({error: 'not found'}));
-//     }
-//     // default to plain-text. send()
-//     res.type('txt').send('Not found');
-// });
+app.use((req, res)=>{
+    res.status(404);
+    if(req.accepts('html')){
+        // note: add custom 404 page here
+        // res.end('404: Page Not Found');
+        res.render("404");
+    }
+    if(req.accepts('json')){
+        res.end(JSON.stringify({error: 'not found'}));
+    }
+    // default to plain-text. send()
+    res.type('txt').send('Not found');
+});
 
 //start server
 app.listen(PORT, ()=>{

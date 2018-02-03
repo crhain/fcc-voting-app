@@ -1,10 +1,10 @@
 <% include ../partials/header %> 
 
 <div class="heading-secondary">
-    <h2><%= poll.name %></h2>
+    <h2><%= poll.name %>, by <%= poll.author.name %></h2>
 </div>
 <div class="heading-tertiary">
-    <h3>by <%= poll.author.name %></h3>
+    <h3><%= poll.question %> </h3>
 </div>
 
 <div class="row-g">

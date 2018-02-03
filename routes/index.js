@@ -6,6 +6,8 @@ const User = require("../models/user");
 const middleWare = require("../middleware");
 const isLoggedIn = middleWare.isLoggedIn;
 const checkPollOwnership = middleWare.checkPollOwnership;
+//require common messages
+const Message = require("../localization")();
 
 //Show Home Page
 router.get("/", function(req, res){
@@ -23,16 +25,14 @@ router.post("/register", function(req, res){
     User.register(newUser, req.body.password, function(err, user){
        if(err) {
         console.log(err);  
-        // req.flash("error", err.message);
-        //res.render("register");  
+        req.flash("error", err);        
         res.redirect("/register");
        } else {
             passport.authenticate("local")(req, res, function(){
-                // req.flash("success", "Welcome to Polls Unlimited " + user.username);   
+                req.flash("success", Message.RegistrationSuccess);   
                 res.redirect("/polls");           
             });    
-       }
-       
+       }       
     });
 });
 
@@ -44,15 +44,16 @@ router.get("/login", function(req, res){
 //ATTEMPT LOGIN - with local strategy
 router.post("/login", passport.authenticate("local", {
     successRedirect: "/polls",
-    failureRedirect: "/login"
-}), (req, res) => {
+    failureRedirect: "/login",
+    failureFlash: true
+}), function (req, res){
    //nothing here for now
 });
 
 //LOGOUT
 router.get("/logout", (req, res) =>{
     req.logout();
-    // req.flash("success", "Logged you out!");
+    req.flash("success", Message.LogoutSuccess);
     res.redirect("/polls");
 });
 

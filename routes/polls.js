@@ -4,6 +4,10 @@ const Poll = require("../models/polls");
 const middleWare = require("../middleware");
 const isLoggedIn = middleWare.isLoggedIn;
 const checkPollOwnership = middleWare.checkPollOwnership;
+//require common messages
+const Message = require("../localization")();
+
+//require debug module
 require("../helpers/debug");
 
 //INDEX ROUTE - shows listing of all polls
@@ -11,7 +15,7 @@ router.get("/", function(req, res){
     // res.send("showing polls");
     Poll.find({}, function(err, polls){
         if(err){
-            console.log("ERROR");
+            console.log(err);
             res.send(err);
         } else {
             res.render("polls/index", {polls})
@@ -24,8 +28,9 @@ router.get("/user", isLoggedIn, function(req, res){
     //for now, it does the same thing as first index route
     Poll.find({"author.id": req.user._id}, function(err, polls){
         if(err){
-            debug.log("ERROR");
-            res.send(err);
+            console.log(err);
+            req.flash("error", Message.Error);
+            res.redirect("/polls");
         } else {
             res.render("polls/index", {polls})
         }
@@ -55,11 +60,12 @@ router.post("/", isLoggedIn, function(req, res){
     debug.log(poll);
     // res.send("created poll!");
     Poll.create(poll, function(err, poll){
-        if(err){
-            debug.log("Could not create!");
-            debug.log(err);
-            res.send(err); //add proper error handling
+        if(err){            
+            console.log(err);
+            req.flash("error", Message.DidNotCreatePoll);
+            res.redirect("/polls");
         } else {
+            req.flash("success", Message.CreatedPoll);
             res.redirect("/polls");
         }
     });    
@@ -71,6 +77,7 @@ router.get("/:id", function(req, res){
     Poll.findById(req.params.id, function(err, poll){
         if(err || !poll){
             debug.log(err);
+            req.flash("error", Message.PollDoesNotExist);
             return res.redirect("/polls");
         } else {
             res.render("polls/show", {poll});
@@ -91,10 +98,12 @@ router.put("/:id/vote", isLoggedIn, function (req, res){
             {new: true},
             function(err, poll){
                 if(err){
-                    debug.log(err);  
+                    debug.log(err); 
+                    req.flash("error", Message.Error); 
                     res.redirect("/polls");
                 } else {
                     //redirect somehwere (show page)
+                    req.flash("success", Message.VoteSuccess);
                     res.redirect("back");
                 }
         });
@@ -111,14 +120,17 @@ router.put("/:id/vote", isLoggedIn, function (req, res){
             {new: true},
             function(err, poll){
                 if(err){
-                    debug.log(err);  
+                    debug.log(err); 
+                    req.flash("error", Message.Error); 
                     res.redirect("/polls");
                 } else {
                     if(poll){
                         //redirect somehwere (show page)
+                        req.flash("success", Message.VoteSuccess);
                         res.redirect("back");
                     } else {
-                        res.send("You cannot vote more than once!");
+                        req.flash("error", Message.VoteOnlyOnce);
+                        res.redirect("back");     
                     }
                     
                 }
@@ -129,14 +141,17 @@ router.put("/:id/vote", isLoggedIn, function (req, res){
 
 //DESTROY POLL ROUTE
 // note: add in middleware to check if user is logged in and has voted already
+// checkPollOwnership is broken so hard!
 router.delete("/:id", checkPollOwnership, function (req, res){
     //find and update the correct campground
     Poll.findByIdAndRemove(req.params.id, function(err){
       if(err){
-        debug.log(err);  
+        debug.log(err); 
+        req.flash("error", Message.Error); 
         res.redirect("/polls");
       } else {
         //redirect somehwere (show page)
+        req.flash("success", Message.DeleteSuccess);
         res.redirect("/polls");
       }
     });

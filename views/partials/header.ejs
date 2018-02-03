@@ -97,6 +97,17 @@
             </ul>            
         </div>
     </nav>
+    <div class="container">
+        <% if(error && error.length > 0){ %>
+            <div class="alert alert-danger" role="alert">
+                <%=error%>
+            </div>
+        <% } else if(success && success.length > 0) { %>
+            <div class="alert alert-success" role="alert">
+                <%=success%>
+            </div>
+        <% } %>
+    </div>
     <div id="modal-window" class="closed"> <!-- closed -->
         <div id="modal-message-window">
             <div id="modal-close-btn">X</div>
