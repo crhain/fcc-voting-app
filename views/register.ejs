@@ -1,6 +1,18 @@
 <% include ./partials/header %>
 
 <h1>This is the Registration Page</h1>
-<a href="/login/twitter">Register with Twitter</a>
+
+<form action="/register" method="POST">
+    <label for="registration-username"></label>    
+    <input type="text" id="registration-username" name="username" placeholder="Enter a username" required>
+
+    <label for="registration-username"></label>
+    <input type="password" id="registration-password" name="password" placeholder="Enter a password" required>
+
+    <button class="btn btn-primary">Submitt</button>
+
+</form>
+
+<a href="/login/twitter" class="btn btn-primary">Login with Twitter</a>
 
 <% include ./partials/footer %>

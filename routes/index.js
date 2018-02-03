@@ -41,7 +41,7 @@ router.get("/login", function(req, res){
     res.render("login");
 });
 
-//ATTEMPT LOGIN
+//ATTEMPT LOGIN - with local strategy
 router.post("/login", passport.authenticate("local", {
     successRedirect: "/polls",
     failureRedirect: "/login"

@@ -28,7 +28,7 @@ require('./helpers/debug.js');
 if(ARGUMENTS[0] === "debug"){
     debug.on(true);
     debug.multivote(false);
-    debug.autolog(true);
+    debug.autolog(false);
     debug.localDb(false);
 }
 

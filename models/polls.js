@@ -9,7 +9,7 @@ var PollSchema = new mongoose.Schema({
             _id: {type: mongoose.Schema.Types.ObjectId, default: mongoose.Types.ObjectId},
             option: String,
             count: {type: Number, default: 0},
-            voters: [String]            
+            voters: [{type: mongoose.Schema.Types.ObjectId}]            
         }
     ],    
     author: {

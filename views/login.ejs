@@ -1,6 +1,18 @@
 <% include ./partials/header %>
 
 <h1>This is the Login Page</h1>
-<a href="/login/twitter">Log In with Twitter</a>
+
+<form action="/login" method="POST">
+    <label for="login-username"></label>    
+    <input type="text" id="login-username" name="username" placeholder="Enter a username" required>
+
+    <label for="login-username"></label>
+    <input type="password" id="login-password" name="password" placeholder="Enter a password" required>
+
+    <button class="btn btn-primary">Submitt</button>
+
+</form>
+
+<a href="/login/twitter" class="btn btn-primary">Login with Twitter</a>
 
 <% include ./partials/footer %>

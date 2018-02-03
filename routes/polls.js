@@ -5,6 +5,7 @@ const middleWare = require("../middleware");
 const isLoggedIn = middleWare.isLoggedIn;
 const checkPollOwnership = middleWare.checkPollOwnership;
 require("../helpers/debug");
+
 //INDEX ROUTE - shows listing of all polls
 router.get("/", function(req, res){
     // res.send("showing polls");
@@ -18,11 +19,10 @@ router.get("/", function(req, res){
     });    
 });
 
-
 //INDEX ROUTE 2 - shows listing of user polls
 router.get("/user", isLoggedIn, function(req, res){
     //for now, it does the same thing as first index route
-    Poll.find({}, function(err, polls){
+    Poll.find({"author.id": req.user._id}, function(err, polls){
         if(err){
             debug.log("ERROR");
             res.send(err);
@@ -84,11 +84,12 @@ router.get("/:id", function(req, res){
 // --- note: instead of storing user name in voters we should use the userId/also update models/polls to require this as well
 router.put("/:id/vote", isLoggedIn, function (req, res){    
     var optionId = req.body.option;
+    var user = req.user;
     debug.log(optionId);
     if(optionId === "new"){
         Poll.findOneAndUpdate(
             {_id: req.params.id},
-            {$addToSet: {pollOptions: {option: req.body.newOption, count: 1, voters:["Carl"]}}},
+            {$addToSet: {pollOptions: {option: req.body.newOption, count: 1, voters:[user._id]}}},
             {new: true},
             function(err, poll){
                 if(err){
@@ -101,14 +102,14 @@ router.put("/:id/vote", isLoggedIn, function (req, res){
         });
     } else {
         //enable or disable multivote for debug
-        var query = {_id: req.params.id, "pollOptions._id": optionId, "pollOptions.voters": {$not: {$all: ["Carl"]}}}; 
+        var query = {_id: req.params.id, "pollOptions._id": optionId, "pollOptions.voters": {$not: {$all: [user._id]}}}; 
         if(debug.canMultivote()){
             query = {_id: req.params.id, "pollOptions._id": optionId};
         }
         //record already exists, so update it with new vote and voter
         Poll.findOneAndUpdate(
             query,
-            {$addToSet: {"pollOptions.$.voters" : "Carl"}, $inc: { "pollOptions.$.count" : 1 }},
+            {$addToSet: {"pollOptions.$.voters" : user._id}, $inc: { "pollOptions.$.count" : 1 }},
             {new: true},
             function(err, poll){
                 if(err){
@@ -123,22 +124,8 @@ router.put("/:id/vote", isLoggedIn, function (req, res){
                     }
                     
                 }
-        });
-        // Poll.findOneAndUpdate(
-        //     {_id: req.params.id, "pollOptions._id": optionId},
-        //     {$inc: { "pollOptions.$.count" : 1 } },
-        //     {new: true},
-        //     function(err, poll){
-        //         if(err){
-        //             debug.log(err);  
-        //             res.redirect("/polls");
-        //         } else {
-        //             //redirect somehwere (show page)
-        //             res.redirect("back");
-        //         }
-        // });
+        });     
     }
-    
 });
 
 
