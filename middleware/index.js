@@ -18,25 +18,23 @@ middlewareObj.isLoggedIn = function(req, res, next){
 //middleware that checks to see if user logged in and own the campground
 middlewareObj.checkPollOwnership = function(req, res, next){
     if(debug.canAutolog() || req.isAuthenticated()){
-        //  Campground.findById(req.params.id, function(err, campground){
-        //     if(err || !campground){
-        //         req.flash("error", "Campgrounds not found!");
-        //         res.redirect("back");
-        //     } else if(campground.author.id.equals(req.user._id) || req.user.isAdmin) {
-        //         req.campground = campground;
-        //         next();
-        //         // does user own the campground? - need to use .equals mongoose method
-        //         // because req.user._id is an object and author.id is a string
-                
-        //     } else {
-        //         req.flash("error", "You don't have permission to do that!");
-        //         res.redirect("/campgrounds/" + req.params.id);
-        //     }
-        // }); 
+         Poll.findById(req.params.id, function(err, poll){
+            if(err || !poll){
+                // req.flash("error", "Campgrounds not found!");
+                // res.redirect("back");
+                console.log(err);
+            } else if(poll.author.id.equals(req.user._id) || req.user.isAdmin) {
+                req.poll = poll;
+                next();                
+            } else {
+                // req.flash("error", "You don't have permission to do that!");
+                res.redirect("/polls/" + req.params.id);
+            }
+        }); 
         next();           
     } else {
         // req.flash("error", "You need to be logged in to do that.");
-        res.redirect("back");
+        res.redirect("/polls/" + req.params.id);
     }    
 };
 

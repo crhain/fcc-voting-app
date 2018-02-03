@@ -60,9 +60,7 @@ router.post("/", isLoggedIn, function(req, res){
             debug.log(err);
             res.send(err); //add proper error handling
         } else {
-
             res.redirect("/polls");
-            // res.sendStatus(200); 
         }
     });    
 });

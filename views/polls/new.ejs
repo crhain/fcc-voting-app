@@ -5,9 +5,9 @@
         <h1 class="">Create A New Poll!</h1>
         <form id="new-poll-form" class="" action="/polls" method="POST">
             <label for="new-poll-name">Title: </label>
-            <input id="new-poll-name" class="" form="new-poll-form" type="text" name="poll[name]" placeholder="Requires a name" >
+            <input id="new-poll-name" class="" form="new-poll-form" type="text" name="poll[name]" placeholder="Requires a name" required>
             <label for=""></label>
-            <input id="new-poll-question" class="" form="new-poll-form" type="text" name="poll[question]" placeholder="Requires a name" >
+            <input id="new-poll-question" class="" form="new-poll-form" type="text" name="poll[question]" placeholder="Requires a name" required>
             
             <label for="new-poll-options-v">Options (seperated by lines): </label>            
             <input id="new-poll-options-h" type="text" name="poll[optionsRaw]" style="display: none"> 
@@ -19,7 +19,7 @@
     </div>    
 </div>
 
-<!-- <script type="text/javascript" src="/src/javascripts/new-poll-ui.js"></script>  -->
+
 <script>
     var option = document.getElementById('new-poll-options-v');
     var newOptions = document.getElementById('new-poll-options-h');
