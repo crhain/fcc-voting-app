@@ -4,9 +4,7 @@ require('../helpers/debug.js');
 var middlewareObj = {};
 
 //middleware to authenticate user
-middlewareObj.isLoggedIn = function(req, res, next){
-    console.log("I can autolog?");
-    console.log(debug.canAutolog);
+middlewareObj.isLoggedIn = function(req, res, next){    
     if(debug.canAutolog() || req.isAuthenticated()){
         return next();
     }
@@ -14,6 +12,13 @@ middlewareObj.isLoggedIn = function(req, res, next){
     // req.flash("error", "You need to be logged in to do that.");
     res.redirect("/login");    
 };
+
+middlewareObj.isLoggedOut = function(req, res, next){
+    if( !(debug.canAutolog() || req.isAuthenticated()) ){
+        return next();
+    }    
+    res.redirect("back");    
+}
 
 //middleware that checks to see if user logged in and own the poll
 middlewareObj.checkPollOwnership = function(req, res, next){

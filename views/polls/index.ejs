@@ -1,16 +1,59 @@
 <% include ../partials/header %> 
 
+<div class="Banner u-margin-bottom-lg">
+    <div class="Banner__title-box">
+        <div class="HeadingPrimary">
+            <h1>Express Your Opinion!</h1>
+        </div>
+        <div class="HeadingSecondary">
+            <h2>Vote on your favorite topics</h2>
+        </div>
+    </div>
+</div>   
 <div id="polls-page" class="">
-    <div class="">
-        <h1 class="">Polls</h1>        
-        <ul class="">            
-            <% polls.forEach(function(poll){ %>            
-                <li id="<%= poll._id %>" class=""> 
-                    <a href="/polls/<%= poll._id %>" class=""><%= poll.name %></a>
-                </li>
-            <% }); %>
-        </ul>
+
+    
+
+    <div class="row-g">
+        <div class="ButtonGroup u-margin-bottom-sm">
+            <% if(currentUser) { %>
+            <div class="ButtonSubGroup">
+                <% if(filter === "none") { %>
+                <a href="/polls/user" class="ButtonLink">User polls</a>
+                <% } else if(filter === "user") { %>
+                <a href="/polls" class="ButtonLink">All polls</a>            
+                <% } %>
+            </div>
+            <div class="ButtonSubGroup u-margin-left">
+            <% } else { %>
+            <div class="ButtonSubGroup">                
+            <% } %>                                       
+                <a href="#" class="ButtonLink">Title &#9650;</a>
+                <a href="#" class="ButtonLink">Author &#9660;</a>
+                <a href="#" class="ButtonLink">Votes &#9660;</a>                
+            </div>                 
+            <div class="ButtonSubGroup u-pull-right">
+                <a href="/polls/new" class="ButtonLink">+ New</a>
+            </div>
+            
+        </div>
+        <div class="PollListing">
+            <ul class="">            
+                <% polls.forEach(function(poll){ %>            
+                    <li id="<%= poll._id %>" class="PollListing__item"> 
+                        <a href="/polls/<%= poll._id %>" class="">
+                            <span class="PollListing__item-name TextLabel--lg"><%=poll.name%></span>
+                            <span class="PollListing__item-author TextLabel--lg">by <%=poll.author.name%></span>
+                            <span class="PollListing__item-votes TextLabel--lg"><%=poll.voters.length%> votes</span>
+                        </a>
+                    </li>                    
+                <% }); %>
+            </ul>
+        </div>
+        
     </div>
 </div>
+
+
 
 <% include ../partials/footer %> 

@@ -5,7 +5,7 @@ body{
     // font-weight: 400;
     // /* font-size: 16px; */
     // line-height: 1.7;
-    font-family: 'Montserrat', sans-serif;    
+    font-family: $font-copy;    
     font-size: 1.5rem;
     color: $text-dark;    
 }
@@ -20,19 +20,50 @@ body{
 }
 
 h1, h2, h3{
-    font-family: 'Rubik', sans-serif;    
+    font-size: inherit;
+    font-family: inherit;
 }
 
 //NEW CLASSES
 
-.heading-main {
-
+.HeadingPrimary {
+    h1 {
+        font-family: $font-primary;     
+        font-size: 6rem;
+        font-weight: 300;
+        color: $color-tertiary;
+        text-transform: uppercase;
+        letter-spacing: .1rem;
+        line-height: 1.5;
+    }
+    
 }
 
-.heading-secondary {
-
+.HeadingSecondary {
+    h2 {
+        font-family: $font-primary;     
+        font-weight: 300;
+        font-size: 4rem;
+        letter-spacing: .1rem;
+        color: $color-tertiary;
+        text-transform: uppercase;
+    }
+    
 }
 
-.text-label-lg {
+.HeadingTertiary {
+    h3 {
+        font-size: 2.5rem;
+        font-weight: 400;
+        font-family: $font-copy;
+    }
+    
+}
+
+.TextLabel--lg {
     font-size: 2rem;
+    font-family: $font-primary;
+    font-weight: 500;
+    letter-spacing: 2px;
+    color: $color-black;
 }

@@ -1,18 +1,84 @@
 <% include ./partials/header %>
 
-<h1>This is the Login Page</h1>
+<div class="display-tabbed">
+    <ul>
+        <% if(register){ %>
+        <li><a href="#" class="display-tabbed__tab">Login</a></li>
+        <li><a href="#" class="display-tabbed__tab display-tabbed__tab--active">Register</a></li>          
+        <% } else { %>    
+        <li><a href="#" class="display-tabbed__tab display-tabbed__tab--active">Login</a></li>
+        <li><a href="#" class="display-tabbed__tab">Register</a></li>          
+        <% } %>    
+    </ul>
+    
+    <div class="display-tabbed__panels">
+        <!-- login panel -->
+        <% if(register){ %>
+        <div class="display-tabbed__panel">                
+        <% } else { %>        
+        <div class="display-tabbed__panel display-tabbed__panel--active">                    
+        <% } %>        
+            <h1>This is the Login Page</h1>
 
-<form action="/login" method="POST">
-    <label for="login-username"></label>    
-    <input type="text" id="login-username" name="username" placeholder="Enter a username" required>
+            <form action="/login" method="POST">
+                <label for="login-username"></label>    
+                <input type="text" id="login-username" name="username" placeholder="Enter a username" required>
+        
+                <label for="login-username"></label>
+                <input type="password" id="login-password" name="password" placeholder="Enter a password" required>
+        
+                <button class="btn btn-primary">Submitt</button>
+            </form>
+        
+            <a href="/login/twitter" class="btn btn-primary">Login with Twitter</a>
+        </div>
+        <!-- registration panel -->
+        <% if(register){ %>
+        <div class="display-tabbed__panel display-tabbed__panel--active">
+        <% } else { %>            
+        <div class="display-tabbed__panel">
+        <% } %>        
+            <h1>This is the Registration Page</h1>
 
-    <label for="login-username"></label>
-    <input type="password" id="login-password" name="password" placeholder="Enter a password" required>
+            <form action="/register" method="POST">
+                <label for="registration-username"></label>    
+                <input type="text" id="registration-username" name="username" placeholder="Enter a username" required>
 
-    <button class="btn btn-primary">Submitt</button>
+                <label for="registration-username"></label>
+                <input type="password" id="registration-password" name="password" placeholder="Enter a password" required>
 
-</form>
+                <button class="btn btn-primary">Submitt</button>
+            </form>
+            <a href="/login/twitter" class="btn btn-primary">Login with Twitter</a>
+        </div>          
+    </div>
+</div>
+      
+<script>
+var tabs = document.querySelectorAll('.display-tabbed__tab');
+var panels = document.querySelectorAll('.display-tabbed__panel');
+var activeTab = "display-tabbed__tab--active";
+var activePanel = "display-tabbed__panel--active";
 
-<a href="/login/twitter" class="btn btn-primary">Login with Twitter</a>
+for(var i=0; i < tabs.length; i++){          
+    (function(){
+        var tab = tabs[i];
+        var panel = panels[i];                
+
+        tab.addEventListener('click', function(e){                                     
+            for(let i=0; i < tabs.length; i++){
+                tabs[i].classList.remove(activeTab);
+            }
+            this.classList.add(activeTab);
+
+            for(let i=0; i < panels.length; i++){                
+                panels[i].classList.remove(activePanel);
+            }        
+            panel.classList.add(activePanel);    
+        });
+    })()                      
+}
+                                            
+</script>
 
 <% include ./partials/footer %>

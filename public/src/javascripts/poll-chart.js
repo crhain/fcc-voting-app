@@ -56,11 +56,12 @@ var chartjs = (function(self){
             }
         });
         return myChart;
+
     } //end draw
 
     function getDataSetFromDOM(numberOfLabelsInChart){        
-        var labelsCollection = document.getElementsByClassName('poll__option-name');
-        var dataCollection = document.getElementsByClassName('poll__option-count');
+        var labelsCollection = document.getElementsByClassName('Chart__option-name');
+        var dataCollection = document.getElementsByClassName('Chart__option-count');
         // console.log("my options are: "); 
         // console.log(labelsCollection); 
         // console.log("my counts are: ");

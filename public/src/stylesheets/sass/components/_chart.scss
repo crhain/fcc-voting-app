@@ -1,8 +1,16 @@
 .chart{
+    position: relative;
+    // border: 2px solid $color-black;
+    // border-radius: 2px;
+    
     &__container {
         position: relative;
-        width: 40vw;    
-        padding: 5px;            
+        top: 0;
+        left: 50%;
+        max-width: 30vw;
+        min-width: 50rem;    
+        padding: 5px;
+        transform: translateX(-50%);            
     }    
 }
 

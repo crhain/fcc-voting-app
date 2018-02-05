@@ -10,16 +10,23 @@
 @import "base/utilities";
 
 // COMPONENTS
-@import "components/modal";
-@import "components/poll-item";
+@import "components/buttons";
+@import "components/banner";
+@import "components/display-modal";
+@import "components/display-tabbed";
+@import "components/poll";
 @import "components/chart";
 
 //LAYOUT
 @import "layout/grid";
 
 //PAGES
-@import "pages/home";
-@import "pages/poll";
+@import "pages/landing";
+@import "pages/index";
+@import "pages/show";
+@import "pages/user";
+@import "pages/new";
+
 
 
 

@@ -1,11 +1,34 @@
 // GRID
-$grid-width: 100%;//114rem;
-$gutter-vertical: 8rem;
-$gutter-vertical-small: 6rem;
-$gutter-horizontal: 6rem;
+
 
 //TEXT STYLE
 
+//FONT
+$font-primary: 'Montserrat', sans-serif;
+$font-secondary: 'Montserrat', sans-serif;
+// $font-primary: 'Rubik', sans-serif;
+// $font-secondary: 'Rubik', sans-serif;
+$font-copy: 'Roboto', sans-serif;
+// $font-primary: 'Raleway', sans-serif;
+// $font-secondary: 'Raleway', sans-serif;
+
+
+
 //COLORS
+$color-primary: #F6EFAB;
+$color-secondary: #BA7A26;
+$color-tertiary: #3E290D;
+
+
+
 $color-black: black;
+$color-white: #FDFCF1;
+$color-red: red;
+$color-blue: blue;
 $text-dark: #263A0C;
+
+
+//OTHER
+
+$shadow: 0 .5rem 1rem rgba($color-black, .2);
+$shadow-large: 0 1rem 2rem rgba($color-black, .4);

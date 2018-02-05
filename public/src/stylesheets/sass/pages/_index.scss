@@ -1,0 +1,60 @@
+//Poll Name - Author
+//Poll question
+//Indicator of total votes
+.PollListing {
+    ul {
+        display: block;        
+        padding: 0;        
+        list-style: none; 
+    }
+    &__item {
+        position: relative;
+        display: block;
+        width: 100%;
+        // height: 6rem;        
+        padding: .5rem 1rem;
+        line-height: 2;
+        border: 2px solid $color-black;
+        border-radius: 5px;
+        background-color: $color-primary;
+        cursor: pointer;
+        transition: transform .2s ease;
+
+        &:not(:last-child){
+            margin-bottom: .5rem;
+        }
+
+        &:hover{
+            @include select;          
+        }
+        
+        //might not need
+        a:link,
+        a:visited {
+            text-decoration: none;
+            color: $color-black;
+        } 
+
+
+        &-name,
+        &-author,
+        &-votes {
+            @include inline-block-compressed;
+            // @include outline;
+        }
+
+        &-name {
+            width: 55%;
+        }
+
+        &-author {
+            width: 25%;
+
+        }
+
+        &-votes {
+            width: 20%;
+            text-align: right;
+        }
+    }
+}

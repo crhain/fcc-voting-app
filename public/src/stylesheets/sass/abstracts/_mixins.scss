@@ -1,7 +1,43 @@
+@mixin outline {
+    border: 1px solid red;
+}
+
 @mixin clearfix {
     &::after {
         content: "";
         display: table;
         clear: both;
     }
+}
+
+//inline and inline-block elements have 4px of spacing between them;
+// but we do not want this...
+@mixin inline-block-compressed {
+    display: inline-block;
+    margin-right: -4px;
+}
+
+@mixin center-y {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+@mixin center-x {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@mixin center {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+@mixin select {
+    transform: translate(-1px, -1px);
+    box-shadow: $shadow;
+}
+
+@mixin select-large {
+    transform: translate(-1px, -2px);
+    box-shadow: $shadow-large;
 }

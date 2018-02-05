@@ -5,6 +5,7 @@ const Poll = require("../models/polls");
 const User = require("../models/user");
 const middleWare = require("../middleware");
 const isLoggedIn = middleWare.isLoggedIn;
+const isLoggedOut = middleWare.isLoggedOut;
 const checkPollOwnership = middleWare.checkPollOwnership;
 //require common messages
 const Message = require("../localization")();
@@ -15,12 +16,12 @@ router.get("/", function(req, res){
 });
 
 //SHOW REGISTERATION PAGE
-router.get("/register", function(req, res){
-    res.render("register");
+router.get("/register", isLoggedOut, function(req, res){
+    res.render("login", {register: true}); //pass this variable to tell it to show registration tab
 });
 
 //REGISTER NEW USER
-router.post("/register", function(req, res){    
+router.post("/register", isLoggedOut, function(req, res){    
     var newUser = new User({username: req.body.username});
     User.register(newUser, req.body.password, function(err, user){
        if(err) {
@@ -37,12 +38,12 @@ router.post("/register", function(req, res){
 });
 
 //SHOW LOGIN
-router.get("/login", function(req, res){
+router.get("/login", isLoggedOut, function(req, res){
     res.render("login");
 });
 
 //ATTEMPT LOGIN - with local strategy
-router.post("/login", passport.authenticate("local", {
+router.post("/login", isLoggedOut, passport.authenticate("local", {
     successRedirect: "/polls",
     failureRedirect: "/login",
     failureFlash: true
@@ -51,7 +52,7 @@ router.post("/login", passport.authenticate("local", {
 });
 
 //LOGOUT
-router.get("/logout", (req, res) =>{
+router.get("/logout", isLoggedIn, (req, res) =>{
     req.logout();
     req.flash("success", Message.LogoutSuccess);
     res.redirect("/polls");

@@ -18,7 +18,9 @@ router.get("/", function(req, res){
             console.log(err);
             res.send(err);
         } else {
-            res.render("polls/index", {polls})
+            // polls : polls contains poll data
+            //         filter: "non" indicates page is showing all polls
+            res.render("polls/index", {polls, filter: "none", sort:{key: "", order: ""}});
         }
     });    
 });
@@ -32,7 +34,9 @@ router.get("/user", isLoggedIn, function(req, res){
             req.flash("error", Message.Error);
             res.redirect("/polls");
         } else {
-            res.render("polls/index", {polls})
+            // polls : polls contains poll data
+            //         filter: "user" indicates page is showing user polls
+            res.render("polls/index", {polls, filter: "user"})
         }
     });    
 });
@@ -103,11 +107,12 @@ router.put("/:id/vote", isLoggedIn, function (req, res){
             {$addToSet: {pollOptions: {option: req.body.newOption, count: 1}}},
             {new: true},
             function(err, poll){
-                if(err){
+                if(err){                    
                     debug.log(err); 
                     req.flash("error", Message.Error); 
                     res.redirect("/polls");
                 } else {
+                    //nesting second query because you cannot use two $addToSet calls together.  Dumb.
                     Poll.findOneAndUpdate(
                         {_id: req.params.id},
                         {$addToSet:{voters: user._id}},

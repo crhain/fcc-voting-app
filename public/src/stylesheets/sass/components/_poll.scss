@@ -1,0 +1,153 @@
+.Poll {      
+    width: 100%;
+    // @include select;  
+
+    ul {
+        display: block;        
+        padding: 0;        
+        list-style: none;        
+    }
+
+    label {
+        @include inline-block-compressed;        
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        // @include select;        
+    }
+
+    &__option {        
+        position: relative;
+        display: block;
+        width: 100%;
+        // height: 6rem;        
+        padding: .5rem 1rem;
+        line-height: 2;
+        border: 2px solid $color-black;
+        border-radius: 5px;
+        background-color: $color-primary;
+        transition: transform .2s ease;
+        cursor: pointer;
+
+        &:not(:last-child){
+            margin-bottom: .5rem;
+        }
+
+        &:hover{
+            @include select;          
+        }
+
+        &-id {
+            display: none;
+        }
+        &-select {
+            @include inline-block-compressed;
+            position: relative;
+            width: 10%;
+            height: 100%;
+            // top: -1.7rem;                    
+            // @include select;            
+
+            &::before {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);                
+                content: "";
+                width: 2.4rem;
+                height: 2.6rem;
+                border: 3px solid $color-secondary;
+                // border-radius: 100%;
+            }
+
+            &::after {
+                opacity: 0;
+                position: absolute;
+                top: -50%;
+                left: 50%;
+                transform: translateX(-50%);                
+                color: $color-secondary;
+                content: "X";
+                width: 2rem;
+                height: 2rem;                
+                font-size: 3.2rem;                                
+                transition: opacity .6s ease;
+            }
+        }
+
+        &-name,
+        &-new {
+            @include inline-block-compressed;
+            position: relative;            
+            width: 75%;           
+            height: 100%;
+            // font-size: 2rem;            
+            padding: 1rem;
+            font-family: $font-primary;
+            // @include select;            
+        }
+
+        &-count,
+        &-percent {            
+            position: relative;                      
+            width: 15%;
+            height: 100%;
+            // font-size: 2rem;            
+            padding: 1rem;
+            text-align: center;
+            font-family: $font-copy;
+        }
+
+        &-count {
+            display: none;
+            z-index: -1;
+            opacity: 0;
+        }
+        
+        &-percent {
+            @include inline-block-compressed;
+            z-index: 10;
+        }
+
+        &-checkbox {
+            display: none;        
+        }
+
+        &-checkbox:checked + label > &-select::after {     
+            opacity: 1;
+        }
+
+        &-checkbox--new:checked + label &-input {
+            z-index: 10;
+            opacity: 1;
+        }
+
+        &-input {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            font-family: $font-copy;
+            font-size: 2rem;
+            padding-left: 10%;
+            background-color: $color-primary;
+            z-index: -1;
+            opacity: 0;
+            outline: none;
+            transition: opacity .6s ease;
+            
+        }
+    }
+
+    &__user-controls {        
+        // border: 2px solid $color-black;
+        padding: 1rem;
+        margin-top: 2rem;
+        border-radius: 4px;
+
+    }
+    
+    
+}

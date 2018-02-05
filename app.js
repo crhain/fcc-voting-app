@@ -1,3 +1,6 @@
+//////////////////////////////////////////////////////////////
+// IMPORTS                                                  //
+//////////////////////////////////////////////////////////////
 //load middleware
 const express           = require('express');
 const mongoose          = require('mongoose');
@@ -23,7 +26,6 @@ const User              = require("./models/user");
 // requiring routes
 const pollRoutes        = require("./routes/polls");
 const indexRoutes       = require("./routes/index");
-
 //setup debug stuff
 require('./helpers/debug.js');
 if(ARGUMENTS[0] === "debug"){
@@ -32,19 +34,22 @@ if(ARGUMENTS[0] === "debug"){
     debug.autolog(false);
     debug.localDb(false);
 }
-
-//connect to database
+//////////////////////////////////////////////////////////////
+// ESTABLISH DB CONNECTION                                  //
+//////////////////////////////////////////////////////////////
 const databaseURL = process.env.DATABASE;
 mongoose.connect(databaseURL);
 
-//global.debug.setUser({name: 'Bob'});
-//set public directory
+//////////////////////////////////////////////////////////////
+// SETUP VIEW ENGINE  & STATIC FOLDER                       //
+//////////////////////////////////////////////////////////////
 app.use(express.static(__dirname + "/public"));
-//set up view engine
 app.set('views', path.join(__dirname, 'views'));
 app.set("view engine", "ejs");
 
-//set up app to use middleware
+//////////////////////////////////////////////////////////////
+// CONFIGURE MIDDLEWARE                                     //
+//////////////////////////////////////////////////////////////
 // app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -52,9 +57,14 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.use(methodOverride("_method"));
 app.use(flash());
 
+//////////////////////////////////////////////////////////////
+// SEED DATABASE - FOR TESTING ONLY!!!                      //
+//////////////////////////////////////////////////////////////
 seedDB();
 
-// PASSPORT CONFIGURATION
+//////////////////////////////////////////////////////////////
+// PASSPORT CONFIGURATION                                   //
+//////////////////////////////////////////////////////////////
 app.use(require("express-session")({
     secret: "You have an opinion or what?",
     resave: false,
@@ -67,31 +77,34 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-
-//add currentUser local to all routes
+//////////////////////////////////////////////////////////////
+//CUSTOM MIDDLE WARE - SETS SOME DEFAULTS                   //
+//////////////////////////////////////////////////////////////
 app.use(function(req, res, next){
+    //set currentUser to either logged in user or debug user
     if(debug.canAutolog()){
         res.locals.currentUser = req.user || debug.getUser();
     } else {
         res.locals.currentUser = req.user;
     }    
+    //set status codes for connect flash
     res.locals.error = req.flash("error");
     res.locals.success = req.flash("success");
+    //local default for tabbed login/registeration menu
+    // register = false    :    show login tab (default)
+    // register = true     :    show registration tab (set in /register route)
+    res.locals.register = false;
     next();
 });
 
 //////////////////////////////////////////////////////////////
 //SETUP ROUTES                                              //
 //////////////////////////////////////////////////////////////
-// app.use(require('./routes/index.js'));
-
 app.use("/", indexRoutes);
 app.use("/polls", pollRoutes);
 
-
-//default route if not found
-app.use((req, res)=>{
-    res.status(404);
+//DEFAULT ROUTE - PAGE NOT FOUND
+app.use("*", (req, res)=>{
     if(req.accepts('html')){
         // note: add custom 404 page here
         // res.end('404: Page Not Found');
@@ -104,9 +117,9 @@ app.use((req, res)=>{
     res.type('txt').send('Not found');
 });
 
-//start server
+//////////////////////////////////////////////////////////////
+//START SERVER                                              //
+//////////////////////////////////////////////////////////////
 app.listen(PORT, ()=>{
     console.log("Server running on: " + IP + ":" + PORT);
 });
-
-

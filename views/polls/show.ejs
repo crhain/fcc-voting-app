@@ -1,70 +1,92 @@
 <% include ../partials/header %> 
-
-<div class="heading-secondary">
-    <h2><%= poll.name %>, by <%= poll.author.name %></h2>
-</div>
-<div class="heading-tertiary">
-    <h3><%= poll.question %> </h3>
-</div>
+<div class="Banner u-margin-bottom-lg">
+    <div class="Banner__title-box">
+        <div class="HeadingPrimary">
+            <h1><%= poll.name %></h1>
+        </div>
+        <div class="HeadingSecondary">
+            <h2>by <%= poll.author.name %></h2>
+        </div>
+    </div>
+</div>        
 
 <div class="row-g">
-    <div class="col-1-of-2">
-        <div class="poll">
-            <form class="delete-form" action="/polls/<%=poll._id%>/vote/?_method=PUT" method="POST">
-                <ul>
-                        <% poll.pollOptions.forEach(function(option, index){ %> 
-                            <li class="poll__option">
-                                <% if(index === 0){ %>
-                                    <input class="poll__option-checkbox"type="radio" id="pollr-<%= index %>" name="option" value="<%=option._id%>" style="display: none" checked>
-                                <% } else { %>
-                                    <input class="poll__option-checkbox"type="radio" id="pollr-<%= index %>" name="option" value="<%=option._id%>" style="display: none">
-                                <% } %>    
-                                <label for="pollr-<%= index %>">
-                                    <span class="poll__option-name"><%=option.option%></span>
-                                    <span class="poll__option-count"><%=option.count%></span>
-                                </label>
-                            </li>
-                        <% }); %>
-                            <li class="poll__option">
-                                <input class="poll__option-checkbox" type="radio" id="pollr-new" name="option" value="new" style="display: none">
-                                <label for="pollr-new">
-                                    <span class="poll__option-new">New</span>                                    
-                                </label>
-                            </li>                                           
-                </ul>
-                <input type="text" id="poll-input-new" class="poll__input-new" name="newOption">
-                <button id="poll-vote-btn" class="btn btn-danger">Vote!</button>            
-            </form>
-        </div>        
-        <!-- this button will open a delete modal confirmation and the modal confirm button will actually fire the delete -->
-        
-        <% if(currentUser && poll.author.id.equals(currentUser._id)){ %>
-        <form class="delete-form" action="/polls/<%=poll._id%>/?_method=DELETE" method="POST">            
-            <button class="btn btn-danger">Delete This Poll!</button>            
-        </form>
-        <% } %>
-
-        <!-- <p>My current user is <%= currentUser %></p> -->
-
+    <div class="HeadingTertiary u-margin-bottom-md">
+        <h3><%= poll.question %> </h3>
     </div>
+    <div class="col-1-of-2">        
+        <div class="Poll u-margin-bottom-sm">            
+            <form action="/polls/<%=poll._id%>/vote/?_method=PUT" method="POST">
+                <ul>
+                    <% poll.pollOptions.forEach(function(option, index){ %> 
+                        <li class="Poll__option">
+                            <% if(index === 0){ %>
+                                <input class="Poll__option-checkbox" type="radio" id="pollr-<%= index %>" name="option" value="<%=option._id%>" checked>
+                            <% } else { %>
+                                <input class="Poll__option-checkbox" type="radio" id="pollr-<%= index %>" name="option" value="<%=option._id%>">
+                            <% } %>    
+                            <label for="pollr-<%= index %>">
+                                <span class="Poll__option-select">&ensp;</span>
+                                <span class="Poll__option-name Chart__option-name TextLabel--lg"><%=option.option%></span>
+                                <span class="Poll__option-count Chart__option-count TextLabel--lg"><%=option.count%></span>
+                                <% if(poll.voters.length === 0) { %>
+                                <span class="Poll__option-percent TextLabel--lg">0%</span>
+                                <% } else { %> 
+                                <span class="Poll__option-percent TextLabel--lg"><%= (option.count / poll.voters.length) * 100 %>%</span>
+                                <% } %>
+                            </label>
+                        </li>
+                    <% }); %>
+                        <li class="Poll__option">
+                            <input class="Poll__option-checkbox Poll__option-checkbox--new" type="radio" id="pollr-new" name="option" value="new">
+                            <label for="pollr-new">
+                                <span class="Poll__option-select">&ensp;</span>
+                                <span class="Poll__option-new TextLabel--lg">Other</span> 
+                                <input 
+                                    type="text" 
+                                    id="poll-input-new" 
+                                    class="Poll__option-input" 
+                                    name="newOption" 
+                                    placeholder="Enter option here"
+                                    autocomplete="off"
+                                >                                   
+                            </label>
+                        </li>                                           
+                </ul>                
+                <button id="poll-vote-btn" class="Button Button--max Button--primary">Vote!</button>                            
+            </form>                                    
+        </div> <!-- end .Poll div -->        
+        <div class="ButtonGroup">
+            <div class="ButtonSubGroup">
+                <a href="/polls" class="ButtonLink"> &larr; Polls</a>
+            </div>
+            <div class="ButtonSubGroup u-pull-right">
+                <% if(currentUser){ %>
+                <a href="/polls/new" class="ButtonLink"> + New</a>
+                <% } %>    
+                <% if(currentUser && poll.author.id.equals(currentUser._id)){ %>
+                <button class="Button Button--small Button--primary"><a href="#"><i class="fas fa-edit"></i> Edit</a></button>                
+                <!-- this button will open a delete modal confirmation and the modal confirm button will actually fire the delete -->                
+                <form class="u-inline-block" action="/polls/<%=poll._id%>/?_method=DELETE" method="POST">            
+                    <button class="Button Button--small Button--danger"><i class="fas fa-eraser"></i> Delete</button>            
+                </form>                        
+                <% } %>    
+            </div>
+            
+        </div>                        
+    </div> <!-- end .col-1-of2 div -->
     <div class="col-1-of-2">        
         <div class="chart">
             <div class="chart__container" >
                 <canvas id="myChart" width="300" height="300"></canvas>                
             </div>
-        </div>
-                        
+        </div>                        
     </div>
 </div>
 
- <!-- <div id="poll-info-container" class="hidden">
-    <div id="poll-id"><%= poll._id %></div>
-    <div id="poll-current-voter"><%= currentUser %></div>
- </div>    -->
- 
  <script type="text/javascript" src="/src/javascripts/poll-chart.js"></script>
  <script>
-    var myChart = chartjs.draw();
+    
     var voteBtn = document.getElementById("poll-vote-btn");
     voteBtn.addEventListener('click', function(e){
         var pollNewRadio = document.getElementById("pollr-new");
@@ -75,6 +97,9 @@
         }
         
     });
+
+    var myChart = chartjs.draw();
+
  </script>
  <!-- <script type="text/javascript" src="/src/javascripts/poll-ui.js"></script>      -->
 
