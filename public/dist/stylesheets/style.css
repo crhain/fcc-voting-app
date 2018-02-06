@@ -15,10 +15,10 @@ body {
 body {
   font-family: "Roboto", sans-serif;
   font-size: 1.5rem;
-  color: #263A0C; }
+  color: #151513; }
 
 .dropdown-item {
-  color: #263A0C;
+  color: #151513;
   font-size: 1.5rem; }
 
 h1, h2, h3 {
@@ -63,6 +63,9 @@ h1, h2, h3 {
 .u-margin-bottom-sm {
   margin-bottom: 2rem; }
 
+.u-margin-top-sm {
+  margin-top: 2rem; }
+
 .u-margin-top-md {
   margin-bottom: 4rem; }
 
@@ -74,6 +77,11 @@ h1, h2, h3 {
 
 .u-center {
   margin: 0 auto; }
+
+.u-center-absolute {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%); }
 
 .u-pull-right {
   float: right; }
@@ -92,33 +100,32 @@ h1, h2, h3 {
 .ButtonGroup {
   display: block;
   position: relative;
-  width: 100%;
-  border: 1px solid red; }
-
-.ButtonSubGroup {
-  position: relative;
-  display: inline-block;
-  border: 1px solid red; }
+  width: 100%; }
+  .ButtonGroup .ButtonSubGroup {
+    position: relative;
+    display: inline-block; }
 
 .Button {
   display: inline-block;
+  display: relative;
   outline: none;
   border-radius: 4px;
   transition: all .2s; }
-  .Button a:link, .Button a:visited {
+  .Button:link, .Button:visited {
     text-align: center;
-    text-decoration: none;
-    color: inherit; }
+    text-decoration: none; }
   .Button:hover {
     transform: translate(-1px, -2px);
-    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.4); }
-    .Button:hover a {
-      text-decoration: none;
-      color: inherit; }
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.4);
+    text-decoration: none; }
   .Button:active {
     transform: translate(0, 0);
     box-shadow: none; }
+  .Button--tiny {
+    padding: .5rem 1rem;
+    font-size: 1.6rem; }
   .Button--small {
+    min-width: 5rem;
     line-height: 1.5;
     padding: 1rem 1.5rem;
     font-size: 2rem; }
@@ -134,40 +141,24 @@ h1, h2, h3 {
     width: 100%;
     line-height: 2;
     font-size: 2.5rem; }
+  .Button--regular {
+    background-color: #FDFCF1;
+    border: 2px solid black;
+    color: black; }
+    .Button--regular:link, .Button--regular:visited, .Button--regular:hover, .Button--regular:active {
+      color: black; }
   .Button--primary {
     background-color: blue;
     border: 2px solid black;
     color: #FDFCF1; }
-    .Button--primary i {
+    .Button--primary:link, .Button--primary:visited, .Button--primary:hover, .Button--primary:active {
       color: #FDFCF1; }
   .Button--danger {
     background-color: red;
     border: 2px solid black;
     color: #FDFCF1; }
-
-.ButtonLink {
-  display: inline-block;
-  min-width: 5rem;
-  line-height: 1.5;
-  padding: 1rem 1.5rem;
-  font-size: 2rem;
-  background-color: #FDFCF1;
-  border: 2px solid black;
-  border-radius: 4px;
-  transition: all .2s; }
-  .ButtonLink:link, .ButtonLink:visited {
-    text-align: center;
-    text-decoration: none;
-    color: black; }
-  .ButtonLink:hover {
-    transform: translate(-1px, -2px);
-    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.4); }
-    .ButtonLink:hover a {
-      text-decoration: none;
-      color: black; }
-  .ButtonLink:active {
-    transform: translate(0, 0);
-    box-shadow: none; }
+    .Button--danger:link, .Button--danger:visited, .Button--danger:hover, .Button--danger:active {
+      color: #FDFCF1; }
 
 .Banner {
   position: relative;
@@ -187,44 +178,81 @@ h1, h2, h3 {
       text-align: center;
       margin-top: -1.5rem; }
 
-.Form {
-  display: block;
-  font-size: 2rem;
-  border: 1px solid red; }
-  .Form label {
-    display: block; }
-  .Form__input-group {
-    width: 50%;
-    border: 1px solid red; }
-    .Form__input-group--centered {
-      margin: 0 auto; }
-  .Form__input {
-    width: 80%;
-    background-color: #FDFCF1;
-    font-size: 2rem;
-    padding: 1rem 2rem;
-    font-family: inherit;
-    color: black;
-    outline: none;
-    border: none; }
-    .Form__input--block {
-      display: block;
-      margin: 0 auto; }
-    .Form__input--inline {
-      display: inline;
-      margin: 0 auto; }
+.Form__group:not(:last-child) {
+  margin-bottom: 2rem; }
 
-.FormInline {
-  display: inline-block;
+.Form__input {
+  font-size: 1.5rem;
+  font-family: inherit;
+  color: inherit;
+  padding: 1.5rem 2rem;
+  border-radius: 2px;
+  background-color: rgba(253, 252, 241, 0.5);
+  border: none;
+  border-bottom: 3px solid transparent;
+  width: 90%;
+  display: block;
+  transition: all .3; }
+  .Form__input:focus {
+    outline: none;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+    border-bottom: 3px solid #BA7A26; }
+  .Form__input:focus:invalid {
+    border-bottom: 3px solid red; }
+  .Form__input::-webkit-input-placeholder {
+    color: #868782; }
+
+.Form__label {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-left: 2rem;
+  margin-top: .7rem;
+  display: block;
+  transition: all .3s; }
+
+.Form__input:placeholder-shown + .Form__label {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4rem); }
+
+.Form__radio-group {
+  width: 49%;
+  display: inline-block; }
+
+.Form__radio-input {
+  display: none; }
+
+.Form__radio-label {
   font-size: 2rem;
-  border: 1px solid red; }
-  .FormInline__input {
-    display: inline-block;
-    background-color: #F6EFAB;
-    font-size: 2rem;
-    font-family: inherit;
-    color: black;
-    outline: none; }
+  cursor: pointer;
+  position: relative;
+  padding-left: 4.5rem; }
+
+.Form__radio-button {
+  height: 3rem;
+  width: 3rem;
+  border: 5px solid #BA7A26;
+  border-radius: 100%;
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  top: -.4rem; }
+  .Form__radio-button::after {
+    content: "";
+    display: block;
+    height: 1.3rem;
+    width: 1.3rem;
+    border-radius: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #BA7A26;
+    opacity: 0;
+    transition: opacity .2s; }
+
+.Form__radio-input:checked ~ .Form__radio-label .Form__radio-button::after {
+  opacity: 1; }
 
 .navigation__checkbox {
   display: none; }
@@ -418,6 +446,101 @@ h1, h2, h3 {
     background-color: #a60000; }
     .display-tabbed__panel--active {
       z-index: 10; }
+
+.OptionList {
+  display: block;
+  width: 100%;
+  padding: 0;
+  list-style: none; }
+  .OptionList__option {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: .5rem 1rem;
+    line-height: 2;
+    border: 2px solid black;
+    border-radius: 5px;
+    background-color: #F6EFAB;
+    transition: transform .2s ease;
+    cursor: pointer; }
+    .OptionList__option:not(:last-child) {
+      margin-bottom: .5rem; }
+    .OptionList__option:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); }
+    .OptionList__option-id {
+      display: none; }
+    .OptionList__option-select {
+      display: inline-block;
+      margin-right: -4px;
+      position: relative;
+      width: 10%;
+      height: 100%; }
+      .OptionList__option-select::before {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        content: "";
+        width: 2.4rem;
+        height: 2.6rem;
+        border: 3px solid #BA7A26; }
+      .OptionList__option-select::after {
+        opacity: 0;
+        position: absolute;
+        top: -50%;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #BA7A26;
+        content: "X";
+        width: 2rem;
+        height: 2rem;
+        font-size: 3.2rem;
+        transition: opacity .6s ease; }
+    .OptionList__option-name, .OptionList__option-new {
+      display: inline-block;
+      margin-right: -4px;
+      position: relative;
+      width: 75%;
+      height: 100%;
+      padding: 1rem;
+      font-family: "Montserrat", sans-serif; }
+    .OptionList__option-count, .OptionList__option-percent {
+      position: relative;
+      width: 15%;
+      height: 100%;
+      padding: 1rem;
+      text-align: center;
+      font-family: "Roboto", sans-serif; }
+    .OptionList__option-count {
+      display: none;
+      z-index: -1;
+      opacity: 0; }
+    .OptionList__option-percent {
+      display: inline-block;
+      margin-right: -4px;
+      z-index: 10; }
+    .OptionList__option-checkbox {
+      display: none; }
+    .OptionList__option-checkbox:checked + label > .OptionList__option-select::after {
+      opacity: 1; }
+    .OptionList__option-checkbox--new:checked + label .OptionList__option-input {
+      z-index: 10;
+      opacity: 1; }
+    .OptionList__option-input {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      font-family: "Roboto", sans-serif;
+      font-size: 2rem;
+      padding-left: 10%;
+      background-color: #F6EFAB;
+      z-index: -1;
+      opacity: 0;
+      outline: none;
+      transition: opacity .6s ease; }
 
 .Poll {
   width: 100%; }

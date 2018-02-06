@@ -58,19 +58,20 @@
         </div> <!-- end .Poll div -->        
         <div class="ButtonGroup">
             <div class="ButtonSubGroup">
-                <a href="/polls" class="ButtonLink"> &larr; Polls</a>
+                <a href="/polls" class="Button Button--small Button--regular"> &larr; Polls</a>
             </div>
             <div class="ButtonSubGroup u-pull-right">
                 <% if(currentUser){ %>
-                <a href="/polls/new" class="ButtonLink"> + New</a>
+                <a href="/polls/new" class="Button Button--small Button--regular"> + New</a>
                 <% } %>    
                 <% if(currentUser && poll.author.id.equals(currentUser._id)){ %>
-                <button class="Button Button--small Button--primary"><a href="#"><i class="fas fa-edit"></i> Edit</a></button>                
-                <!-- this button will open a delete modal confirmation and the modal confirm button will actually fire the delete -->                                                      
-                <% } %>    
+                <a href="#" class="Button Button--small Button--primary"><i class="fas fa-edit"></i> Edit</a>                
+                <!-- this button will open a delete modal confirmation and the modal confirm button will actually fire the delete --> 
                 <form class="u-inline-block" action="/polls/<%=poll._id%>/?_method=DELETE" method="POST">            
                     <button class="Button Button--small Button--danger"><i class="fas fa-eraser"></i> Delete</button>            
-                </form> 
+                </form>                                                      
+                <% } %>    
+              
             </div>
             
         </div>                        

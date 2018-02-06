@@ -19,21 +19,21 @@
             <% if(currentUser) { %>
             <div class="ButtonSubGroup">
                 <% if(filter === "none") { %>
-                <a href="/polls/user" class="ButtonLink">User polls</a>
+                <a href="/polls/user" class="Button Button--small Button--regular">User polls</a>
                 <% } else if(filter === "user") { %>
-                <a href="/polls" class="ButtonLink">All polls</a>            
+                <a href="/polls" class="Button Button--small Button--regular">All polls</a>            
                 <% } %>
             </div>
             <div class="ButtonSubGroup u-margin-left">
             <% } else { %>
             <div class="ButtonSubGroup">                
             <% } %>                                       
-                <a href="#" class="ButtonLink">Title &#9650;</a>
-                <a href="#" class="ButtonLink">Author &#9660;</a>
-                <a href="#" class="ButtonLink">Votes &#9660;</a>                
+                <a href="#" class="Button Button--small Button--regular">Title &#9650;</a>
+                <a href="#" class="Button Button--small Button--regular">Author &#9660;</a>
+                <a href="#" class="Button Button--small Button--regular">Votes &#9660;</a>                
             </div>                 
             <div class="ButtonSubGroup u-pull-right">
-                <a href="/polls/new" class="ButtonLink">+ New</a>
+                <a href="/polls/new" class="Button Button--small Button--regular">+ New</a>
             </div>
             
         </div>

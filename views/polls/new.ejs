@@ -9,82 +9,101 @@
 </div>        
 
 <div class="row-g">    
-    <form id="new-poll-form" class="Form" action="/polls" method="POST">
-        <div class="Form__input-group Form__input-group--centered">
-            <label for="new-poll-name">Title: </label>
+    <form id="new-poll-form" class="Form u-margin-bottom-sm" action="/polls" method="POST">        
+        <div class="Form__group Form__input-group--centered">            
             <input 
                 type="text" 
                 id="new-poll-name" 
                 class="Form__input"                     
                 name="poll[name]" 
-                placeholder="Requires a name" 
+                placeholder="Name" 
+                autocomplete="off"
                 required
             >
+            <label for="new-poll-name" class="Form__label">Name </label>
         </div>
-        <div class="Form__input-group Form__input-group--centered">
-            <label for="new-poll-question">Question:</label>            
+        <div class="Form__group Form__input-group--centered">
+                        
             <input 
                 type="text" 
                 id="new-poll-question" 
                 class="Form__input"                       
                 name="poll[question]" 
-                placeholder="Requires a name" 
+                placeholder="Question" 
+                autocomplete="off"
                 required
             >
+            <label for="new-poll-question" class="Form__label">Question</label>
         </div>
-        <div class="Form__input-group Form__input-group--centered">
-            <label for="new-poll-options-v">Options: </label>
-            <!-- visible option input             -->
-            <input 
-                type="text" 
-                id="new-poll-options-v" 
-                class="Form__input Form__input--inline" 
-                form="#" 
-                placeholder="Enter at least one option"
-            >
-            <a href="#" class="ButtonLink" id="new-opt-btn">+</a>            
+
+        <div class="Form__group Form__input-group--centered">
+            
+                <!-- visible option input             -->
+                <input 
+                    type="text" 
+                    id="new-poll-options-v" 
+                    class="Form__input Form__input--inline"                                         
+                    placeholder="Option"
+                    autocomplete="off"
+                >
+                <label for="new-poll-options-v" class="Form__label">Option</label>                         
+                <a href="#" class="Button Button--tiny Button--regular" id="new-opt-btn">+</a>            
+                   
             <!-- hidden option input -->
             <input type="text" id="new-poll-options-h" name="poll[optionsRaw]" style="display: none">
-            
+            <div class="u-margin-top-sm">
+                <ul id="option-display-list" class="OptionList">                                     
+                </ul>
+            </div>            
         </div>                                                                                                                                                 
-    </form>                
+    </form>
 
-    <div>
-        <ul id="option-display-list">
-            
-        </ul>
-    </div>
+    
+    
+
+   
 
     <div class="ButtonGroup">
-        <div class="ButtonSubGroup u-center">
+        <div class="u-center-absolute">
             <button 
             form="new-poll-form" 
             id="new-poll-submit-btn" 
-            class="Button Button--large Button--primary"
+            class="Button Button--large Button--primary "
             >
                 Add Poll
-            </button>
-        </div>
-        
+            </button>                
+        </div>        
     </div>
 </div>
 
 
 <script>
     (function(){
-        var option = document.getElementById('new-poll-options-v');
-        var newOptions = document.getElementById('new-poll-options-h');
+        
         var optBtn = document.getElementById('new-opt-btn');
-        var optionList = document.getElementById('option-display-list');
-        var optionsInList = "";
-        optBtn.addEventListener('click', function(e){
+        var option = document.getElementById('new-poll-options-v');
+        var addOptionItem = (function addOption(){            
+            var newOptions = document.getElementById('new-poll-options-h');
+            var optionList = document.getElementById('option-display-list');
+            var optionsInList = "";
+            return function(){
+                optionsInList += 
+                    "<li class='OptionList__option'><span class='OptionList__option-name TextLabel--lg'>" +  
+                    option.value  + 
+                    "</span></li>";
+                newOptions.value += "|" + option.value;
+                option.value = ""; 
+                optionList.innerHTML = optionsInList;
+            }
+            
+        })();
+                
+        optBtn.addEventListener('click', function(e){            
+            addOptionItem();
             e.preventDefault();
-            optionsInList += "<li>" +  option.value  + "</li>";
-            newOptions.value += "|" + option.value;
-            option.value = ""; 
-
-            optionList.innerHTML = optionsInList;
+            
         });
+        
     })();
     
 </script>

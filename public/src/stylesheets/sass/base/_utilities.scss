@@ -10,6 +10,10 @@
     margin-bottom: 2rem;
 }
 
+.u-margin-top-sm {
+    margin-top: 2rem;
+}
+
 .u-margin-top-md {
     margin-bottom: 4rem;
 }
@@ -24,6 +28,12 @@
 
 .u-center {
     margin: 0 auto;
+}
+
+.u-center-absolute {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);    
 }
 
 .u-pull-right {
