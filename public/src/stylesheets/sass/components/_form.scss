@@ -1,0 +1,56 @@
+.Form {
+    display: block;
+    font-size: 2rem;    
+    @include outline;
+    label {
+        display: block;
+    }
+
+    &__input-group {
+        width: 50%;
+        @include outline;
+
+        &--centered{
+            margin: 0 auto;
+        }
+    }
+
+    &__input {
+        width: 80%;                
+        background-color: $color-white;
+        font-size: 2rem;
+        padding: 1rem 2rem;
+        font-family: inherit;
+        color: $color-black;        
+        outline: none; 
+        border: none;    
+
+        &--block {
+            display: block;
+            margin: 0 auto;
+        }
+
+        &--inline {
+            display: inline;
+            margin: 0 auto;
+        }
+    }
+
+
+}
+
+.FormInline {
+    display: inline-block;
+    font-size: 2rem;
+    @include outline;
+
+    &__input {
+        display: inline-block;        
+        background-color: $color-primary;
+        font-size: 2rem;
+        font-family: inherit;
+        color: $color-black;        
+        outline: none;
+    }
+
+}

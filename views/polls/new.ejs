@@ -1,34 +1,92 @@
 <% include ../partials/header %> 
 
-<div id="new-poll-page" class="section pure-g">
-    <div class="">
-        <h1 class="">Create A New Poll!</h1>
-        <form id="new-poll-form" class="" action="/polls" method="POST">
+<div class="Banner u-margin-bottom-lg">
+    <div class="Banner__title-box">
+        <div class="HeadingPrimary">
+            <h1>Create a new poll now!</h1>
+        </div>        
+    </div>
+</div>        
+
+<div class="row-g">    
+    <form id="new-poll-form" class="Form" action="/polls" method="POST">
+        <div class="Form__input-group Form__input-group--centered">
             <label for="new-poll-name">Title: </label>
-            <input id="new-poll-name" class="" form="new-poll-form" type="text" name="poll[name]" placeholder="Requires a name" required>
-            <label for=""></label>
-            <input id="new-poll-question" class="" form="new-poll-form" type="text" name="poll[question]" placeholder="Requires a name" required>
+            <input 
+                type="text" 
+                id="new-poll-name" 
+                class="Form__input"                     
+                name="poll[name]" 
+                placeholder="Requires a name" 
+                required
+            >
+        </div>
+        <div class="Form__input-group Form__input-group--centered">
+            <label for="new-poll-question">Question:</label>            
+            <input 
+                type="text" 
+                id="new-poll-question" 
+                class="Form__input"                       
+                name="poll[question]" 
+                placeholder="Requires a name" 
+                required
+            >
+        </div>
+        <div class="Form__input-group Form__input-group--centered">
+            <label for="new-poll-options-v">Options: </label>
+            <!-- visible option input             -->
+            <input 
+                type="text" 
+                id="new-poll-options-v" 
+                class="Form__input Form__input--inline" 
+                form="#" 
+                placeholder="Enter at least one option"
+            >
+            <a href="#" class="ButtonLink" id="new-opt-btn">+</a>            
+            <!-- hidden option input -->
+            <input type="text" id="new-poll-options-h" name="poll[optionsRaw]" style="display: none">
             
-            <label for="new-poll-options-v">Options (seperated by lines): </label>            
-            <input id="new-poll-options-h" type="text" name="poll[optionsRaw]" style="display: none"> 
-            <!-- <textarea id="new-poll-options" form="new-poll-form" class="" cols="30" rows="10" name="poll[optionsRaw]" placeholder="Requires At Least One Item"></textarea> -->            
-            <button id="new-poll-submit-btn" class="btn btn-primary">Add Poll</button>
-        </form>
-        <input id="new-poll-options-v" type="text">
-        <a href="#" class="btn" id="new-opt-btn">Add Option</a>
-    </div>    
+        </div>                                                                                                                                                 
+    </form>                
+
+    <div>
+        <ul id="option-display-list">
+            
+        </ul>
+    </div>
+
+    <div class="ButtonGroup">
+        <div class="ButtonSubGroup u-center">
+            <button 
+            form="new-poll-form" 
+            id="new-poll-submit-btn" 
+            class="Button Button--large Button--primary"
+            >
+                Add Poll
+            </button>
+        </div>
+        
+    </div>
 </div>
 
 
 <script>
-    var option = document.getElementById('new-poll-options-v');
-    var newOptions = document.getElementById('new-poll-options-h');
-    var optBtn = document.getElementById('new-opt-btn');
-    optBtn.addEventListener('click', function(e){
-        e.preventDefault();
-        newOptions.value += "|" + option.value;
-        option.value = "";        
-    });
+    (function(){
+        var option = document.getElementById('new-poll-options-v');
+        var newOptions = document.getElementById('new-poll-options-h');
+        var optBtn = document.getElementById('new-opt-btn');
+        var optionList = document.getElementById('option-display-list');
+        var optionsInList = "";
+        optBtn.addEventListener('click', function(e){
+            e.preventDefault();
+            optionsInList += "<li>" +  option.value  + "</li>";
+            newOptions.value += "|" + option.value;
+            option.value = ""; 
+
+            optionList.innerHTML = optionsInList;
+        });
+    })();
+    
 </script>
 
 <% include ../partials/footer %> 

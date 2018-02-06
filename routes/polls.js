@@ -15,12 +15,13 @@ router.get("/", function(req, res){
     // res.send("showing polls");
     Poll.find({}, function(err, polls){
         if(err){
-            console.log(err);
-            res.send(err);
+            debug.log("ERROR GETTING INDEX ROUTE");
+            debug.log(err);
+            // res.send(err);
         } else {
             // polls : polls contains poll data
             //         filter: "non" indicates page is showing all polls
-            res.render("polls/index", {polls, filter: "none", sort:{key: "", order: ""}});
+            return res.render("polls/index", {polls, filter: "none", sort:{key: "", order: ""}});
         }
     });    
 });
@@ -30,20 +31,21 @@ router.get("/user", isLoggedIn, function(req, res){
     //for now, it does the same thing as first index route
     Poll.find({"author.id": req.user._id}, function(err, polls){
         if(err){
+            debug.log("ERROR GETTING USER INDEX ROUTE");
             console.log(err);
             req.flash("error", Message.Error);
-            res.redirect("/polls");
+            return res.redirect("/polls");
         } else {
             // polls : polls contains poll data
             //         filter: "user" indicates page is showing user polls
-            res.render("polls/index", {polls, filter: "user"})
+            return res.render("polls/index", {polls, filter: "user"})
         }
     });    
 });
 
 //NEW ROUTE
 router.get("/new", isLoggedIn, function(req, res){
-    res.render("polls/new");
+    return res.render("polls/new");
 });
 
 //CREATE ROUTE
@@ -60,17 +62,17 @@ router.post("/", isLoggedIn, function(req, res){
         return {option, voters:[]};
     });
     poll.optionsRaw = "";
-    debug.log("My poll: ");
-    debug.log(poll);
-    // res.send("created poll!");
+    // debug.log("My poll: ");
+    // debug.log(poll);    
     Poll.create(poll, function(err, poll){
         if(err){            
-            console.log(err);
+            debug.log("ERROR CREATING NEW POLL");
+            debug.log(err);
             req.flash("error", Message.DidNotCreatePoll);
-            res.redirect("/polls");
+            return res.redirect("/polls");
         } else {
             req.flash("success", Message.CreatedPoll);
-            res.redirect("/polls");
+            return res.redirect("/polls");
         }
     });    
 });
@@ -80,11 +82,12 @@ router.post("/", isLoggedIn, function(req, res){
 router.get("/:id", function(req, res){
     Poll.findById(req.params.id, function(err, poll){
         if(err || !poll){
+            debug.log("ERROR GETTING POLL");
             debug.log(err);
             req.flash("error", Message.PollDoesNotExist);
             return res.redirect("/polls");
         } else {
-            res.render("polls/show", {poll});
+            return res.render("polls/show", {poll});
         }
     });
 });
@@ -108,9 +111,10 @@ router.put("/:id/vote", isLoggedIn, function (req, res){
             {new: true},
             function(err, poll){
                 if(err){                    
+                    debug.log("ERROR VOTING WITH NEW OPTION");
                     debug.log(err); 
                     req.flash("error", Message.Error); 
-                    res.redirect("/polls");
+                    return res.redirect("/polls");
                 } else {
                     //nesting second query because you cannot use two $addToSet calls together.  Dumb.
                     Poll.findOneAndUpdate(
@@ -119,17 +123,18 @@ router.put("/:id/vote", isLoggedIn, function (req, res){
                         {new: true},
                         function(err, secondPoll){
                             if(err){
+                                debug.log("ERROR CHECKING FOR EXISTING VOTE FROM USER");
                                 debug.log(err); 
                                 req.flash("error", Message.Error); 
-                                res.redirect("/polls");
+                                return res.redirect("/polls");
                             } else {
-                                if(poll){
+                                if(secondPoll){
                                     //redirect somehwere (show page)
                                     req.flash("success", Message.VoteSuccess);
-                                    res.redirect("back");
+                                    return res.redirect("back");
                                 } else {
                                     req.flash("error", Message.VoteOnlyOnce);
-                                    res.redirect("back");     
+                                    return res.redirect("/index");     
                                 }                                
                             }
                         }
@@ -150,17 +155,18 @@ router.put("/:id/vote", isLoggedIn, function (req, res){
             {new: true},
             function(err, poll){
                 if(err){
+                    debug.log("ERROR VOTING FOR EXISTING OPTION"); 
                     debug.log(err); 
                     req.flash("error", Message.Error); 
-                    res.redirect("/polls");
+                    return res.redirect("/polls");
                 } else {
                     if(poll){
                         //redirect somehwere (show page)
                         req.flash("success", Message.VoteSuccess);
-                        res.redirect("back");
+                        return res.redirect("back");
                     } else {
                         req.flash("error", Message.VoteOnlyOnce);
-                        res.redirect("back");     
+                        return res.redirect("back");     
                     }
                     
                 }
@@ -174,15 +180,17 @@ router.put("/:id/vote", isLoggedIn, function (req, res){
 // checkPollOwnership is broken so hard!
 router.delete("/:id", checkPollOwnership, function (req, res){
     //find and update the correct campground
+    debug.log("DELETING POLL:" + req.params.id);   
     Poll.findByIdAndRemove(req.params.id, function(err){
       if(err){
+        debug.log("ERROR DELETING POLL"); 
         debug.log(err); 
         req.flash("error", Message.Error); 
-        res.redirect("/polls");
+        return res.redirect("/polls");
       } else {
         //redirect somehwere (show page)
         req.flash("success", Message.DeleteSuccess);
-        res.redirect("/polls");
+        return res.redirect("/polls");
       }
     });
 });

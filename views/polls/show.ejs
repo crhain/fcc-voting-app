@@ -17,7 +17,7 @@
     <div class="col-1-of-2">        
         <div class="Poll u-margin-bottom-sm">            
             <form action="/polls/<%=poll._id%>/vote/?_method=PUT" method="POST">
-                <ul>
+                <ul class="Poll__list u-margin-bottom-sm">
                     <% poll.pollOptions.forEach(function(option, index){ %> 
                         <li class="Poll__option">
                             <% if(index === 0){ %>
@@ -66,11 +66,11 @@
                 <% } %>    
                 <% if(currentUser && poll.author.id.equals(currentUser._id)){ %>
                 <button class="Button Button--small Button--primary"><a href="#"><i class="fas fa-edit"></i> Edit</a></button>                
-                <!-- this button will open a delete modal confirmation and the modal confirm button will actually fire the delete -->                
+                <!-- this button will open a delete modal confirmation and the modal confirm button will actually fire the delete -->                                                      
+                <% } %>    
                 <form class="u-inline-block" action="/polls/<%=poll._id%>/?_method=DELETE" method="POST">            
                     <button class="Button Button--small Button--danger"><i class="fas fa-eraser"></i> Delete</button>            
-                </form>                        
-                <% } %>    
+                </form> 
             </div>
             
         </div>                        

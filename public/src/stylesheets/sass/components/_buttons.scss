@@ -2,13 +2,13 @@
     display: block;
     position: relative;
     width: 100%;
-    // @include outline;
+    @include outline;
 }
 
 .ButtonSubGroup {
     position: relative;
     display: inline-block;    
-    // @include outline;
+    @include outline;
 }
 
 .Button {
@@ -46,14 +46,16 @@
     }
 
     &--medium {
-        font-size: 1.8rem;
+        font-size: 2rem;
         width: 10rem;
         height: 5rem;
     }
 
     &--large {
+        font-size: 2rem;
         width: 20rem;
         height: 5rem;
+        
     }
 
     &--max {
@@ -82,7 +84,7 @@
 
 .ButtonLink {    
     display: inline-block;
-    min-width: 10rem;
+    min-width: 5rem;
     line-height: 1.5;    
     padding: 1rem 1.5rem;    
     font-size: 2rem;
@@ -90,6 +92,8 @@
     border: 2px solid $color-black;
     border-radius: 4px;
     transition: all .2s;
+
+
 
     &:link,
     &:visited {

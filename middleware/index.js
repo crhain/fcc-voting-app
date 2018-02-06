@@ -9,37 +9,43 @@ middlewareObj.isLoggedIn = function(req, res, next){
         return next();
     }
     //flash message if authentication fails and then redirect to /login
-    // req.flash("error", "You need to be logged in to do that.");
-    res.redirect("/login");    
+    req.flash("error", "You need to be logged in to do that.");
+    return res.redirect("/login");    
 };
 
 middlewareObj.isLoggedOut = function(req, res, next){
     if( !(debug.canAutolog() || req.isAuthenticated()) ){
         return next();
-    }    
-    res.redirect("back");    
+    } 
+    debug.log("REDIRECTING FROM isLoggedOut FUNCTION");   
+    return res.redirect("/login");    
 }
 
-//middleware that checks to see if user logged in and own the poll
+// middleware that checks to see if user logged in and own the poll
+// this function has some kind of major bug in it.  It does not work as middleware
 middlewareObj.checkPollOwnership = function(req, res, next){
     if(debug.canAutolog() || req.isAuthenticated()){
          Poll.findById(req.params.id, function(err, poll){
-            if(err || !poll){
-                // req.flash("error", "Campgrounds not found!");
-                // res.redirect("back");
-                console.log(err);
-            } else if(poll.author.id.equals(req.user._id) || req.user.isAdmin) {
-                // req.poll = poll;
+            if(err || !poll){                
+                debug("CHECKING POLL OWNERSHIP FOR POLL:");
+                debug(poll);
+                debug.log(err);
+                req.flash("error", "Polls not found!");
+                return res.redirect("back");
+            } else if(poll.author.id.equals(req.user._id)) {
+                // || req.user.isAdmin  
+                req.poll = poll;
                 next();                
             } else {
-                // req.flash("error", "You don't have permission to do that!");
-                res.redirect("/polls/" + req.params.id);
+                debug.log("REDIRECTING TO POLL: " + req.params.id);
+                req.flash("error", "You don't have permission to do that!");                
+                return res.redirect("/polls/" + req.params.id);
             }
-        }); 
-        next();           
+        });         
+                   
     } else {
-        // req.flash("error", "You need to be logged in to do that.");
-        res.redirect("/polls/" + req.params.id);
+        req.flash("error", "You need to be logged in to do that.");
+        return res.redirect("/polls/" + req.params.id);
     }    
 };
 

@@ -108,13 +108,13 @@ app.use("*", (req, res)=>{
     if(req.accepts('html')){
         // note: add custom 404 page here
         // res.end('404: Page Not Found');
-        res.render("404");
+        return res.render("404");
     }
     if(req.accepts('json')){
-        res.end(JSON.stringify({error: 'not found'}));
+        return res.end(JSON.stringify({error: 'not found'}));
     }
     // default to plain-text. send()
-    res.type('txt').send('Not found');
+    return res.type('txt').send('Not found');
 });
 
 //////////////////////////////////////////////////////////////

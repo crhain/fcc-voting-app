@@ -6,11 +6,11 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script> 
     <link href="https://fonts.googleapis.com/css?family=Raleway:200,300,400,500|Roboto:300,400,500,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800|Rubik:300,400,500" rel="stylesheet">
-    <link 
+    <!-- <link 
         rel="stylesheet" 
         href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"
-    >    
+    >     -->
     <link rel="stylesheet" type="text/css" href="/dist/stylesheets/style.css">
     <script 
         src="https://code.jquery.com/jquery-3.2.1.slim.min.js" 
@@ -23,82 +23,37 @@
     <script type="text/javascript" src="/src/javascripts/nav-ui.js"></script>    
 </head>
 <body>   
-<div class="container-fluid">    
-    <nav class="navbar navbar-expand-lg navbar-light">  
-        <button 
-            class="navbar-toggler" 
-            type="button" 
-            data-toggle="collapse" 
-            data-target="#navbarSupportedContent" 
-            aria-controls="navbarSupportedContent" 
-            aria-expanded="false" 
-            aria-label="Toggle navigation"
-        >
-            <span class="navbar-toggler-icon"></span>
-        </button>      
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-                </li>                
-                <li class="nav-item dropdown active">
-                    <a 
-                        class="nav-link dropdown-toggle" 
-                        href="#" 
-                        id="navbarDropdown" 
-                        role="button" 
-                        data-toggle="dropdown" 
-                        aria-haspopup="true" 
-                        aria-expanded="false"
-                    >
-                        Polls
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/polls">View All Polls</a>
-                        <% if(currentUser) { %>
-                            <a class="dropdown-item" href="/polls/user">View My Polls</a>
-                            <a class="dropdown-item" href="/polls/new">Add a New Poll</a>                    
-                        <% } else { %>
-                            <a class="dropdown-item disabled" href="#">View My Polls</a>      
-                            <!-- this is just temporary for now - set href back to # -->
-                            <a class="dropdown-item" href="/polls/new">Add a New Poll</a>              
-                        <% } %>
-                        
-                </li>                            
-                <% if (currentUser){ %>
-                    <li class="nav-item dropdown active"> 
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <%= currentUser.username %>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Profile</a>                            
-                            <a class="dropdown-item" href="/logout">Logout</a>
-                        </div>
-                    </li>                
+    
+    <div class="navigation">
+        <input type="checkbox" class="navigation__checkbox" id="navi-toggle">
+        <label for="navi-toggle" class="navigation__button">
+            <span class="navigation__icon">&nbsp;</span>
+        </label>
+        <div class="navigation__background">&nbsp;</div>
+        <nav class="navigation__nav">
+            <ul class="navigation__list">
+                <% if(currentUser){ %>
+                <li class="navigation__item"><a href="#" data-path="#" class="navigation__link"><span>01</span> Profile</a></li>
+                <li class="navigation__item"><a href="/logout" data-path="/logout" class="navigation__link"><span>02</span> Logout</a></li>
                 <% } else { %>
-                    <li class="nav-item dropdown active float-right">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Login
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/login">Login</a>
-                            
-                        <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/register">Sign up</a>
-                        </div>
-                    </li>     
-                <% } %>
-                           
-            </ul>            
-        </div>
-    </nav>
-    <div class="container">
+                <li class="navigation__item"><a href="login" data-path="/login" class="navigation__link"><span>02</span> Login</a></li>    
+                <li class="navigation__item"><a href="/register" data-path="/register" class="navigation__link"><span>01</span> Sign Up!</a></li>                
+                <% } %>                
+                <li class="navigation__item"><a href="/polls" data-path="/polls" class="navigation__link"><span>03</span> Polls</a></li>
+                <% if(currentUser){ %>
+                <li class="navigation__item"><a href="/polls/new" data-path="/polls/new" class="navigation__link"><span>04</span> + New</a></li>
+                <% } %>                
+            </ul>
+        </nav>
+    </div>
+    
+    <div class="container-full-g">
         <% if(error && error.length > 0){ %>
-            <div class="alert alert-danger" role="alert">
+            <div class="" role="alert">
                 <%=error%>
             </div>
         <% } else if(success && success.length > 0) { %>
-            <div class="alert alert-success" role="alert">
+            <div class="" role="alert">
                 <%=success%>
             </div>
         <% } %>
