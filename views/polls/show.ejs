@@ -29,10 +29,10 @@
                                 <span class="OptionList__option-select">&ensp;</span>
                                 <span class="OptionList__option-name Chart__option-name"><%=option.option%></span>
                                 <span class="OptionList__option-count Chart__option-count"><%=option.count%></span>
-                                <% if(poll.voters.length === 0) { %>
+                                <% if(poll.votes === 0) { %>
                                 <span class="OptionList__option-percent">0%</span>
                                 <% } else { %> 
-                                <span class="OptionList__option-percent"><%= (option.count / poll.voters.length) * 100 %>%</span>
+                                <span class="OptionList__option-percent"><%= ((option.count / poll.votes) * 100).toFixed(0) %>%</span>
                                 <% } %>
                             </label>
                         </li>

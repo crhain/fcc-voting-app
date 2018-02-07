@@ -18,6 +18,7 @@ var PollSchema = new mongoose.Schema({
         },
         name: String
     },
+    votes: {type: Number, default: 0},
     voters: [{type: mongoose.Schema.Types.ObjectId}]
 });
 

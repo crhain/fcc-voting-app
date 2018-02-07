@@ -31,6 +31,7 @@ function seedDB(){
                         id: user ? userid : mongoose.Types.ObjectId(),
                         name: user ? username : "Mary"
                     },
+                    votes: 0,
                     voters: []            
                 },
                 {
@@ -46,6 +47,7 @@ function seedDB(){
                         id: mongoose.Types.ObjectId(),
                         name: "Carl"
                     },
+                    votes: 0,
                     voters: []
                 }    
             ];            

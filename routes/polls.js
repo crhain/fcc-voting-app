@@ -94,12 +94,12 @@ router.get("/:id", function(req, res){
 
 //UDPATE POLL ROUTE - VOTE
 // --- note: instead of storing user name in voters we should use the userId/also update models/polls to require this as well
-router.put("/:id/vote", isLoggedIn, function (req, res){    
+router.put("/:id/vote", function (req, res){    
     var optionId = req.body.option;
     var user = req.user;
     //enable or disable multivote for debug
     var query;
-    if(debug.canMultivote()){
+    if(true){
         query = {_id: req.params.id};
     } else {
         query = {_id: req.params.id, voters: {$not: {$all: [user._id]}}}; 
@@ -119,7 +119,7 @@ router.put("/:id/vote", isLoggedIn, function (req, res){
                     //nesting second query because you cannot use two $addToSet calls together.  Dumb.
                     Poll.findOneAndUpdate(
                         {_id: req.params.id},
-                        {$addToSet:{voters: user._id}},
+                        {$inc: {votes: 1}},
                         {new: true},
                         function(err, secondPoll){
                             if(err){
@@ -143,7 +143,7 @@ router.put("/:id/vote", isLoggedIn, function (req, res){
         });
     } else {        
         //enable or disable multivote for debug   
-        if(debug.canMultivote()){
+        if(true){
             query = {_id: req.params.id, "pollOptions._id": optionId};
         } else {
             query = {_id: req.params.id, "pollOptions._id": optionId, voters: {$not: {$all: [user._id]}}}; 
@@ -151,7 +151,7 @@ router.put("/:id/vote", isLoggedIn, function (req, res){
         //record already exists, so update it with new vote and voter
         Poll.findOneAndUpdate(
             query,
-            {$inc: { "pollOptions.$.count" : 1 }, $addToSet:{voters: user._id}},
+            {$inc: { "pollOptions.$.count" : 1 }},
             {new: true},
             function(err, poll){
                 if(err){
@@ -160,14 +160,21 @@ router.put("/:id/vote", isLoggedIn, function (req, res){
                     req.flash("error", Message.Error); 
                     return res.redirect("/polls");
                 } else {
-                    if(poll){
-                        //redirect somehwere (show page)
-                        req.flash("success", Message.VoteSuccess);
-                        return res.redirect("back");
-                    } else {
-                        req.flash("error", Message.VoteOnlyOnce);
-                        return res.redirect("back");     
-                    }
+                    Poll.findOneAndUpdate(
+                        query,
+                        {$inc: {votes: 1}},
+                        {new: true},
+                        function(err, poll){
+                            if(poll){
+                                //redirect somehwere (show page)
+                                req.flash("success", Message.VoteSuccess);
+                                return res.redirect("back");
+                            } else {
+                                req.flash("error", Message.VoteOnlyOnce);
+                                return res.redirect("back");     
+                            }
+                        });
+                    
                     
                 }
         });     
