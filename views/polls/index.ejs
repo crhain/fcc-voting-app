@@ -36,6 +36,7 @@
                 if(!options.sort.order || options.sort.order === 1){
                     queryStringTitle += "&order= -1";
                     titleSymbol = "#9650";                    
+                    queryStringVotes += "&order= -1";
                 } else {                    
                     titleSymbol = "#9660"
                 }
@@ -48,9 +49,9 @@
                 }
             } else if(options.sort.key === "votes"){ 
                 if(!options.sort.order || options.sort.order === 1){
-                    queryStringVotes += "&order= -1";
+                    queryStringVotes += "&order=-1";
                     votesSymbol = "#9650";                    
-                } else {                    
+                } else {                   
                     votesSymbol = "#9660"
                 }
             } else {
@@ -64,7 +65,7 @@
             titleSymbol = "#9650";
             queryStringTitle += "&order= -1";
 
-            queryStringVotes += "&order=1";
+            queryStringVotes += "&order=-1";
             queryStringAuthor += "&order=1";
         }                     
     %>
