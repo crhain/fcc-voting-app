@@ -12,29 +12,24 @@ require("../helpers/debug");
 
 //INDEX ROUTE - shows listing of all polls
 router.get("/", function(req, res){
-    // res.send("showing polls");
+    //set up options object to send with page render
     var options = {
         filter: req.query.filter || null,
         sort:{}
     };
-    options.sort.order = 1;
-
-//    var order = 1;
-    // var filter = req.query.filter || null;
+    options.sort.order = 1;    
+    //set up some variables for filtering and sorting the db query
     var sortType = req.query.sort || null;
     var dbSort = {}; 
     var dbQuery = {};
-
-    //set filter query - but only if user logged in
+    //set query to "user"; but only if user logged in
     if(req.user && options.filter === "user"){
         dbQuery = {"author.id": req.user._id};
     }
-
     //change default order if query request descending order
     if(req.query.order == -1){
         options.sort.order = -1;
     }
-
     //check sort types and construct sortOrder object
     if(!sortType){
         options.sort.key = "name";
@@ -49,12 +44,8 @@ router.get("/", function(req, res){
         //sanity check
         options.sort.key = "name";
         dbSort.name = options.sort.order;
-    }
-    
-    // debug.log("Sort order: " + req.query.order);
-    // debug.log("Sort type: " + sortType + " = ");
-    // debug.log(sort);
-
+    }    
+    //run db query
     Poll.find(dbQuery, null, {sort: dbSort}, function(err, polls){
         if(err){
             debug.log("ERROR GETTING INDEX ROUTE");
@@ -62,7 +53,7 @@ router.get("/", function(req, res){
             // res.send(err);
         } else {
             // polls : polls contains poll data
-            //         filter: "non" indicates page is showing all polls
+            //         options: contains filter, sort.key, and sort.order
             return res.render("polls/index", {polls, options});
         }
     });    

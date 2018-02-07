@@ -12,33 +12,81 @@
 </div>   
 <div id="polls-page" class="">
 
-    
+    <% 
+      var queryStringTitle = "?";
+      var titleSymbol = "mdash";
+      var queryStringAuthor = "?";
+      var authorSymbol = "mdash";
+      var queryStringVotes = "?";
+      var votesSymbol = "mdash";
+
+      if(options.filter === "user") {
+          queryStringTitle += "filter=user&";
+          queryStringAuthor += "filter=user&";
+          queryStringVotes += "filter=user&";
+          
+      }
+            
+        queryStringTitle += "sort=name";
+        queryStringAuthor += "sort=author";
+        queryStringVotes += "sort=votes";
+        
+        if(options.sort.key){            
+            if(options.sort.key === "name"){
+                if(!options.sort.order || options.sort.order === 1){
+                    queryStringTitle += "&order= -1";
+                    titleSymbol = "#9650";                    
+                } else {                    
+                    titleSymbol = "#9660"
+                }
+            } else if(options.sort.key === "author"){
+                if(!options.sort.order || options.sort.order === 1){
+                    queryStringAuthor += "&order= -1";
+                    authorSymbol = "#9650";                    
+                } else {                    
+                    authorSymbol = "#9660"
+                }
+            } else if(options.sort.key === "votes"){ 
+                if(!options.sort.order || options.sort.order === 1){
+                    queryStringVotes += "&order= -1";
+                    votesSymbol = "#9650";                    
+                } else {                    
+                    votesSymbol = "#9660"
+                }
+            } else {
+                titleSymbol = "#9650";
+                queryStringTitle += "&order= -1";
+
+                queryStringVotes += "&order= -1";
+                queryStringAuthor += "&order=1";    
+            }     
+        } else {
+            titleSymbol = "#9650";
+            queryStringTitle += "&order= -1";
+
+            queryStringVotes += "&order=1";
+            queryStringAuthor += "&order=1";
+        }                     
+    %>
 
     <div class="row-g">
         <div class="ButtonGroup u-margin-bottom-sm">
             <% if(currentUser) { %>            
                 <% if(options.filter === "user") { %>
-                <a href="/polls" class="Button Button--small Button--regular">All polls</a>    
-                <div class="ButtonSubGroup u-margin-left">    
-                    <a href="/polls?filter=user&sort=title" class="Button Button--small Button--regular">Title &#9650;</a>
-                    <a href="/polls?filter=user&sort=author" class="Button Button--small Button--regular">Author &#9660;</a>
-                    <a href="/polls?filter=user&sort=votes" class="Button Button--small Button--regular">Votes &#9660;</a>                
-                </div>    
+                <a href="/polls" class="Button Button--small Button--regular">All polls</a>                       
+                <div class="ButtonSubGroup u-margin-left">                                              
                 <% } else { %>
                 <a href="/polls?filter=user" class="Button Button--small Button--regular">User polls</a>
-                <div class="ButtonSubGroup u-margin-left">                            
-                    <a href="/polls?sort=title" class="Button Button--small Button--regular">Title &#9650;</a>
-                    <a href="/polls?sort=author" class="Button Button--small Button--regular">Author &#9660;</a>
-                    <a href="/polls?sort=votes" class="Button Button--small Button--regular">Votes &#9660;</a>                
-                </div>    
+                <div class="ButtonSubGroup u-margin-left">                                              
                 <% } %>
             <% } else { %>
-                <div class="ButtonSubGroup">                
-                    <a href="/polls?sort=title" class="Button Button--small Button--regular">Title &#9650;</a>
-                    <a href="/polls?sort=author" class="Button Button--small Button--regular">Author &#9660;</a>
-                    <a href="/polls?sort=votes" class="Button Button--small Button--regular">Votes &#9660;</a>                                    
+                <div class="ButtonSubGroup"> 
+            <% } %>                   
+                    <a href="/polls<%= queryStringTitle %>" class="Button Button--small Button--regular">Title &<%=titleSymbol%>;</a> 
+                    <a href="/polls<%= queryStringAuthor %>" class="Button Button--small Button--regular">Author &<%=authorSymbol%>;</a>
+                    <a href="/polls<%= queryStringVotes %>" class="Button Button--small Button--regular">Votes &<%=votesSymbol%>;</a>                                                                                                  
                 </div>    
-            <% } %>                                       
+            
                                  
             <div class="ButtonSubGroup u-pull-right">
                 <a href="/polls/new" class="Button Button--small Button--regular">+ New</a>
@@ -55,7 +103,7 @@
                             <span class="PollListing__item-votes TextLabel--lg"><%=poll.votes%> votes</span>
                         </a>
                     </li>                    
-                <% }); %>
+                <% }); %>                         
             </ul>
         </div>
         
