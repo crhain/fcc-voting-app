@@ -107,3 +107,20 @@ router.put("/:id/vote", function (req, res){
         });     
     }
 });
+
+//INDEX ROUTE 2 - shows listing of user polls
+router.get("/user", isLoggedIn, function(req, res){
+    //for now, it does the same thing as first index route
+    Poll.find({"author.id": req.user._id}, function(err, polls){
+        if(err){
+            debug.log("ERROR GETTING USER INDEX ROUTE");
+            console.log(err);
+            req.flash("error", Message.Error);
+            return res.redirect("/polls");
+        } else {
+            // polls : polls contains poll data
+            //         filter: "user" indicates page is showing user polls
+            return res.render("polls/index", {polls, filter: "user"})
+        }
+    });    
+});

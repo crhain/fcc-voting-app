@@ -13,7 +13,39 @@ require("../helpers/debug");
 //INDEX ROUTE - shows listing of all polls
 router.get("/", function(req, res){
     // res.send("showing polls");
-    Poll.find({}, function(err, polls){
+    var order = 1;
+    var sort = {}; 
+    var filter = req.query.filter || null;
+    var sortType = req.query.sort || null;
+    var query = {};
+
+    //set filter query - but only if user logged in
+    if(req.user && filter === "user"){
+        query = {"author.id": req.user._id};
+    }
+
+    //change default order if query request descending order
+    if(req.query.order == -1){
+        order = -1;
+    }
+
+    //check sort types and construct sortOrder object
+    if(!sortType){
+        sort.name = order;
+    } else if (sortType === "author") {
+        sort = {"author.name": order};        
+    } else if (sortType === "votes") {
+        sort.votes = order;
+    } else {
+        //sanity check
+        sort.name = order;
+    }
+    
+    debug.log("Sort order: " + req.query.order);
+    debug.log("Sort type: " + sortType + " = ");
+    debug.log(sort);
+
+    Poll.find(query, null, {sort: sort}, function(err, polls){
         if(err){
             debug.log("ERROR GETTING INDEX ROUTE");
             debug.log(err);
@@ -21,24 +53,7 @@ router.get("/", function(req, res){
         } else {
             // polls : polls contains poll data
             //         filter: "non" indicates page is showing all polls
-            return res.render("polls/index", {polls, filter: "none", sort:{key: "", order: ""}});
-        }
-    });    
-});
-
-//INDEX ROUTE 2 - shows listing of user polls
-router.get("/user", isLoggedIn, function(req, res){
-    //for now, it does the same thing as first index route
-    Poll.find({"author.id": req.user._id}, function(err, polls){
-        if(err){
-            debug.log("ERROR GETTING USER INDEX ROUTE");
-            console.log(err);
-            req.flash("error", Message.Error);
-            return res.redirect("/polls");
-        } else {
-            // polls : polls contains poll data
-            //         filter: "user" indicates page is showing user polls
-            return res.render("polls/index", {polls, filter: "user"})
+            return res.render("polls/index", {polls, filter, sort:{key: "", order: ""}});
         }
     });    
 });

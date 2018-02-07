@@ -18,8 +18,8 @@
         <div class="ButtonGroup u-margin-bottom-sm">
             <% if(currentUser) { %>
             <div class="ButtonSubGroup">
-                <% if(filter === "none") { %>
-                <a href="/polls/user" class="Button Button--small Button--regular">User polls</a>
+                <% if(!filter) { %>
+                <a href="/polls?filter=user" class="Button Button--small Button--regular">User polls</a>
                 <% } else if(filter === "user") { %>
                 <a href="/polls" class="Button Button--small Button--regular">All polls</a>            
                 <% } %>
@@ -28,9 +28,9 @@
             <% } else { %>
             <div class="ButtonSubGroup">                
             <% } %>                                       
-                <a href="#" class="Button Button--small Button--regular">Title &#9650;</a>
-                <a href="#" class="Button Button--small Button--regular">Author &#9660;</a>
-                <a href="#" class="Button Button--small Button--regular">Votes &#9660;</a>                
+                <a href="/polls?sort=title" class="Button Button--small Button--regular">Title &#9650;</a>
+                <a href="/polls?sort=author" class="Button Button--small Button--regular">Author &#9660;</a>
+                <a href="/polls?sort=votes" class="Button Button--small Button--regular">Votes &#9660;</a>                
             </div>                 
             <div class="ButtonSubGroup u-pull-right">
                 <a href="/polls/new" class="Button Button--small Button--regular">+ New</a>
@@ -44,7 +44,7 @@
                         <a href="/polls/<%= poll._id %>" class="">
                             <span class="PollListing__item-name TextLabel--lg"><%=poll.name%></span>
                             <span class="PollListing__item-author TextLabel--lg">by <%=poll.author.name%></span>
-                            <span class="PollListing__item-votes TextLabel--lg"><%=poll.voters.length%> votes</span>
+                            <span class="PollListing__item-votes TextLabel--lg"><%=poll.votes%> votes</span>
                         </a>
                     </li>                    
                 <% }); %>

@@ -49,6 +49,22 @@ function seedDB(){
                     },
                     votes: 0,
                     voters: []
+                },    
+                {
+                    name: "Cats",
+                    question: "What is your favorite breed of cat?",
+                    pollOptions: [
+                        {option: "Samese"},
+                        {option: "Persian"},
+                        {option: "Egyptian Mau"},
+                        {option: "Tabby"}
+                    ],
+                    author: {
+                        id: mongoose.Types.ObjectId(),
+                        name: "Beth"
+                    },
+                    votes: 0,
+                    voters: []
                 }    
             ];            
             //add a few polls
