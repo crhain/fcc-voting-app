@@ -56,7 +56,7 @@ router.post("/", isLoggedIn, function(req, res){
     let debugUser = debug.getUser();
     poll.author = {};
     poll.author.id = debugUser ? debug.getUser()._id : undefined || req.user._id;
-    poll.author.name = debugUser ? debug.getUser().username : undefined || req.user.username;
+    poll.author.name = debugUser ? debug.getUser().username : undefined || req.user.fullname;
     //get poll.optionsRaw and reformat is as [{option: option}]    
     poll.pollOptions = poll.optionsRaw.split("|").slice(1).map((option) =>{
         return {option, voters:[]};

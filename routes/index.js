@@ -23,7 +23,8 @@ router.get("/register", isLoggedOut, function(req, res){
 
 //REGISTER NEW USER
 router.post("/register", isLoggedOut, function(req, res){    
-    var newUser = new User({username: req.body.username});
+    var fullname = req.body.fullname || req.body.username;    
+    var newUser = new User({username: req.body.username, fullname});
     User.register(newUser, req.body.password, function(err, user){
        if(err) {
         console.log(err);  

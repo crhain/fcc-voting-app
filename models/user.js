@@ -3,10 +3,10 @@ var passportLocalMongoose          = require("passport-local-mongoose");
 const Message                      = require("../localization")();
 
 var UserSchema = new mongoose.Schema({
-    username: String,    
+    username: String,
+    fullname: String,    
     created: {type: Date, default: Date.now },
     last: {type: Date, default: Date.now},
-    name: String,
     emails: [String],
     picture: String,
    
