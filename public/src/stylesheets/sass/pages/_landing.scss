@@ -1,0 +1,67 @@
+
+.SlideShow {
+    position: relative;
+    display: fixed;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    @include outline;
+
+    &__slide{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;        
+        z-index: -1;
+        opacity: 0;                
+        background-size: cover;
+        background-repeat: no-repeat;                    
+        
+
+        &:nth-child(1){
+            background-image: linear-gradient(rgba($color-black, .2), rgba($color-black, .8));                
+            opacity: 1;
+            z-index: 0;
+            
+        }        
+        &:nth-child(2){
+            background-image: url("https://wtop.com/wp-content/uploads/2016/11/2016-Election-Virginia-Voting2-1880x1156.jpeg");                
+            animation: crossfade 39s linear infinite;
+            
+        }        
+        &:nth-child(3){
+            background-image: url("https://www.brennancenter.org/sites/default/files/styles/individual_node_page/public/blog/vote%20hands.jpg?itok=4y1cYTFy");                        
+            animation: crossfade 39s linear infinite;
+            animation-delay: 13s;
+        }        
+        &:nth-child(4){
+            background-image: url("http://content.tegna-media.com/photo/2016/04/04/635953451235512360-635821616820311652-A03-VOTING-27S-61265280_1368031_ver1.0.JPG");            
+            animation: crossfade 39s linear infinite;
+            animation-delay: 26s;
+        }        
+                
+    }
+}
+
+
+@keyframes crossfade {
+    0% {
+        opacity: 0;
+    }
+    
+    13% {
+        opacity: 1;
+    }
+
+    33% {
+        opacity: 1;
+    }
+
+    46% {
+        opacity: 0;
+    }
+
+}

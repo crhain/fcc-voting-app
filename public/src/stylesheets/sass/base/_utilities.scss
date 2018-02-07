@@ -61,6 +61,12 @@
     transform: translate(-50%, -50%);    
 }
 
+.u-center-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
 .u-pull-right {
     float: right;
     @include clearfix;

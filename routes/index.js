@@ -13,7 +13,7 @@ require('../helpers/debug.js');
 
 //Show Home Page
 router.get("/", function(req, res){
-    return res.render("home");
+    return res.render("landing");
 });
 
 //SHOW REGISTERATION PAGE
