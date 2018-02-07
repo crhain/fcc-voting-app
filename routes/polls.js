@@ -13,39 +13,49 @@ require("../helpers/debug");
 //INDEX ROUTE - shows listing of all polls
 router.get("/", function(req, res){
     // res.send("showing polls");
-    var order = 1;
-    var sort = {}; 
-    var filter = req.query.filter || null;
+    var options = {
+        filter: req.query.filter || null,
+        sort:{}
+    };
+    options.sort.order = 1;
+
+//    var order = 1;
+    // var filter = req.query.filter || null;
     var sortType = req.query.sort || null;
-    var query = {};
+    var dbSort = {}; 
+    var dbQuery = {};
 
     //set filter query - but only if user logged in
-    if(req.user && filter === "user"){
-        query = {"author.id": req.user._id};
+    if(req.user && options.filter === "user"){
+        dbQuery = {"author.id": req.user._id};
     }
 
     //change default order if query request descending order
     if(req.query.order == -1){
-        order = -1;
+        options.sort.order = -1;
     }
 
     //check sort types and construct sortOrder object
     if(!sortType){
-        sort.name = order;
+        options.sort.key = "name";
+        dbSort.name = options.sort.order;
     } else if (sortType === "author") {
-        sort = {"author.name": order};        
+        options.sort.key = "author";
+        dbSort = {"author.name": options.sort.order};        
     } else if (sortType === "votes") {
-        sort.votes = order;
+        options.sort.key = "votes";
+        dbSort.votes = options.sort.order;
     } else {
         //sanity check
-        sort.name = order;
+        options.sort.key = "name";
+        dbSort.name = options.sort.order;
     }
     
-    debug.log("Sort order: " + req.query.order);
-    debug.log("Sort type: " + sortType + " = ");
-    debug.log(sort);
+    // debug.log("Sort order: " + req.query.order);
+    // debug.log("Sort type: " + sortType + " = ");
+    // debug.log(sort);
 
-    Poll.find(query, null, {sort: sort}, function(err, polls){
+    Poll.find(dbQuery, null, {sort: dbSort}, function(err, polls){
         if(err){
             debug.log("ERROR GETTING INDEX ROUTE");
             debug.log(err);
@@ -53,7 +63,7 @@ router.get("/", function(req, res){
         } else {
             // polls : polls contains poll data
             //         filter: "non" indicates page is showing all polls
-            return res.render("polls/index", {polls, filter, sort:{key: "", order: ""}});
+            return res.render("polls/index", {polls, options});
         }
     });    
 });
