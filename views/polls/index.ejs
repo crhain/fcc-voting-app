@@ -16,22 +16,30 @@
 
     <div class="row-g">
         <div class="ButtonGroup u-margin-bottom-sm">
-            <% if(currentUser) { %>
-            <div class="ButtonSubGroup">
-                <% if(!filter) { %>
+            <% if(currentUser) { %>            
+                <% if(filter === "user") { %>
+                <a href="/polls" class="Button Button--small Button--regular">All polls</a>    
+                <div class="ButtonSubGroup u-margin-left">    
+                    <a href="/polls?filter=user&sort=title" class="Button Button--small Button--regular">Title &#9650;</a>
+                    <a href="/polls?filter=user&sort=author" class="Button Button--small Button--regular">Author &#9660;</a>
+                    <a href="/polls?filter=user&sort=votes" class="Button Button--small Button--regular">Votes &#9660;</a>                
+                </div>    
+                <% } else { %>
                 <a href="/polls?filter=user" class="Button Button--small Button--regular">User polls</a>
-                <% } else if(filter === "user") { %>
-                <a href="/polls" class="Button Button--small Button--regular">All polls</a>            
+                <div class="ButtonSubGroup u-margin-left">                            
+                    <a href="/polls?sort=title" class="Button Button--small Button--regular">Title &#9650;</a>
+                    <a href="/polls?sort=author" class="Button Button--small Button--regular">Author &#9660;</a>
+                    <a href="/polls?sort=votes" class="Button Button--small Button--regular">Votes &#9660;</a>                
+                </div>    
                 <% } %>
-            </div>
-            <div class="ButtonSubGroup u-margin-left">
             <% } else { %>
-            <div class="ButtonSubGroup">                
+                <div class="ButtonSubGroup">                
+                    <a href="/polls?sort=title" class="Button Button--small Button--regular">Title &#9650;</a>
+                    <a href="/polls?sort=author" class="Button Button--small Button--regular">Author &#9660;</a>
+                    <a href="/polls?sort=votes" class="Button Button--small Button--regular">Votes &#9660;</a>                                    
+                </div>    
             <% } %>                                       
-                <a href="/polls?sort=title" class="Button Button--small Button--regular">Title &#9650;</a>
-                <a href="/polls?sort=author" class="Button Button--small Button--regular">Author &#9660;</a>
-                <a href="/polls?sort=votes" class="Button Button--small Button--regular">Votes &#9660;</a>                
-            </div>                 
+                                 
             <div class="ButtonSubGroup u-pull-right">
                 <a href="/polls/new" class="Button Button--small Button--regular">+ New</a>
             </div>
