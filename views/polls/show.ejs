@@ -17,38 +17,39 @@
     <div class="col-1-of-2">        
         <div class="Poll u-margin-bottom-sm">            
             <form action="/polls/<%=poll._id%>/vote/?_method=PUT" method="POST">
-                <ul class="Poll__list u-margin-bottom-sm">
+                <ul class="OptionList u-margin-bottom-sm">
                     <% poll.pollOptions.forEach(function(option, index){ %> 
-                        <li class="Poll__option">
+                        <li class="OptionList__option">
                             <% if(index === 0){ %>
-                                <input class="Poll__option-checkbox" type="radio" id="pollr-<%= index %>" name="option" value="<%=option._id%>" checked>
+                                <input class="OptionList__option-checkbox" type="radio" id="pollr-<%= index %>" name="option" value="<%=option._id%>" checked>
                             <% } else { %>
-                                <input class="Poll__option-checkbox" type="radio" id="pollr-<%= index %>" name="option" value="<%=option._id%>">
+                                <input class="OptionList__option-checkbox" type="radio" id="pollr-<%= index %>" name="option" value="<%=option._id%>">
                             <% } %>    
                             <label for="pollr-<%= index %>">
-                                <span class="Poll__option-select">&ensp;</span>
-                                <span class="Poll__option-name Chart__option-name TextLabel--lg"><%=option.option%></span>
-                                <span class="Poll__option-count Chart__option-count TextLabel--lg"><%=option.count%></span>
+                                <span class="OptionList__option-select">&ensp;</span>
+                                <span class="OptionList__option-name Chart__option-name"><%=option.option%></span>
+                                <span class="OptionList__option-count Chart__option-count"><%=option.count%></span>
                                 <% if(poll.voters.length === 0) { %>
-                                <span class="Poll__option-percent TextLabel--lg">0%</span>
+                                <span class="OptionList__option-percent">0%</span>
                                 <% } else { %> 
-                                <span class="Poll__option-percent TextLabel--lg"><%= (option.count / poll.voters.length) * 100 %>%</span>
+                                <span class="OptionList__option-percent"><%= (option.count / poll.voters.length) * 100 %>%</span>
                                 <% } %>
                             </label>
                         </li>
                     <% }); %>
-                        <li class="Poll__option">
-                            <input class="Poll__option-checkbox Poll__option-checkbox--new" type="radio" id="pollr-new" name="option" value="new">
+                        <!-- new option -->
+                        <li class="OptionList__option">
+                            <input class="OptionList__option-checkbox OptionList__option-checkbox--new" type="radio" id="pollr-new" name="option" value="new">
                             <label for="pollr-new">
-                                <span class="Poll__option-select">&ensp;</span>
-                                <span class="Poll__option-new TextLabel--lg">Other</span> 
+                                <span class="OptionList__option-select">&ensp;</span>
+                                <span class="OptionList__option-new">Other</span> 
                                 <input 
                                     type="text" 
                                     id="poll-input-new" 
-                                    class="Poll__option-input" 
+                                    class="OptionList__option-input" 
                                     name="newOption" 
-                                    placeholder="Enter option here"
-                                    autocomplete="off"
+                                    placeholder="Other"
+                                    autocomplete="off"                                    
                                 >                                   
                             </label>
                         </li>                                           
@@ -89,14 +90,18 @@
  <script>
     
     var voteBtn = document.getElementById("poll-vote-btn");
+    var pollNewInput = document.getElementById("poll-input-new");
+
     voteBtn.addEventListener('click', function(e){
-        var pollNewRadio = document.getElementById("pollr-new");
-        var pollNewInput = document.getElementById("poll-input-new");
-        
+        var pollNewRadio = document.getElementById("pollr-new");                
         if(pollNewRadio.checked && !pollNewInput.value){
             e.preventDefault();
-        }
-        
+        }        
+    });
+
+    //set focus on new option input when selected
+    document.getElementById("pollr-new").addEventListener('change', function(e){        
+        pollNewInput.focus();
     });
 
     var myChart = chartjs.draw();

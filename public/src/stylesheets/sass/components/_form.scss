@@ -1,68 +1,10 @@
-// .Form {
-//     display: block;
-//     font-size: 2rem;    
-//     // @include outline;
-//     label {
-//         display: block;
-//     }
-
-//     &__input-group {
-//         width: 50%;
-//         // @include outline;
-
-//         &--centered{
-//             margin: 0 auto;
-//         }
-//     }
-
-//     &__input {
-//         width: 80%;                
-//         background-color: $color-white;
-//         font-size: 2rem;
-//         padding: 1rem 2rem;
-//         font-family: inherit;
-//         color: $color-black;        
-//         outline: none; 
-//         border: 0;
-//         border-bottom: 2px solid $color-black;    
-
-//         &--block {
-//             display: block;
-//             margin: 0 auto;
-//         }
-
-//         &--inline {
-//             display: inline;
-//             margin: 0 auto;
-//         }
-//     }
-
-
-// }
-
-// .FormInline {
-//     display: inline-block;
-//     font-size: 2rem;
-//     @include outline;
-
-//     &__input {
-//         display: inline-block;        
-//         background-color: $color-primary;
-//         font-size: 2rem;
-//         font-family: inherit;
-//         color: $color-black;        
-//         outline: none;
-//     }
-
-// }
-
 .Form {
     &__group:not(:last-child) {
         margin-bottom: 2rem;
     }
 
     &__input {
-        font-size: 1.5rem;
+        font-size: $copy-font-size;//1.5rem;
         font-family: inherit;
         color: inherit;
         padding: 1.5rem 2rem;
@@ -70,10 +12,11 @@
         background-color: rgba($color-white, .5);
         border: none;  
         border-bottom: 3px solid transparent;     
-        width: 90%;
+        width: 100%;
+        height: 100%;
         display: block; 
         transition: all .3;
-
+        
         // @include respond(tab-port) {
         //     width: 100%;          
         // }
@@ -81,12 +24,13 @@
         &:focus{
             outline: none;
             box-shadow: 0 1rem 2rem rgba($color-black, .1);
-            border-bottom: 3px solid $color-secondary;
+            border-bottom: 3px solid $color-primary;
+ 
         }
 
         //pesudo class for an invalid entry on a form element
         &:focus:invalid {
-            border-bottom: 3px solid $color-red;
+            border-bottom: 3px solid $color-secondary;            
         }
 
         &::-webkit-input-placeholder {
@@ -95,11 +39,12 @@
     }
 
     &__label {
-        font-size: 1.2rem;
+        font-size: $copy-font-size;//1.2rem;
         font-weight: 700;
         margin-left: 2rem;
         margin-top: .7rem;
         display: block;
+        transform: translateY(-10rem);
         transition: all .3s;        
     }
 
@@ -107,7 +52,7 @@
     &__input:placeholder-shown + &__label {
         opacity: 0;
         visibility: hidden;
-        transform: translateY(-4rem);
+        transform: translateY(-2rem);
         
     }
 

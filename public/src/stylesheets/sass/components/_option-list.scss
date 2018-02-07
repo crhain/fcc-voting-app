@@ -1,14 +1,17 @@
+$option-height: 7rem;
+
 .OptionList {
     display: block;        
     width: 100%;
     padding: 0;        
     list-style: none; 
-    
+    // @include outline;
+ 
     &__option {        
         position: relative;
         display: block;
         width: 100%;
-        // height: 6rem;        
+        height: $option-height;        
         padding: .5rem 1rem;
         line-height: 2;
         border: 2px solid $color-black;
@@ -16,6 +19,7 @@
         background-color: $color-primary;
         transition: transform .2s ease;
         cursor: pointer;
+        // @include outline;
 
         &:not(:last-child){
             margin-bottom: .5rem;
@@ -28,36 +32,60 @@
         &-id {
             display: none;
         }
+
+        &-select,
+        &-name,
+        &-count,
+        &-percent,
+        &-new {            
+            height: $option-height;
+            // padding: 1rem;
+        }
+
+        &-name,
+        &-new,
+        &-count,
+        &-percent,
+        &-input {
+            font-size: $option-height / 3;
+            font-family: $font-primary;
+            font-weight: 500;
+            letter-spacing: 2px;
+            line-height: $option-height / 2;
+            color: $text-dark;            
+            padding: 1rem;
+        }
+
         &-select {
             @include inline-block-compressed;
             position: relative;
             width: 10%;
-            height: 100%;
+            // height: 100%;
             // top: -1.7rem;                    
             // @include select;            
 
             &::before {
                 position: absolute;
-                top: 50%;
+                top: 15%;
                 left: 50%;
                 transform: translate(-50%, -50%);                
                 content: "";
-                width: 2.4rem;
-                height: 2.6rem;
-                border: 3px solid $color-secondary;
+                width: $option-height / 2;//2.4rem;
+                height: $option-height / 2;//2.6rem;
+                border: 3px solid $color-tertiary;
                 // border-radius: 100%;
             }
 
             &::after {
                 opacity: 0;
                 position: absolute;
-                top: -50%;
+                top: $option-height/10;
                 left: 50%;
-                transform: translateX(-50%);                
-                color: $color-secondary;
-                content: "X";
-                width: 2rem;
-                height: 2rem;                
+                transform: translateX(-50%) rotate(-45deg);                
+                background-color: $color-tertiary;
+                content: "";
+                width: $option-height / 1.5;
+                height: 4px;                
                 font-size: 3.2rem;                                
                 transition: opacity .6s ease;
             }
@@ -68,9 +96,9 @@
             @include inline-block-compressed;
             position: relative;            
             width: 75%;           
-            height: 100%;
+            // height: 100%;
             // font-size: 2rem;            
-            padding: 1rem;
+            // padding: 1rem;
             font-family: $font-primary;
             // @include select;            
         }
@@ -79,9 +107,9 @@
         &-percent {            
             position: relative;                      
             width: 15%;
-            height: 100%;
+            // height: 100%;
             // font-size: 2rem;            
-            padding: 1rem;
+            // padding: 1rem;
             text-align: center;
             font-family: $font-copy;
         }
@@ -112,18 +140,20 @@
 
         &-input {
             position: absolute;
-            left: 0;
+            left: 12%;
             top: 0;
-            width: 100%;
+            width: 88%;
             height: 100%;
-            font-family: $font-copy;
-            font-size: 2rem;
-            padding-left: 10%;
+            // font-family: $font-copy;
+            // font-size: 2rem;
+            padding-left: 1rem;
             background-color: $color-primary;
             z-index: -1;
             opacity: 0;
             outline: none;
-            transition: opacity .6s ease;            
-        }
+            border: none;
+            transition: opacity .6s ease;                                    
+            // @include outline;
+        }               
     }    
 }

@@ -1,0 +1,32 @@
+.NewPoll__form {
+    width: 50%;
+    min-width: 50rem;
+    margin: 0 auto;
+}
+
+.PollOptionInput {     
+    padding: .5rem 1rem;
+    line-height: 2; 
+
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    font-family: $font-copy;
+    font-size: $copy-font-size;
+    padding-left: 1rem;
+    background-color: $color-primary;
+    z-index: 10;
+    opacity: 1;
+    outline: none;
+    transition: opacity .6s ease;                                                        
+}
+
+.PollOptionButton {
+    position: absolute;
+    right: 2rem;
+    top: 50%;    
+    transform: translateY(-50%);
+    z-index: 10;
+}

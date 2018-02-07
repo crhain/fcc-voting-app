@@ -17,20 +17,52 @@
         <div class="display-tabbed__panel">                
         <% } else { %>        
         <div class="display-tabbed__panel display-tabbed__panel--active">                    
-        <% } %>        
-            <h1>This is the Login Page</h1>
-
-            <form action="/login" method="POST">
-                <label for="login-username"></label>    
-                <input type="text" id="login-username" name="username" placeholder="Enter a username" required>
-        
-                <label for="login-username"></label>
-                <input type="password" id="login-password" name="password" placeholder="Enter a password" required>
-        
-                <button class="btn btn-primary">Submitt</button>
-            </form>
-        
-            <a href="/login/twitter" class="btn btn-primary">Login with Twitter</a>
+        <% } %>      
+            <!-- Grouping for login form               -->
+            <div class="Login u-center-absolute">
+                <div class="ButtonGroup">
+                    <div class="u-center-x-absolute">
+                        <a href="/login/twitter" class="Button Button--medium Button--regular">Login with Twitter</a>
+                    </div>                                        
+                </div>
+                <!-- Login form -->
+                <form action="/login" method="POST" class="Form u-margin-top-lg">
+                    <!-- Username Input -->
+                    <div class="Form__group">
+                        <input 
+                            type="text" 
+                            id="login-username" 
+                            class="Form__input" 
+                            name="username" 
+                            placeholder="User Name" 
+                            autocomplete="off" 
+                            autofocus
+                            required
+                        >
+                        <label for="login-username" class="Form__label">User Name</label>    
+                    </div>
+                    <!-- Password input -->
+                    <div class="Form__group">                    
+                        <input 
+                            type="password" 
+                            id="login-password" 
+                            class="Form__input" 
+                            name="password" 
+                            placeholder="Password" 
+                            autocomplete="off" 
+                            required
+                        >
+                        <label for="login-username" class="Form__label">Password</label>
+                    </div>     
+                    <div class="ButtonGroup">
+                        <div class="u-center-x-absolute">
+                            <button class="Button Button--large Button--primary">Login</button>
+                        </div>                            
+                    </div>                           
+                    
+                </form>
+            </div>
+                               
         </div>
         <!-- registration panel -->
         <% if(register){ %>
@@ -38,21 +70,63 @@
         <% } else { %>            
         <div class="display-tabbed__panel">
         <% } %>        
-            <h1>This is the Registration Page</h1>
-
-            <form action="/register" method="POST">
-                <label for="registration-username"></label>    
-                <input type="text" id="registration-username" name="username" placeholder="Enter a username" required>
-
-                <label for="registration-username"></label>
-                <input type="password" id="registration-password" name="password" placeholder="Enter a password" required>
-
-                <button class="btn btn-primary">Submitt</button>
-            </form>
-            <a href="/login/twitter" class="btn btn-primary">Login with Twitter</a>
-        </div>          
-    </div>
-</div>
+            <!-- Grouping for registration form -->
+            <div class="Registration u-center-absolute">
+                <div class="ButtonGroup">
+                    <div class="u-center-x-absolute">
+                        <a href="/login/twitter" class="Button Button--medium Button--regular">Login with Twitter</a>
+                    </div>                                        
+                </div>  
+                <!-- registration form           -->
+                <form action="/register" method="POST" class="Form u-margin-top-lg">
+                    <!-- Full Name Input -->
+                    <div class="Form__group">
+                        <input 
+                            type="text"                      
+                            class="Form__input" 
+                            name="fullname" 
+                            placeholder="Full Name" 
+                            autocomplete="off"                                                         
+                        >
+                        <label class="Form__label">Full Name</label>    
+                    </div>
+                    <!-- Username Input -->
+                    <div class="Form__group">                    
+                        <input 
+                            type="text" 
+                            id="registration-username" 
+                            class="Form__input" 
+                            name="username" 
+                            placeholder="Username" 
+                            autocomplete="off"
+                            required
+                        >
+                        <label class="Form__label">Username</label>    
+                    </div>                
+                    <!-- Password input -->
+                    <div class="Form__group">
+                        <input 
+                            type="text"                      
+                            class="Form__input" 
+                            name="password" 
+                            placeholder="Password" 
+                            autocomplete="off"   
+                            required                                                      
+                        >
+                        <label class="Form__label">Password</label>    
+                    </div>
+                    <!-- Register button -->
+                    <div class="ButtonGroup">
+                        <div class="u-center-x-absolute">
+                            <button class="Button Button--large Button--primary">Register</button>
+                        </div>                        
+                    </div>                
+                </form>                
+            </div>    <!--Div.Login end -->
+        </div> <!-- Div.DisplayTabbed__panel -->
+                      
+    </div> <!-- Div.display-tabbed__panels -->
+</div> <!-- Div.display-tabbed -->
       
 <script>
 var tabs = document.querySelectorAll('.display-tabbed__tab');

@@ -1,12 +1,15 @@
-$display-tabbed-width: 40vw;
-$display-tabbed-height: 100vh;
-$display-tabbed-panel-height: 50vh;
-$display-tabbed-tab-width: 50%;
+$display-tabbed-height: 88vh;
+$display-tabbed-width: 50%;
+$display-tabbed-min-width: 60rem;
+$display-tab-width: 15rem;
+
 
 .display-tabbed{
     width: $display-tabbed-width;
+    min-width: $display-tabbed-min-width;
     height: $display-tabbed-height;
-    margin: 5rem auto;
+    margin: 5rem auto;    
+    // @include outline;
 
     & > ul {
         padding-left: 0;
@@ -15,58 +18,66 @@ $display-tabbed-tab-width: 50%;
         li {
             float: left;
             list-style-type: none;
-            width: $display-tabbed-tab-width;
+            width: $display-tab-width;
+            &:not(:last-child) {
+                margin-right: 1rem;
+            }
         }
     }
 
     &__tab {                
         display: inline-block;
         text-decoration: none;
-        width: 100%;
+        width: $display-tab-width;
         line-height: 3;
-        background-color: red;
-        color: $color-black;
+        // height: $display-tab-height;
+        background-color: $color-white;
+        color: $text-dark;
         text-align: center;
+        border-radius: 4px 4px 0 0;
+        // box-shadow: 1px 0px 2rem rgba($color-black, .2);
+        // @include outline;
+        
 
         &:focus,
         &:hover {
             text-decoration: none;
-            background-color: #a60000;            
-            color: $color-white;
+            background-color: $color-white;            
+            color: $text-dark;
         }
 
         &:active, 
         &--active {
             text-decoration: none;
-            background-color: #a60000;
-            color: $color-white;
-        }
-                
+            background-color: $color-white;
+            color: $text-dark;
+            box-shadow: -2px 0px 2rem rgba($color-black, .2);
+        }            
     }
 
     &__panels {
-        height: 352px;
+        width: 100%;
+        height: 100%;
         position: relative;
         clear: both;
+        // @include outline;
     }
     
-
     &__panel {
         position: absolute;
         top: 0;
         left: 0;
-        width: $display-tabbed-width;
-        height: $display-tabbed-panel-height;
+        width: 100%;
+        height: 100%;
         padding: 10px;
-        color: $color-white;
-        background-color: #a60000;
+        color: $text-dark;
+        background-color: $color-white;
+        overflow: hidden;
+        // @include outline;
 
         &--active {
             z-index: 10;
         }
-
     }
-
-    
   }
   

@@ -1,13 +1,13 @@
-.u-margin-bottom-lg {
-    margin-bottom: 6rem;
+.u-margin-bottom-sm {
+    margin-bottom: 2rem;
 }
 
 .u-margin-bottom-md {
     margin-bottom: 4rem;
 }
 
-.u-margin-bottom-sm {
-    margin-bottom: 2rem;
+.u-margin-bottom-lg {
+    margin-bottom: 6rem;
 }
 
 .u-margin-top-sm {
@@ -15,7 +15,15 @@
 }
 
 .u-margin-top-md {
-    margin-bottom: 4rem;
+    margin-top: 4rem;
+}
+
+.u-margin-top-lg {
+    margin-top: 8rem;
+}
+
+.u-margin-top-huge {
+    margin-top: 10rem;
 }
 
 .u-margin-right {
@@ -26,14 +34,31 @@
     margin-left: 2rem;
 }
 
-.u-center {
+.u-margin-top-center {
+    margin: auto 0;
+}
+
+.u-margin-left-center {
     margin: 0 auto;
+}
+
+.u-center-x-absolute {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);    
+}
+
+.u-center-y-absolute {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);    
 }
 
 .u-center-absolute {
     position: absolute;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);    
+    transform: translate(-50%, -50%);    
 }
 
 .u-pull-right {

@@ -8,72 +8,85 @@
     </div>
 </div>        
 
-<div class="row-g">    
-    <form id="new-poll-form" class="Form u-margin-bottom-sm" action="/polls" method="POST">        
-        <div class="Form__group Form__input-group--centered">            
-            <input 
-                type="text" 
-                id="new-poll-name" 
-                class="Form__input"                     
-                name="poll[name]" 
-                placeholder="Name" 
-                autocomplete="off"
-                required
-            >
-            <label for="new-poll-name" class="Form__label">Name </label>
-        </div>
-        <div class="Form__group Form__input-group--centered">
-                        
-            <input 
-                type="text" 
-                id="new-poll-question" 
-                class="Form__input"                       
-                name="poll[question]" 
-                placeholder="Question" 
-                autocomplete="off"
-                required
-            >
-            <label for="new-poll-question" class="Form__label">Question</label>
-        </div>
-
-        <div class="Form__group Form__input-group--centered">
-            
-                <!-- visible option input             -->
+<div class="row-g">  
+    <div class="NewPoll__form">
+        <form id="new-poll-form" class="Form u-margin-bottom-sm" action="/polls" method="POST">        
+            <div class="Form__group">                            
                 <input 
                     type="text" 
-                    id="new-poll-options-v" 
-                    class="Form__input Form__input--inline"                                         
-                    placeholder="Option"
+                    id="new-poll-name" 
+                    class="Form__input"                     
+                    name="poll[name]" 
+                    placeholder="Name" 
                     autocomplete="off"
+                    required
                 >
-                <label for="new-poll-options-v" class="Form__label">Option</label>                         
-                <a href="#" class="Button Button--tiny Button--regular" id="new-opt-btn">+</a>            
-                   
-            <!-- hidden option input -->
-            <input type="text" id="new-poll-options-h" name="poll[optionsRaw]" style="display: none">
-            <div class="u-margin-top-sm">
-                <ul id="option-display-list" class="OptionList">                                     
-                </ul>
-            </div>            
-        </div>                                                                                                                                                 
-    </form>
-
+                <label for="new-poll-name" class="Form__label">Name </label>
+                
+            </div>
+            <div class="Form__group">
+                            
+                <input 
+                    type="text" 
+                    id="new-poll-question" 
+                    class="Form__input"                       
+                    name="poll[question]" 
+                    placeholder="Question" 
+                    autocomplete="off"
+                    required
+                >
+                <label for="new-poll-question" class="Form__label">Question</label>
+            </div>
     
+            <!-- visible option input             -->
+            <div class="Form__group">
+                    <ul class="OptionList">
+                        <li class="OptionList__option">  
+                            <input class="OptionList__option-checkbox OptionList__option-checkbox--new" type="radio">
+                            <label>
+                                <span class="OptionList__option-select">&ensp;</span>
+                                <span class="OptionList__option-new TextLabel--lg">Other</span> 
+                                <input                                 
+                                    type="text" 
+                                    id="new-poll-options-v" 
+                                    class="OptionList__option-input PollOptionInput"                                         
+                                    placeholder="Option"
+                                    autocomplete="off"                                    
+                                >
+                                <a href="#" class="Button Button--tiny Button--regular PollOptionButton" id="new-opt-btn">+</a>                                   
+                            </label>                                                                                                                                                                                                                                          
+                        </li>
+                        
+                    </ul>
+                    
+                    
+                    <!-- <label for="new-poll-options-v" class="Form__label">Option</label>                          -->
+                                
+                        
+                <!-- hidden option input -->
+                <input type="text" id="new-poll-options-h" name="poll[optionsRaw]" style="display: none">
+                <!-- option list -->
+                <div class="u-margin-top-sm">
+                    <ul id="option-display-list" class="OptionList">                                     
+                    </ul>
+                </div>            
+            </div>                                                                                                                                                 
+        </form>
     
+        <div class="ButtonGroup">
+            <div class="u-center-absolute">
+                <button 
+                form="new-poll-form" 
+                id="new-poll-submit-btn" 
+                class="Button Button--large Button--primary "
+                >
+                    Add Poll
+                </button>                
+            </div>        
+        </div>
 
-   
-
-    <div class="ButtonGroup">
-        <div class="u-center-absolute">
-            <button 
-            form="new-poll-form" 
-            id="new-poll-submit-btn" 
-            class="Button Button--large Button--primary "
-            >
-                Add Poll
-            </button>                
-        </div>        
-    </div>
+    </div>  
+    
 </div>
 
 
@@ -87,6 +100,9 @@
             var optionList = document.getElementById('option-display-list');
             var optionsInList = "";
             return function(){
+                if(option.value === ""){
+                    return;
+                }
                 optionsInList += 
                     "<li class='OptionList__option'><span class='OptionList__option-name TextLabel--lg'>" +  
                     option.value  + 
