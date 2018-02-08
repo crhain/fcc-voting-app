@@ -8,7 +8,7 @@
     width: 100vw;
     height: 100vh;
     background-image: linear-gradient(transparent, rgba($color-black, .8));
-    @include outline;
+    // @include outline;
 
     &__slide{
         position: absolute;
@@ -23,7 +23,7 @@
         
 
         &:nth-child(1){
-            background-image: url("../../images/splash-1-lg.jpg");                
+            background-color: $color-primary;                
             opacity: 1;
             z-index: -5;
             
