@@ -29,9 +29,9 @@
         }
 
         //pesudo class for an invalid entry on a form element
-        &:focus:invalid {
-            border-bottom: 3px solid $color-secondary;            
-        }
+        // &:focus:invalid {
+        //     border-bottom: 3px solid $color-secondary;            
+        // }
 
         &::-webkit-input-placeholder {
             color: $text-light;

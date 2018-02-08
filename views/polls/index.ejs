@@ -35,7 +35,9 @@
             if(options.sort.key === "name"){
                 if(!options.sort.order || options.sort.order === 1){
                     queryStringTitle += "&order= -1";
-                    titleSymbol = "#9650";                    
+                    titleSymbol = "#9650";
+                    //set default order for queryStringVotes so it starts out in descending 
+                    //order                    
                     queryStringVotes += "&order= -1";
                 } else {                    
                     titleSymbol = "#9660"

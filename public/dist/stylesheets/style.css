@@ -191,7 +191,7 @@ h1, h2, h3 {
   .Button--primary {
     background-color: blue; }
   .Button--danger {
-    background-color: red; }
+    background-color: #ED8787; }
 
 .Banner {
   position: relative;
@@ -231,8 +231,6 @@ h1, h2, h3 {
     outline: none;
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
     border-bottom: 3px solid #F6EFAB; }
-  .Form__input:focus:invalid {
-    border-bottom: 3px solid #BA7A26; }
   .Form__input::-webkit-input-placeholder {
     color: #868782; }
 
@@ -438,6 +436,35 @@ h1, h2, h3 {
   top: 40%;
   text-align: center;
   overflow: hidden; }
+
+.Alert {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  font-size: 2rem;
+  color: black;
+  opacity: .8;
+  z-index: 100;
+  border-radius: 4px;
+  text-align: center;
+  line-height: 5;
+  animation: fadeout 5s;
+  animation-fill-mode: forwards; }
+  .Alert--warning {
+    background-color: #ED8787; }
+  .Alert--success {
+    background-color: #64FB82; }
+
+@keyframes fadeout {
+  0% {
+    opacity: 1; }
+  95% {
+    opacity: 0; }
+  100% {
+    opacity: 0;
+    z-index: -100; } }
 
 .display-tabbed {
   width: 50%;
