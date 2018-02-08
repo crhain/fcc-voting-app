@@ -81,7 +81,12 @@ passport.use(new TwitterStrategy({
   },
   function(token, tokenSecret, profile, cb) {
     User.findOrCreate({ twitterId: profile.id }, function (err, user) {
-      return cb(err, user);
+      if(err){
+          debug.log("ERROR: COULD NOT CREATE NEW USER ACCOUNT USING TWITTER");
+          res.redirect("/login");
+      } else {
+          return cb(null, user);
+      }      
     });
   })
 );
