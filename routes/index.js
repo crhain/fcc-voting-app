@@ -63,7 +63,7 @@ router.post('/login/twitter',
 router.get('/login/twitter/return', 
   passport.authenticate('twitter', { failureRedirect: '/login' }),
   function(req, res) {
-    res.redirect('/');
+    res.redirect('/polls');
 });
 
 //LOGOUT
