@@ -74,6 +74,17 @@ app.use(require("express-session")({
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
+passport.use(new TwitterStrategy({
+    consumerKey: process.env.TWITTER_CLIENT_ID,
+    consumerSecret: process.env.TWITTER_CLIENT_SECRET,
+    callbackURL: 'https://crh-voting-app.herokuapp.com//login/twitter/return'
+  },
+  function(token, tokenSecret, profile, cb) {
+    User.findOrCreate({ twitterId: profile.id }, function (err, user) {
+      return cb(err, user);
+    });
+  })
+);
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 

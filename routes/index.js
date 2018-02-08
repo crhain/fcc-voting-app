@@ -55,6 +55,17 @@ router.post("/login", isLoggedOut, passport.authenticate("local", {
 //    failureFlash: true
 });
 
+//ATTEMP LOGIN - with social auth (twitter)
+app.post('/login/twitter',
+  passport.authenticate('twitter'));
+
+//TWITTER LOGIN RETURN ROUTE  
+app.get('/login/twitter/return', 
+  passport.authenticate('twitter', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/');
+});
+
 //LOGOUT
 router.get("/logout", isLoggedIn, (req, res) =>{
     req.flash("success", Message.LogoutSuccess);

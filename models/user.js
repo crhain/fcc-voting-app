@@ -3,6 +3,7 @@ var passportLocalMongoose          = require("passport-local-mongoose");
 const Message                      = require("../localization")();
 
 var UserSchema = new mongoose.Schema({
+    twitterId: Number,
     username: String,
     fullname: String,    
     created: {type: Date, default: Date.now },

@@ -18,11 +18,15 @@
         <% } else { %>        
         <div class="display-tabbed__panel display-tabbed__panel--active">                    
         <% } %>      
+            
             <!-- Grouping for login form               -->
             <div class="Login u-center-absolute">
                 <div class="ButtonGroup">
                     <div class="u-center-x-absolute">
-                        <a href="/login/twitter" class="Button Button--medium Button--regular">Login with Twitter</a>
+                        <form action="/login/twitter" method="POST">
+                            <button class="Button Button--medium Button--regular">Login with Twitter</button>
+                        </form>    
+                        
                     </div>                                        
                 </div>
                 <!-- Login form -->
