@@ -86,28 +86,9 @@
     </div>
 </div>
 
- <script type="text/javascript" src="/src/javascripts/poll-chart.js"></script>
- <script>
-    
-    var voteBtn = document.getElementById("poll-vote-btn");
-    var pollNewInput = document.getElementById("poll-input-new");
-
-    voteBtn.addEventListener('click', function(e){
-        var pollNewRadio = document.getElementById("pollr-new");                
-        if(pollNewRadio.checked && !pollNewInput.value){
-            e.preventDefault();
-        }        
-    });
-
-    //set focus on new option input when selected
-    document.getElementById("pollr-new").addEventListener('change', function(e){        
-        pollNewInput.focus();
-    });
-
-    var myChart = chartjs.draw();
-
- </script>
- <!-- <script type="text/javascript" src="/src/javascripts/poll-ui.js"></script>      -->
-
+<script type="text/javascript"> 
+    showPageSetup.init();
+    chartjs.draw(); 
+</script>
         
 <% include ../partials/footer %>

@@ -89,39 +89,6 @@
     
 </div>
 
-
-<script>
-    (function(){
-        
-        var optBtn = document.getElementById('new-opt-btn');
-        var option = document.getElementById('new-poll-options-v');
-        var addOptionItem = (function addOption(){            
-            var newOptions = document.getElementById('new-poll-options-h');
-            var optionList = document.getElementById('option-display-list');
-            var optionsInList = "";
-            return function(){
-                if(option.value === ""){
-                    return;
-                }
-                optionsInList += 
-                    "<li class='OptionList__option'><span class='OptionList__option-name TextLabel--lg'>" +  
-                    option.value  + 
-                    "</span></li>";
-                newOptions.value += "|" + option.value;
-                option.value = ""; 
-                optionList.innerHTML = optionsInList;
-            }
-            
-        })();
-                
-        optBtn.addEventListener('click', function(e){            
-            addOptionItem();
-            e.preventDefault();
-            
-        });
-        
-    })();
-    
-</script>
+<script>newPageSetup.init();</script>
 
 <% include ../partials/footer %> 
