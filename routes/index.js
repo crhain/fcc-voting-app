@@ -61,7 +61,7 @@ router.post('/login/twitter',
 
 //TWITTER LOGIN RETURN ROUTE  
 router.get('/login/twitter/return', 
-  passport.authenticate('twitter', { failureRedirect: '/login' }),
+  passport.authenticate("twitter", { failureRedirect: '/login' }),
   function(req, res) {
     res.redirect('/polls');
 });

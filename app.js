@@ -77,7 +77,7 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.use(new TwitterStrategy({
     consumerKey: process.env.TWITTER_CLIENT_ID,
     consumerSecret: process.env.TWITTER_CLIENT_SECRET,
-    callbackURL: 'https://crh-voting-app.herokuapp.com//login/twitter/return'
+    callbackURL: 'https://crh-voting-app.herokuapp.com/login/twitter/return'
   },
   function(token, tokenSecret, profile, cb) {
     User.findOrCreate({ twitterId: profile.id }, function (err, user) {
