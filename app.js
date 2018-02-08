@@ -88,7 +88,7 @@ passport.use(new TwitterStrategy({
     callbackURL: twitterCallbackURL
   },
   function(token, tokenSecret, profile, done) {
-    User.findOne({uid: profile.id}, function(err, user) {
+    User.findOne({twitter_id: profile.id}, function(err, user) {
       if(user) {
         done(null, user);
       } else {
