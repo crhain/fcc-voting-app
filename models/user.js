@@ -1,5 +1,6 @@
-var mongoose                       = require("mongoose");
-var passportLocalMongoose          = require("passport-local-mongoose");
+const mongoose                       = require("mongoose");
+const passportLocalMongoose          = require("passport-local-mongoose");
+const findOrCreate                   = require('mongoose-findorcreate');
 const Message                      = require("../localization")();
 
 var UserSchema = new mongoose.Schema({
@@ -18,6 +19,9 @@ UserSchema.plugin(passportLocalMongoose, {
     maxAttempts: 3,
     passwordValidator: validatePassword
 });
+
+//plugin findorcreate method to mongoose
+UserSchema.plugin(findOrCreate);
 
 //PASSWORD VALIDATION FUNCTION
 // note: returning anyting other than null or undefined causes validation to fail;
