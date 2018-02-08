@@ -4,13 +4,14 @@ const findOrCreate                   = require('mongoose-findorcreate');
 const Message                      = require("../localization")();
 
 var UserSchema = new mongoose.Schema({
-    twitterId: Number,
+    twitter_id: String,
     username: String,
     fullname: String,    
+    provider: String,
     created: {type: Date, default: Date.now },
     last: {type: Date, default: Date.now},
     emails: [String],
-    picture: String,
+    image: String,
    
 });
 
