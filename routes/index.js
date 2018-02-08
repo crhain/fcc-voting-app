@@ -56,11 +56,11 @@ router.post("/login", isLoggedOut, passport.authenticate("local", {
 });
 
 //ATTEMP LOGIN - with social auth (twitter)
-app.post('/login/twitter',
+router.post('/login/twitter',
   passport.authenticate('twitter'));
 
 //TWITTER LOGIN RETURN ROUTE  
-app.get('/login/twitter/return', 
+router.get('/login/twitter/return', 
   passport.authenticate('twitter', { failureRedirect: '/login' }),
   function(req, res) {
     res.redirect('/');
