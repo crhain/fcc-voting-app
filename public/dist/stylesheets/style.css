@@ -523,9 +523,8 @@ h1, h2, h3 {
   list-style: none; }
   .OptionList__option {
     position: relative;
-    display: block;
     width: 100%;
-    height: 7rem;
+    min-height: 6rem;
     padding: .5rem 1rem;
     line-height: 2;
     border: 2px solid black;
@@ -538,62 +537,60 @@ h1, h2, h3 {
     .OptionList__option:hover {
       transform: translate(-1px, -1px);
       box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); }
+    .OptionList__option > label {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      align-items: center; }
     .OptionList__option-id {
       display: none; }
-    .OptionList__option-select, .OptionList__option-name, .OptionList__option-count, .OptionList__option-percent, .OptionList__option-new {
-      height: 7rem; }
-    .OptionList__option-name, .OptionList__option-new, .OptionList__option-count, .OptionList__option-percent, .OptionList__option-input {
-      font-size: 2.33333rem;
+    .OptionList__option-select, .OptionList__option-name, .OptionList__option-new, .OptionList__option-count, .OptionList__option-percent, .OptionList__option-input {
+      position: relative;
+      font-family: "Montserrat", sans-serif;
+      min-height: 6rem;
+      font-size: 2rem;
       font-family: "Montserrat", sans-serif;
       font-weight: 500;
-      letter-spacing: 2px;
-      line-height: 3.5rem;
+      letter-spacing: 1px;
       color: #151513;
       padding: 1rem; }
+    .OptionList__option-select, .OptionList__option-name, .OptionList__optionnew {
+      margin-right: auto; }
     .OptionList__option-select {
-      display: inline-block;
-      margin-right: -4px;
-      position: relative;
-      width: 10%; }
+      flex: 0 0 10%;
+      position: relative; }
       .OptionList__option-select::before {
         position: absolute;
-        top: 15%;
+        top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         content: "";
-        width: 3.5rem;
-        height: 3.5rem;
+        width: 3rem;
+        height: 3rem;
         border: 3px solid #3E290D; }
       .OptionList__option-select::after {
-        opacity: 0;
         position: absolute;
-        top: 0.7rem;
+        top: 50%;
         left: 50%;
-        transform: translateX(-50%) rotate(-45deg);
+        transform: translate(-50%, -50%) rotate(-45deg);
         background-color: #3E290D;
         content: "";
-        width: 4.66667rem;
+        width: 4rem;
         height: 4px;
-        font-size: 3.2rem;
+        opacity: 0;
         transition: opacity .6s ease; }
-    .OptionList__option-name, .OptionList__option-new {
-      display: inline-block;
-      margin-right: -4px;
-      position: relative;
-      width: 75%;
-      font-family: "Montserrat", sans-serif; }
+    .OptionList__option-name {
+      flex: 0 0 75%; }
+    .OptionList__option-new {
+      flex: 0 0 90%; }
     .OptionList__option-count, .OptionList__option-percent {
-      position: relative;
-      width: 15%;
-      text-align: center;
-      font-family: "Roboto", sans-serif; }
+      text-align: center; }
     .OptionList__option-count {
       display: none;
       z-index: -1;
       opacity: 0; }
     .OptionList__option-percent {
-      display: inline-block;
-      margin-right: -4px;
+      flex: 0 0 15%;
       z-index: 10; }
     .OptionList__option-checkbox {
       display: none; }
@@ -603,6 +600,7 @@ h1, h2, h3 {
       z-index: 10;
       opacity: 1; }
     .OptionList__option-input {
+      font-family: inherit;
       position: absolute;
       left: 12%;
       top: 0;
