@@ -54,7 +54,7 @@ function seedDB(){
                     name: "Cats",
                     question: "What is your favorite breed of cat?",
                     pollOptions: [
-                        {option: "Samese"},
+                        {option: "Siamese"},
                         {option: "Persian"},
                         {option: "Egyptian Mau"},
                         {option: "Tabby"}
