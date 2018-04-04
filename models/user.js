@@ -26,7 +26,7 @@ UserSchema.plugin(passportLocalMongoose, {
 UserSchema.plugin(findOrCreate);
 
 //PASSWORD VALIDATION FUNCTION
-// note: returning anyting other than null or undefined causes validation to fail;
+// note: returning anything other than null or undefined causes validation to fail;
 // can pass simple text string with error message.
 function validatePassword(password, cb){    
     //check to see if password was entered    
