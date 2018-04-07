@@ -1,8 +1,10 @@
 .navigation {
+    border: 1px solid red;
     &__checkbox {
         display: none;        
     }    
     &__button {
+        border: 1px solid red;
         background-color: $color-white;
         height: 7rem;
         width: 7rem;
@@ -20,7 +22,7 @@
         //     right: 3rem;
         // }
     }    
-    &__background {
+    &__background {        
         height: 6rem;
         width: 6rem;
         border-radius: 100%;
@@ -28,7 +30,7 @@
         top: 6.5rem;
         right: 6.5rem;
         background-color: $color-primary;
-        z-index: 1000;
+        z-index: 1000;        
         transition: transform .8s cubic-bezier(0.86, 0, 0.07, 1);
 
         // @include respond(tab-land){
@@ -42,7 +44,7 @@
         position: fixed;
         top: 0;
         left: 0;
-        z-index: 1500;
+        z-index: -1500;
         transition: all .8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
         opacity: 0;
@@ -94,12 +96,13 @@
 
     //FUNCTIONALITY
     &__checkbox:checked ~&__background {
-        transform: scale(200);
+        transform: scale(200);        
     }
 
     &__checkbox:checked ~&__nav {
         width: 100%;
         opacity: 1;
+        z-index: 1500;
     }
 
     //ICON
