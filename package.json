@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A voting app for freeCodeCamp back-end certificate",
   "main": "server.js",
+  "homepage": "https://github.com/crhwebdev/fcc-voting-app",
   "directories": {
     "doc": "docs"
   },
@@ -17,14 +18,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/crhain/fcc-voting-app.git"
+    "url": "git+https://github.com/crhwebdev/fcc-voting-app.git"
   },
   "author": "Carl Hain",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/crhain/fcc-voting-app/issues"
+    "url": "https://github.com/crhwebdev/fcc-voting-app/issues"
   },
-  "homepage": "https://github.com/crhain/fcc-voting-app#readme",
   "dependencies": {
     "bcrypt": "^1.0.2",
     "body-parser": "^1.17.2",
