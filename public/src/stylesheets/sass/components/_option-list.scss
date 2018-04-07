@@ -19,6 +19,7 @@ $option-height: 6rem;
         background-color: $color-primary;
         transition: transform .2s ease;
         cursor: pointer;
+        
         // @include outline;
 
         &:not(:last-child){
@@ -34,6 +35,7 @@ $option-height: 6rem;
             flex-wrap: nowrap;
             justify-content: space-between;
             align-items: center;
+            cursor: pointer;
         }
 
         &-id {
