@@ -1,6 +1,8 @@
 fcc-voting-app
 ===================================================================================
 
+This is application was built for freeCodeCamp's Full Stack developer program. A working version can be found at [https://crh-voting-app.herokuapp.com/](https://crh-voting-app.herokuapp.com/)
+
 ## DEVELOPMENT ##
 
 * Place a .env file in the root of the project directory.  (See the example .env for format)
