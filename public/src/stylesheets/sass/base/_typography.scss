@@ -35,6 +35,10 @@ h1, h2, h3{
         text-transform: uppercase;
         letter-spacing: .1rem;
         line-height: 1.5;
+
+        @include respond(small-desk){
+            font-size: 4rem;
+        }
     }
     
 }
@@ -47,6 +51,10 @@ h1, h2, h3{
         letter-spacing: .1rem;
         color: $color-tertiary;
         text-transform: uppercase;
+
+        @include respond(small-desk){
+            font-size: 2rem;
+        }
     }
     
 }

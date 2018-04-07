@@ -1,10 +1,8 @@
-.navigation {
-    border: 1px solid red;
+.navigation {    
     &__checkbox {
         display: none;        
     }    
     &__button {
-        border: 1px solid red;
         background-color: $color-white;
         height: 7rem;
         width: 7rem;
@@ -17,10 +15,10 @@
         text-align: center;
         cursor: pointer;    
         
-        // @include respond(tab-land){
-        //     top: 3rem;
-        //     right: 3rem;
-        // }
+        @include respond(tab-land){
+            top: 3rem;
+            right: 3rem;
+        }
     }    
     &__background {        
         height: 6rem;
@@ -33,10 +31,10 @@
         z-index: 1000;        
         transition: transform .8s cubic-bezier(0.86, 0, 0.07, 1);
 
-        // @include respond(tab-land){
-        //     top: 3.5rem;
-        //     right: 3.5rem;
-        // }
+        @include respond(tab-land){
+            top: 3.5rem;
+            right: 3.5rem;
+        }
     }   
     
     &__nav {
