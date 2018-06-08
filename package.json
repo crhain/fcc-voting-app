@@ -15,7 +15,7 @@
     "devserver": "nodemon -r dotenv/config app.js debug",
     "start:dev": "npm-run-all --parallel devserver watch:sass",
     "start": "node app.js",
-    "test": "mocha lib/**/**.spec.js"
+    "test": "mocha tests/**.spec.js"
   },
   "repository": {
     "type": "git",
