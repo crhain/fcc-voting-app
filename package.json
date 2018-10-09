@@ -28,12 +28,12 @@
   },
   "dependencies": {
     "bcrypt": "^1.0.2",
-    "body-parser": "^1.17.2",
+    "body-parser": "^1.18.3",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.3",
     "ejs": "^2.5.7",
-    "express": "^4.15.3",
-    "express-session": "^1.15.3",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
     "hbs": "^4.0.1",
     "hoek": "^5.0.3",
     "method-override": "^2.3.10",
@@ -47,7 +47,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^7.1.1",
-    "babel-preset-env": "^1.5.2",
+    "babel-preset-env": "^1.7.0",
     "chai": "^4.1.2",
     "cssnano": "^3.10.0",
     "dotenv": "^5.0.0",
@@ -57,8 +57,8 @@
     "gulp-postcss": "^7.0.0",
     "gulp-sass": "^3.1.0",
     "mocha": "^5.2.0",
-    "node-sass": "^4.7.2",
-    "nodemon": "^1.14.11",
+    "node-sass": "^4.9.3",
+    "nodemon": "^1.18.4",
     "npm-run-all": "^4.1.2"
   }
 }
