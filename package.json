@@ -1,6 +1,6 @@
 {
   "name": "fcc-voting-app",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A voting app for freeCodeCamp back-end certificate",
   "main": "server.js",
   "homepage": "https://github.com/crhwebdev/fcc-voting-app",
@@ -8,7 +8,7 @@
     "doc": "docs"
   },
   "engines": {
-    "node": "8.1.4"
+    "node": "10.11.0"
   },
   "scripts": {
     "watch:sass": "node-sass public/src/stylesheets/sass/main.scss public/dist/stylesheets/style.css -w",
@@ -27,7 +27,6 @@
     "url": "https://github.com/crhwebdev/fcc-voting-app/issues"
   },
   "dependencies": {
-    "bcrypt": "^1.0.2",
     "body-parser": "^1.18.3",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.3",
