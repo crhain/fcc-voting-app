@@ -56,9 +56,11 @@ typings/
 
 # dotenv environment variables file
 .env
+config/dev.js
 
 # design
 docs/private/
 
 #visual studio config
 .vscode
+
