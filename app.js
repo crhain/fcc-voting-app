@@ -28,6 +28,7 @@ const pollRoutes        = require("./routes/polls");
 const indexRoutes       = require("./routes/index");
 
 //config variables for twitter login
+const keys              = require("./config/keys");
 
 const twitterCallbackURL = "https://crh-voting-app.herokuapp.com/login/twitter/return";
 
@@ -45,7 +46,7 @@ if(ARGUMENTS[0] === "debug"){
 //////////////////////////////////////////////////////////////
 // ESTABLISH DB CONNECTION                                  //
 //////////////////////////////////////////////////////////////
-const databaseURL = process.env.DATABASE;
+const databaseURL = keys.DATABASE; //process.env.DATABASE;
 mongoose.connect(databaseURL);
 
 //////////////////////////////////////////////////////////////
@@ -83,8 +84,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.use(new TwitterStrategy({
-    consumerKey: process.env.TWITTER_CLIENT_ID,
-    consumerSecret: process.env.TWITTER_CLIENT_SECRET,
+    consumerKey: keys.TWITTER_CLIENT_ID,
+    consumerSecret: keys.TWITTER_CLIENT_SECRET,
     callbackURL: twitterCallbackURL
   },
   function(token, tokenSecret, profile, done) {
