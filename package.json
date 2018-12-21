@@ -11,6 +11,7 @@
     "node": "10.11.0"
   },
   "scripts": {
+<<<<<<< HEAD
     "start": "node app.js",
     "dev": "nodemon app.js debug",
     "build": "npm-run-all clean:dist make:dist build:css build:js",
@@ -21,9 +22,22 @@
     "compile:sass": "node-sass public/src/stylesheets/sass/main.scss public/dist/stylesheets/style.comp.css",
     "prefix:css": "postcss public/dist/stylesheets/style.comp.css --use autoprefixer -o public/dist/stylesheets/style.prefix.css",
     "compress:css": "node-sass public/dist/stylesheets/style.prefix.css public/dist/stylesheets/style.prefix.css/style.css --output-style compressed",
+||||||| e98602d... Add npm scripts to process client style and javascript files
+    "start": "node app.js",
+    "build": "npm-run-all clean:dist make:dist build:css build:js",
+    "clean:dist": "rimraf public/dist -rf",
+    "make:dist": "mkdirp public/dist/stylesheets public/dist/javascripts",
+    "build:css": "npm-run-all compile:sass prefix:css compress:css",
+    "build:js": "uglifyjs public/src/javascripts/poll-ui.js -o public/dist/javascripts/poll-ui.js -c -m --source-map",
+    "compile:sass": "node-sass public/src/stylesheets/sass/main.scss public/dist/stylesheets/style.comp.css",
+    "prefix:css": "postcss public/dist/stylesheets/style.comp.css --use autoprefixer -o public/dist/stylesheets/style.prefix.css",
+    "compress:css": "node-sass public/dist/stylesheets/style.prefix.css public/dist/stylesheets/style.prefix.css/style.css --output-style compressed",
+=======
+>>>>>>> parent of e98602d... Add npm scripts to process client style and javascript files
     "watch:sass": "node-sass public/src/stylesheets/sass/main.scss public/dist/stylesheets/style.css -w",
     "devserver": "nodemon -r dotenv/config app.js debug",
     "start:dev": "npm-run-all --parallel devserver watch:sass",
+    "start": "node app.js",
     "test": "mocha tests/**.spec.js"
   },
   "repository": {
