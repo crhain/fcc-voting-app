@@ -30,9 +30,6 @@ const indexRoutes = require('./routes/index');
 //config variables for twitter login
 const keys = require('./config/keys');
 
-const twitterCallbackURL =
-  'https://crh-voting-app.herokuapp.com/login/twitter/return';
-
 // The following callback is for testing on localhost - use instead of the one above
 // const twitterCallbackURL = "http://localhost:" + PORT + "/login/twitter/return";
 
@@ -91,7 +88,7 @@ passport.use(
     {
       consumerKey: keys.TWITTER_CLIENT_ID,
       consumerSecret: keys.TWITTER_CLIENT_SECRET,
-      callbackURL: twitterCallbackURL
+      callbackURL: keys.TWITTER_CALLBACK_URL
     },
     function(token, tokenSecret, profile, done) {
       User.findOne({ twitter_id: profile.id }, function(err, user) {
