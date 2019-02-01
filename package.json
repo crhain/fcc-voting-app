@@ -23,7 +23,7 @@
     "compress:css": "node-sass public/dist/stylesheets/style.prefix.css public/dist/stylesheets/style.prefix.css/style.css --output-style compressed",
     "watch:sass": "node-sass public/src/stylesheets/sass/main.scss public/dist/stylesheets/style.css -w",
     "devserver": "nodemon app.js debug",
-    "test": "echo not installed yet"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -57,6 +57,7 @@
     "babel-preset-env": "^1.7.0",
     "cssnano": "^3.10.0",
     "dotenv": "^5.0.0",
+    "jest": "^24.0.0",
     "mkdirp": "^0.5.1",
     "ncp": "^2.0.0",
     "node-sass": "^4.9.3",
