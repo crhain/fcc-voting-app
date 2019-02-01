@@ -23,7 +23,7 @@
     "compress:css": "node-sass public/dist/stylesheets/style.prefix.css public/dist/stylesheets/style.prefix.css/style.css --output-style compressed",
     "watch:sass": "node-sass public/src/stylesheets/sass/main.scss public/dist/stylesheets/style.css -w",
     "devserver": "nodemon app.js debug",
-    "test": "mocha tests/**.spec.js"
+    "test": "echo not installed yet"
   },
   "repository": {
     "type": "git",
@@ -55,11 +55,9 @@
   "devDependencies": {
     "autoprefixer": "^7.1.1",
     "babel-preset-env": "^1.7.0",
-    "chai": "^4.1.2",
     "cssnano": "^3.10.0",
     "dotenv": "^5.0.0",
     "mkdirp": "^0.5.1",
-    "mocha": "^5.2.0",
     "ncp": "^2.0.0",
     "node-sass": "^4.9.3",
     "nodemon": "^1.18.4",
