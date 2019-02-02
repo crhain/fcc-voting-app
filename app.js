@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const helmet = require('helmet');
 const methodOverride = require('method-override');
 const flash = require('connect-flash');
 //load authentication modules
@@ -61,6 +62,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/public')));
+app.use(helmet());
 app.use(methodOverride('_method'));
 app.use(flash());
 
