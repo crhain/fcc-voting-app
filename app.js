@@ -63,6 +63,40 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/public')));
 app.use(helmet());
+/*
+  The following sets content security policy
+   if using any resource loaded from a cdn, then added
+   it's url to any of the following lists
+   styleSrc = stylesheets
+   scriptSrc = scripts
+   fontSrc = fonts
+ */
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      styleSrc: [
+        "'self'",
+        "'unsafe-inline'",
+        'fonts.googleapis.com',
+        'use.fontawesome.com'
+      ],
+      scriptSrc: [
+        "'self'",
+        "'unsafe-inline'",
+        'use.fontawesome.com',
+        'cdnjs.cloudflare.com'
+      ],
+      fontSrc: [
+        "'self'",
+        'fonts.googleapis.com',
+        'use.fontawesome.com',
+        'fonts.gstatic.com'
+      ]
+    },
+    browserSniff: false
+  })
+);
 app.use(methodOverride('_method'));
 app.use(flash());
 
