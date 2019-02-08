@@ -13,11 +13,13 @@
   "scripts": {
     "start": "node app.js",
     "dev": "npm-run-all --parallel devserver watch:sass",
-    "build": "npm-run-all clean:dist make:dist build:css",
+    "build": "npm-run-all clean:dist make:dist build:css build:js",
     "clean:dist": "rimraf public/dist -rf",
     "make:dist": "mkdirp public/dist/stylesheets public/dist/javascripts",
     "build:css": "npm-run-all compile:sass prefix:css compress:css",
-    "build:js": "uglifyjs public/src/javascripts/poll-ui.js -o public/dist/javascripts/poll-ui.js -c -m --source-map",
+    "build:js": "npm-run-all babel:js minify:js",
+    "babel:js": "babel public/src/javascripts -d public/dist/javascripts",
+    "minify:js": "minify public/dist/javascripts/poll-ui.js --out-file public/dist/javascripts/poll-ui.min.js",
     "compile:sass": "node-sass public/src/stylesheets/sass/main.scss public/dist/stylesheets/style.comp.css",
     "prefix:css": "postcss public/dist/stylesheets/style.comp.css --use autoprefixer -o public/dist/stylesheets/style.prefix.css",
     "compress:css": "node-sass public/dist/stylesheets/style.prefix.css public/dist/stylesheets/style.css --output-style compressed",
@@ -55,7 +57,10 @@
     "winston": "^3.2.1"
   },
   "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
     "autoprefixer": "^7.1.1",
+    "babel-minify": "^0.5.0",
     "babel-preset-env": "^1.7.0",
     "cssnano": "^3.10.0",
     "dotenv": "^5.0.0",
