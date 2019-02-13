@@ -13,6 +13,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "npm-run-all --parallel devserver watch:sass",
+    "heroku-postbuild": "npm run build",
     "build": "npm-run-all clean:dist make:dist build:css build:js",
     "clean:dist": "rimraf public/dist -rf",
     "make:dist": "mkdirp public/dist/stylesheets public/dist/javascripts",
