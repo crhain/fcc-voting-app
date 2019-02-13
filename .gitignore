@@ -64,3 +64,6 @@ docs/private/
 #visual studio config
 .vscode
 
+#build
+public/dist/
+
